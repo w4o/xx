@@ -9,6 +9,7 @@
 * [MyBatis-Plus](https://baomidou.com/)
 * [JWT](https://jwt.io/)
 * [Lombok](https://projectlombok.org/)
+* [SpringDoc](https://springdoc.org/)
 
 ## 如何参与项目
 
