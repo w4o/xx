@@ -3,6 +3,8 @@ package com.github.w4o.xx.manage.controller;
 
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.core.exception.CustomException;
+import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.BusinessUtils;
 import com.github.w4o.xx.manage.common.UserInfo;
 import com.github.w4o.xx.manage.common.config.AppConfig;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,7 +65,12 @@ public class LoginController {
         String password = businessUtils.aesDecrypt(appConfig.getAesKey(), loginParam.getPassword());
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginParam.getUsername(), password);
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(authenticationToken);
+        } catch (BadCredentialsException ignore) {
+            throw new CustomException(ErrorCode.E401);
+        }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginParam.getUsername());
         var token = jwtUtils.generateToken(userDetails);
