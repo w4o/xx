@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.manage.mapper.SysRoleMapper">
+
+    <select id="findPage" resultType="map">
+        select sys_role.id,
+               sys_role.`name`,
+               sys_role.sort,
+               sys_role.create_by,
+               sys_role.create_time,
+               sys_role.last_update_by,
+               sys_role.last_update_time
+        from sys_role
+        where sys_role.deleted = 0
+    </select>
+</mapper>
