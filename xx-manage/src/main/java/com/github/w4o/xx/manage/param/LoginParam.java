@@ -20,7 +20,7 @@ public class LoginParam {
     @Schema(title = "用户名")
     private String username;
     @NotBlank
-    @Schema(title = "密码")
+    @Schema(title = "密码", description = "密码需要AES加密")
     private String password;
     @Schema(title = "验证码Key")
     private String captchaKey;
