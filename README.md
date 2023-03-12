@@ -42,3 +42,5 @@
 [玩转Spring Cache --- 扩展缓存注解支持失效时间TTL【享学Spring】](https://blog.csdn.net/f641385712/article/details/95234347)
 
 [书写良好的 commit message](https://loveky.github.io/2018/06/04/write-good-commit-message/)
+
+[神器 SpringDoc 横空出世，最适合 SpringBoot 的API文档工具来了~](https://blog.csdn.net/zhenghongcs/article/details/123812583)
