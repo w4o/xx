@@ -27,6 +27,7 @@
         <poi-ooxml.version>5.2.2</poi-ooxml.version>
         <flowable.version>6.7.2</flowable.version>
         <aliyun-spring-boot-dependencies.version>1.0.0</aliyun-spring-boot-dependencies.version>
+        <springdoc.version>1.6.6</springdoc.version>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +61,11 @@
                 <groupId>org.flowable</groupId>
                 <artifactId>flowable-spring-boot-starter</artifactId>
                 <version>${flowable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
