@@ -47,6 +47,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/login", "/captcha").permitAll()
+                // Swagger的资源路径需要允许访问
+                .antMatchers(HttpMethod.GET,
+                        "/",
+                        "/swagger-ui.html",
+                        "/swagger-ui/",
+                        "/*.html",
+                        "/favicon.ico",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/swagger-resources/**",
+                        "/v3/api-docs/**"
+                )
+                .permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessHandler((request, response, authentication) -> {
                 })

@@ -1,7 +1,7 @@
 package com.github.w4o.xx.core.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,28 +14,34 @@ import java.time.format.DateTimeFormatter;
  * @author Frank
  */
 @Data
+@Schema(name = "API通用数据")
 public class CommonResult<T> {
 
-    public final static int SUCCESS = 200;
+    public final static int SUCCESS = 0;
+    public final static String SUCCESS_MSG = "操作成功";
 
-    @JsonProperty("code")
+    @Schema(title = "响应代码", description = "0：表示成功；非0：表示出错")
     private int code;
-
-    @JsonProperty("result")
+    
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    @Schema(title = "业务数据")
     private T data;
 
-    @JsonProperty("msg")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    @Schema(title = "响应描述信息")
     private String msg;
 
+    @Schema(title = "接口版本")
     private String version;
 
+    @Schema(title = "接口执行时间")
     private String timestamp;
 
+    @Schema(title = "接口执行耗时(ms)")
     private long spent;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    @Schema(title = "跟踪信息", description = "接口调试信息，生产环境无此字段")
     private String trace;
 
     protected CommonResult(int code, String msg, T data) {
@@ -53,11 +59,11 @@ public class CommonResult<T> {
     }
 
     public static <T> CommonResult<T> success(T data) {
-        return new CommonResult<>(SUCCESS, "操作成功", data);
+        return new CommonResult<>(SUCCESS, SUCCESS_MSG, data);
     }
 
     public static <T> CommonResult<T> success() {
-        return new CommonResult<>(SUCCESS, "操作成功", null);
+        return new CommonResult<>(SUCCESS, SUCCESS_MSG, null);
     }
 
     public static <T> CommonResult<T> error(CommonError error) {

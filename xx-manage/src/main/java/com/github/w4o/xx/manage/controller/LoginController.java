@@ -14,6 +14,8 @@ import com.github.w4o.xx.manage.service.SysMenuService;
 import com.github.w4o.xx.manage.service.SysUserService;
 import com.github.w4o.xx.manage.vo.LoginVO;
 import com.github.w4o.xx.manage.vo.UserInfoVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +31,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 登陆控制器
  *
  * @author Frank
  */
+
+@Tag(name = "系统用户登陆相关")
 @RestController
 @RequestMapping
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -52,11 +55,9 @@ public class LoginController {
     private final AppConfig appConfig;
     private final BusinessUtils businessUtils;
 
-    /**
-     * 登陆
-     */
+    @Operation(summary = "登陆")
     @PostMapping("/login")
-    public CommonResult<LoginVO> login(@RequestBody LoginParam loginParam) {
+    public CommonResult<LoginVO> login(@RequestBody @Valid LoginParam loginParam) {
         // 密码解密
         String password = businessUtils.aesDecrypt(appConfig.getAesKey(), loginParam.getPassword());
 
@@ -72,18 +73,14 @@ public class LoginController {
             log.error("登录日志插入失败", e);
         }
         return CommonResult.success(LoginVO.builder()
-                .username(loginParam.getUsername())
                 .accessToken(token)
                 .refreshToken("")
-                .roles(List.of("*"))
                 .expires(LocalDateTime.MAX)
                 .build());
     }
 
-    /**
-     * 用户信息
-     */
-    @GetMapping({"/userInfo", "/admin_info"})
+    @Operation(summary = "获取登陆用户信息")
+    @GetMapping("/userInfo")
     public CommonResult<UserInfoVO> userInfo(Principal principal) {
         // TODO 测试用户信息
         UserInfoVO userInfoVO = UserInfoVO.builder()
@@ -98,27 +95,21 @@ public class LoginController {
         return CommonResult.success(userInfoVO);
     }
 
-    /**
-     * 修改密码
-     */
     @SysLog("用户修改密码")
+    @Operation(summary = "修改密码")
     @PutMapping("/changePassword")
     public CommonResult<?> changePassword(@RequestBody @Valid ChangePasswordParam param) {
         sysUserService.changePassword(param);
         return CommonResult.success();
     }
 
-    /**
-     * 登出
-     */
+    @Operation(summary = "登出")
     @GetMapping("/logout")
     public CommonResult<?> logout() {
         return CommonResult.success();
     }
 
-    /**
-     * 前端路由
-     */
+    @Operation(summary = "前端路由（菜单）")
     @GetMapping("/menus")
     public CommonResult<?> getRouter() {
         return CommonResult.success(sysMenuService.findNavTree());

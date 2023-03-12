@@ -2,6 +2,8 @@ package com.github.w4o.xx.manage.controller;
 
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.service.UploadService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author Frank
  */
+@Tag(name = "上传")
 @RestController
 @RequestMapping("/upload")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -26,9 +29,7 @@ public class UploadController {
 
     private final UploadService uploadService;
 
-    /**
-     * 上传图片
-     */
+    @Operation(summary = "上传图片")
     @PostMapping(value = "/image")
     public CommonResult<?> image(@RequestParam(value = "file") MultipartFile file) {
         return CommonResult.success(uploadService.uploadImage(file));

@@ -1,11 +1,10 @@
 package com.github.w4o.xx.manage.vo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 登录信息
@@ -14,11 +13,12 @@ import java.util.List;
  */
 @Data
 @Builder
+@Schema(name = "登陆模型")
 public class LoginVO {
-    private String username;
-    private List<String> roles;
-    @JsonProperty("token")
+    @Schema(title = "jwt Token")
     private String accessToken;
+    @Schema(title = "刷新 Token，暂无")
     private String refreshToken;
+    @Schema(title = "过期时间")
     private LocalDateTime expires;
 }
