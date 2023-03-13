@@ -1,6 +1,8 @@
 package com.github.w4o.xx.manage.controller;
 
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.LineCaptcha;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.exception.CustomException;
@@ -14,6 +16,7 @@ import com.github.w4o.xx.manage.param.LoginParam;
 import com.github.w4o.xx.manage.service.SysLoginLogService;
 import com.github.w4o.xx.manage.service.SysMenuService;
 import com.github.w4o.xx.manage.service.SysUserService;
+import com.github.w4o.xx.manage.vo.CaptchaVO;
 import com.github.w4o.xx.manage.vo.LoginVO;
 import com.github.w4o.xx.manage.vo.UserInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,6 +38,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 登陆控制器
@@ -57,6 +63,7 @@ public class LoginController {
     private final SysLoginLogService sysLoginLogService;
     private final AppConfig appConfig;
     private final BusinessUtils businessUtils;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Operation(summary = "登陆")
     @PostMapping("/login")
@@ -121,6 +128,15 @@ public class LoginController {
     @GetMapping("/menus")
     public CommonResult<?> getRouter() {
         return CommonResult.success(sysMenuService.findNavTree());
+    }
+
+    @Operation(summary = "获取验证码")
+    @GetMapping("/captcha")
+    public CommonResult<CaptchaVO> captcha() {
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(120, 40, 4, 100);
+        String uuid = UUID.randomUUID().toString();
+        redisTemplate.opsForValue().set("captcha:" + uuid, lineCaptcha.getCode(), 30, TimeUnit.MINUTES);
+        return CommonResult.success(CaptchaVO.builder().captchaKey(uuid).captchaImg(lineCaptcha.getImageBase64()).build());
     }
 
 }
