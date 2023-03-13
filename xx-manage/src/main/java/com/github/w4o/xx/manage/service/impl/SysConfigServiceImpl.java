@@ -2,6 +2,7 @@ package com.github.w4o.xx.manage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
 import com.github.w4o.xx.core.constant.Constant;
 import com.github.w4o.xx.core.entity.SysConfigEntity;
 import com.github.w4o.xx.core.exception.CustomException;
@@ -28,14 +29,16 @@ import java.util.Objects;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SysConfigServiceImpl implements SysConfigService {
+public class SysConfigServiceImpl extends BaseServiceImpl<SysConfigMapper, SysConfigEntity> implements SysConfigService {
 
     private final SysConfigMapper sysConfigMapper;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Page<SysConfigPageDTO> getPageList(ConfigPageParam param) {
-        return sysConfigMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+        Page<SysConfigPageDTO> page = sysConfigMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+        handlePageRecord(page);
+        return page;
     }
 
     @Override

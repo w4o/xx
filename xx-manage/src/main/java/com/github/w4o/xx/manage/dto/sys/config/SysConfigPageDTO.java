@@ -1,6 +1,6 @@
 package com.github.w4o.xx.manage.dto.sys.config;
 
-import com.github.w4o.xx.manage.dto.BasePageDataDTO;
+import com.github.w4o.xx.core.base.dto.BasePageDataDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

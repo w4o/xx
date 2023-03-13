@@ -1,6 +1,8 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.BaseService;
+import com.github.w4o.xx.core.entity.SysConfigEntity;
 import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
 import com.github.w4o.xx.manage.param.sys.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
@@ -11,7 +13,7 @@ import com.github.w4o.xx.manage.param.sys.config.ModifyConfigParam;
  *
  * @author Frank
  */
-public interface SysConfigService {
+public interface SysConfigService extends BaseService<SysConfigEntity> {
     /**
      * 获取分页列表
      *
