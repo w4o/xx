@@ -1,5 +1,6 @@
 package com.github.w4o.xx.core.filter;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.w4o.xx.core.util.RequestUtils;
@@ -37,6 +38,7 @@ import java.util.Objects;
 @Slf4j
 public class HttpTraceLogFilter extends OncePerRequestFilter implements Ordered {
     private static final String NEED_TRACE_PATH_PREFIX = "/";
+    private static final String[] IGNORE_TRACE_PATH_PREFIX = {"/v3/api-docs", "/swagger-ui"};
     private static final String IGNORE_CONTENT_TYPE = "multipart/form-data";
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -65,7 +67,9 @@ public class HttpTraceLogFilter extends OncePerRequestFilter implements Ordered 
             status = response.getStatus();
         } finally {
             val path = request.getRequestURI();
-            if (path.startsWith(NEED_TRACE_PATH_PREFIX) && !Objects.equals(IGNORE_CONTENT_TYPE, request.getContentType())) {
+            if (path.startsWith(NEED_TRACE_PATH_PREFIX) &&
+                    !StrUtil.startWithAny(path, IGNORE_TRACE_PATH_PREFIX) &&
+                    !Objects.equals(IGNORE_CONTENT_TYPE, request.getContentType())) {
                 log.info("Http trace log: {}", mapper.writeValueAsString(HttpTraceLog.builder()
                         .path(path)
                         .method(request.getMethod())
