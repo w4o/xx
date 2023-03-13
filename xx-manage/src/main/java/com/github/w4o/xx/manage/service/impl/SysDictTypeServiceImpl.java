@@ -8,6 +8,7 @@ import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.AssertUtils;
 import com.github.w4o.xx.manage.mapper.SysDictTypeMapper;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
+import com.github.w4o.xx.manage.param.sys.dict.DictTypePageParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictTypeParam;
 import com.github.w4o.xx.manage.service.SysDictTypeService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     private final SysDictTypeMapper sysDictTypeMapper;
 
     @Override
-    public Page<Map<String, Object>> getPageList(long pageNo, long pageSize) {
-        return sysDictTypeMapper.selectMapsPage(new Page<>(pageNo, pageSize), new LambdaQueryWrapper<SysDictTypeEntity>()
+    public Page<Map<String, Object>> getPageList(DictTypePageParam param) {
+        return sysDictTypeMapper.selectMapsPage(new Page<>(param.getPageNo(), param.getPageSize()), new LambdaQueryWrapper<SysDictTypeEntity>()
                 .eq(SysDictTypeEntity::getDeleted, false)
                 .select(SysDictTypeEntity::getId,
                         SysDictTypeEntity::getLabel,
