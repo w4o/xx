@@ -17,14 +17,14 @@ import javax.validation.constraints.NotBlank;
 public class LoginParam {
     @NotBlank
     @Length(max = 50)
-    @Schema(title = "用户名")
+    @Schema(description = "用户名")
     private String username;
     @NotBlank
-    @Schema(title = "密码", description = "密码需要AES加密")
+    @Schema(description = "密码")
     private String password;
-    @Schema(title = "验证码Key")
+    @Schema(description = "验证码Key")
     private String captchaKey;
     @NotBlank
-    @Schema(title = "验证码")
+    @Schema(description = "验证码")
     private String verificationCode;
 }

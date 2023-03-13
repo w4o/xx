@@ -1,12 +1,11 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.manage.dto.sys.user.UserPageDTO;
 import com.github.w4o.xx.manage.param.ChangePasswordParam;
 import com.github.w4o.xx.manage.param.sys.user.AddUserParam;
 import com.github.w4o.xx.manage.param.sys.user.ModifyUserParam;
 import com.github.w4o.xx.manage.param.sys.user.UserPageParam;
-
-import java.util.Map;
 
 /**
  * 系统用户服务接口
@@ -57,7 +56,7 @@ public interface SysUserService {
      * @param param 请求参数
      * @return 分页列表
      */
-    Page<Map<String, Object>> getPageList(UserPageParam param);
+    Page<UserPageDTO> getPageList(UserPageParam param);
 
     /**
      * 重置密码

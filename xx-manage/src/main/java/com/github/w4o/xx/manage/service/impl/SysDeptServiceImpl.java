@@ -4,6 +4,7 @@ import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
 import com.github.w4o.xx.core.entity.SysDeptEntity;
 import com.github.w4o.xx.core.entity.SysUserEntity;
 import com.github.w4o.xx.core.exception.CustomException;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SysDeptServiceImpl implements SysDeptService {
+public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEntity> implements SysDeptService {
 
     private final SysDeptMapper sysDeptMapper;
     private final SysUserMapper sysUserMapper;

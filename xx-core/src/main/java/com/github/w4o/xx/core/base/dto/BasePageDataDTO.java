@@ -12,17 +12,17 @@ import java.time.LocalDateTime;
 @Schema(name = "通用分页数据模型")
 public class BasePageDataDTO {
 
-    @Schema(title = "创建人ID")
+    @Schema(description = "创建人ID")
     private Long createBy;
-    @Schema(title = "创建人")
+    @Schema(description = "创建人")
     private String createUser;
-    @Schema(title = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
-    @Schema(title = "更新人ID")
+    @Schema(description = "更新人ID")
     private Long lastUpdateBy;
-    @Schema(title = "更新人")
+    @Schema(description = "更新人")
     private String lastUpdateUser;
-    @Schema(title = "更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime lastUpdateTime;
 
 }

@@ -17,16 +17,16 @@ import javax.validation.constraints.NotNull;
 public class ModifyDictDataParam {
 
     @NotBlank
-    @Schema(title = "字典数据值")
+    @Schema(description = "字典数据值")
     private String value;
 
-    @Schema(title = "描述")
+    @Schema(description = "描述")
     private String description;
 
     @NotNull
-    @Schema(title = "排序", defaultValue = "0")
+    @Schema(description = "排序", defaultValue = "0")
     private Integer sort = NumberUtils.INTEGER_ZERO;
 
-    @Schema(title = "备注")
+    @Schema(description = "备注")
     private String remark;
 }

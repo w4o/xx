@@ -14,8 +14,8 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "修改配置参数")
 public class ModifyConfigParam {
     @NotBlank
-    @Schema(title = "配置值")
+    @Schema(description = "配置值")
     private String configValue;
-    @Schema(title = "配置备注信息")
+    @Schema(description = "配置备注信息")
     private String remark;
 }

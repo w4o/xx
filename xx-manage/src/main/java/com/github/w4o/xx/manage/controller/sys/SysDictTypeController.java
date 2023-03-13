@@ -1,7 +1,9 @@
 package com.github.w4o.xx.manage.controller.sys;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
 import com.github.w4o.xx.manage.param.sys.dict.DictTypePageParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictTypeParam;
@@ -35,7 +37,7 @@ public class SysDictTypeController {
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<?> findPage(@ParameterObject @ModelAttribute DictTypePageParam param) {
+    public CommonResult<Page<DictTypePageDTO>> findPage(@ParameterObject @ModelAttribute DictTypePageParam param) {
         return CommonResult.success(sysDictTypeService.getPageList(param));
     }
 

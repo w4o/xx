@@ -1,9 +1,11 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.manage.dto.sys.role.RolePageDTO;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleMenuParam;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleParam;
 import com.github.w4o.xx.manage.param.sys.role.ModifyRoleParam;
+import com.github.w4o.xx.manage.param.sys.role.RolePageParam;
 
 import java.util.List;
 import java.util.Map;
@@ -18,11 +20,10 @@ public interface SysRoleService {
     /**
      * 获取分页列表
      *
-     * @param pageNo   页码
-     * @param pageSize 页大小
+     * @param param 请求参数
      * @return 分页列表
      */
-    Page<Map<String, Object>> getPageList(long pageNo, long pageSize);
+    Page<RolePageDTO> getPageList(RolePageParam param);
 
     /**
      * 添加角色

@@ -2,10 +2,12 @@ package com.github.w4o.xx.manage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
 import com.github.w4o.xx.core.entity.SysDictTypeEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.AssertUtils;
+import com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO;
 import com.github.w4o.xx.manage.mapper.SysDictTypeMapper;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
 import com.github.w4o.xx.manage.param.sys.dict.DictTypePageParam;
@@ -16,8 +18,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-
 /**
  * 字典类型服务实现
  *
@@ -25,20 +25,15 @@ import java.util.Map;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SysDictTypeServiceImpl implements SysDictTypeService {
+public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeMapper, SysDictTypeEntity> implements SysDictTypeService {
 
     private final SysDictTypeMapper sysDictTypeMapper;
 
     @Override
-    public Page<Map<String, Object>> getPageList(DictTypePageParam param) {
-        return sysDictTypeMapper.selectMapsPage(new Page<>(param.getPageNo(), param.getPageSize()), new LambdaQueryWrapper<SysDictTypeEntity>()
-                .eq(SysDictTypeEntity::getDeleted, false)
-                .select(SysDictTypeEntity::getId,
-                        SysDictTypeEntity::getLabel,
-                        SysDictTypeEntity::getName,
-                        SysDictTypeEntity::getCreateTime,
-                        SysDictTypeEntity::getLastUpdateTime)
-                .orderByDesc(SysDictTypeEntity::getCreateTime));
+    public Page<DictTypePageDTO> getPageList(DictTypePageParam param) {
+        Page<DictTypePageDTO> page = sysDictTypeMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+        handlePageRecord(page);
+        return page;
     }
 
     @Override

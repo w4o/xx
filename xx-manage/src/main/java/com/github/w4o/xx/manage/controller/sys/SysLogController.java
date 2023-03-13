@@ -1,6 +1,8 @@
 package com.github.w4o.xx.manage.controller.sys;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.manage.dto.sys.log.LogPageDTO;
 import com.github.w4o.xx.manage.param.sys.log.LogPageParam;
 import com.github.w4o.xx.manage.service.SysLogService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +31,7 @@ public class SysLogController {
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<?> findPage(@ParameterObject @ModelAttribute LogPageParam param) {
+    public CommonResult<Page<LogPageDTO>> findPage(@ParameterObject @ModelAttribute LogPageParam param) {
         return CommonResult.success(sysLogService.getPageList(param));
     }
 

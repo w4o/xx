@@ -14,11 +14,11 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "添加配置参数")
 public class AddConfigParam {
     @NotBlank
-    @Schema(title = "配置key")
+    @Schema(description = "配置key")
     private String configKey;
     @NotBlank
-    @Schema(title = "配置值")
+    @Schema(description = "配置值")
     private String configValue;
-    @Schema(title = "配置备注信息")
+    @Schema(description = "配置备注信息")
     private String remark;
 }

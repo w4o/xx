@@ -2,11 +2,10 @@ package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.SysDictTypeEntity;
+import com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
 import com.github.w4o.xx.manage.param.sys.dict.DictTypePageParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictTypeParam;
-
-import java.util.Map;
 
 /**
  * 系统字典服务接口
@@ -43,7 +42,7 @@ public interface SysDictTypeService {
      * @param param 请求参数
      * @return 分页列表
      */
-    Page<Map<String, Object>> getPageList(DictTypePageParam param);
+    Page<DictTypePageDTO> getPageList(DictTypePageParam param);
 
 
     /**

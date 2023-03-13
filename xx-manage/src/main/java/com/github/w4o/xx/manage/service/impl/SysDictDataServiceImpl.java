@@ -1,11 +1,12 @@
 package com.github.w4o.xx.manage.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
 import com.github.w4o.xx.core.constant.Constant;
 import com.github.w4o.xx.core.entity.SysDictDataEntity;
 import com.github.w4o.xx.core.entity.SysDictTypeEntity;
 import com.github.w4o.xx.core.util.AssertUtils;
+import com.github.w4o.xx.manage.dto.sys.dict.DictDataPageDTO;
 import com.github.w4o.xx.manage.mapper.SysDictDataMapper;
 import com.github.w4o.xx.manage.mapper.SysDictTypeMapper;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictDataParam;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SysDictDataServiceImpl implements SysDictDataService {
+public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataMapper, SysDictDataEntity> implements SysDictDataService {
 
     private final SysDictDataMapper sysDictDataMapper;
     private final SysDictTypeMapper sysDictTypeMapper;
@@ -51,18 +51,10 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     }
 
     @Override
-    public Page<Map<String, Object>> getPageList(DictDataPageParam param) {
-        return sysDictDataMapper.selectMapsPage(new Page<>(param.getPageNo(), param.getDictTypeId()), new LambdaQueryWrapper<SysDictDataEntity>()
-                .eq(SysDictDataEntity::getSysDictTypeId, param.getDictTypeId())
-                .eq(SysDictDataEntity::getDeleted, false)
-                .select(SysDictDataEntity::getId,
-                        SysDictDataEntity::getLabel,
-                        SysDictDataEntity::getSort,
-                        SysDictDataEntity::getDescription,
-                        SysDictDataEntity::getValue,
-                        SysDictDataEntity::getCreateTime,
-                        SysDictDataEntity::getLastUpdateTime)
-                .orderByAsc(SysDictDataEntity::getSort));
+    public Page<DictDataPageDTO> getPageList(DictDataPageParam param) {
+        Page<DictDataPageDTO> page = sysDictDataMapper.findPage(new Page<>(param.getPageNo(), param.getDictTypeId()), param);
+        handlePageRecord(page);
+        return page;
     }
 
     @Override

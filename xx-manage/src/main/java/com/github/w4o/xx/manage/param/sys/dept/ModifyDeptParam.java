@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @Data
 @Schema(name = "修改部门参数")
 public class ModifyDeptParam {
-    @Schema(title = "部门名")
+    @Schema(description = "部门名")
     @NotBlank
     private String deptName;
-    @Schema(title = "排序")
+    @Schema(description = "排序")
     @NotNull
     private Integer sort;
 }

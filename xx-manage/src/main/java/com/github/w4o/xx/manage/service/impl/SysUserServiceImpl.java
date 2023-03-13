@@ -3,6 +3,7 @@ package com.github.w4o.xx.manage.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
 import com.github.w4o.xx.core.entity.SysUserEntity;
 import com.github.w4o.xx.core.entity.SysUserRoleEntity;
 import com.github.w4o.xx.core.exception.CustomException;
@@ -11,6 +12,7 @@ import com.github.w4o.xx.core.util.AssertUtils;
 import com.github.w4o.xx.core.util.BusinessUtils;
 import com.github.w4o.xx.manage.common.config.AppConfig;
 import com.github.w4o.xx.manage.common.util.LoginUtils;
+import com.github.w4o.xx.manage.dto.sys.user.UserPageDTO;
 import com.github.w4o.xx.manage.mapper.SysUserMapper;
 import com.github.w4o.xx.manage.mapper.SysUserRoleMapper;
 import com.github.w4o.xx.manage.param.ChangePasswordParam;
@@ -19,15 +21,11 @@ import com.github.w4o.xx.manage.param.sys.user.ModifyUserParam;
 import com.github.w4o.xx.manage.param.sys.user.UserPageParam;
 import com.github.w4o.xx.manage.service.SysUserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-
-import java.util.Map;
 
 /**
  * 系统用户服务实现
@@ -36,7 +34,7 @@ import java.util.Map;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SysUserServiceImpl implements SysUserService {
+public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserEntity> implements SysUserService {
 
     private final SysUserMapper sysUserMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
@@ -112,25 +110,10 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Page<Map<String, Object>> getPageList(UserPageParam param) {
-        var queryWrapper = new LambdaQueryWrapper<SysUserEntity>()
-                .select(
-                        SysUserEntity::getId,
-                        SysUserEntity::getUsername,
-                        SysUserEntity::getEmail,
-                        SysUserEntity::getLastUpdateTime,
-                        SysUserEntity::getAvatar,
-                        SysUserEntity::getNickName,
-                        SysUserEntity::getMobile
-                );
-        if (StringUtils.isNotEmpty(param.getUsername())) {
-            queryWrapper.like(SysUserEntity::getUsername, param.getUsername());
-        }
-
-        var page = sysUserMapper.selectMapsPage(new Page<>(param.getPageNo(), param.getPageSize()), queryWrapper);
-        if (!CollectionUtils.isEmpty(page.getRecords())) {
-            page.getRecords().forEach(r -> r.put("roleList", sysUserRoleMapper.findRoleByUserId((long) r.get("id"))));
-        }
+    public Page<UserPageDTO> getPageList(UserPageParam param) {
+        var page = sysUserMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+        handlePageRecord(page);
+        page.getRecords().forEach(dto -> dto.setRoleList(sysUserRoleMapper.findRoleByUserId(dto.getUserId())));
         return page;
     }
 

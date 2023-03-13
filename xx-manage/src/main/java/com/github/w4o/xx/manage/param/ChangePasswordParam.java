@@ -14,9 +14,9 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "修改密码参数")
 public class ChangePasswordParam {
     @NotBlank
-    @Schema(title = "旧密码")
+    @Schema(description = "旧密码")
     private String oldPassword;
     @NotBlank
-    @Schema(title = "新密码")
+    @Schema(description = "新密码")
     private String newPassword;
 }

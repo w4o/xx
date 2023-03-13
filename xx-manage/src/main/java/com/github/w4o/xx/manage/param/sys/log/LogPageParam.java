@@ -14,10 +14,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "日志分页查询参数")
 public class LogPageParam extends BasePageParam {
-    @Schema(title = "用户名")
+    @Schema(description = "用户名")
     private String username;
-    @Schema(title = "检索开始日期", description = "格式：yyyy-MM-dd")
+    @Schema(description = "检索开始日期，格式：yyyy-MM-dd")
     private String startDate;
-    @Schema(title = "检索截止日期", description = "格式：yyyy-MM-dd")
+    @Schema(description = "检索截止日期，格式：yyyy-MM-dd")
     private String endDate;
 }

@@ -14,6 +14,6 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "修改字典类型参数")
 public class ModifyDictTypeParam {
     @NotBlank
-    @Schema(title = "字典类型名")
+    @Schema(description = "字典类型名")
     private String name;
 }

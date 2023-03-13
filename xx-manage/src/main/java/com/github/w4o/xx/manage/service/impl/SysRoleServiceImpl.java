@@ -2,24 +2,26 @@ package com.github.w4o.xx.manage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
 import com.github.w4o.xx.core.entity.SysRoleEntity;
 import com.github.w4o.xx.core.entity.SysRoleMenuEntity;
 import com.github.w4o.xx.core.entity.SysUserRoleEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
+import com.github.w4o.xx.manage.dto.sys.role.RolePageDTO;
 import com.github.w4o.xx.manage.mapper.SysRoleMapper;
 import com.github.w4o.xx.manage.mapper.SysRoleMenuMapper;
 import com.github.w4o.xx.manage.mapper.SysUserRoleMapper;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleMenuParam;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleParam;
 import com.github.w4o.xx.manage.param.sys.role.ModifyRoleParam;
+import com.github.w4o.xx.manage.param.sys.role.RolePageParam;
 import com.github.w4o.xx.manage.service.SysRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -31,20 +33,19 @@ import java.util.Map;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEntity> implements SysRoleService {
 
     private final SysRoleMapper sysRoleMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
     private final SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
-    public Page<Map<String, Object>> getPageList(long pageNo, long pageSize) {
-        var page = sysRoleMapper.findPage(new Page<>(pageNo, pageSize));
-        if (!CollectionUtils.isEmpty(page.getRecords())) {
-            page.getRecords().forEach(p -> p.put("menus", sysRoleMenuMapper.selectObjs(new LambdaQueryWrapper<SysRoleMenuEntity>()
-                    .eq(SysRoleMenuEntity::getSysRoleId, p.get("id"))
-                    .select(SysRoleMenuEntity::getSysMenuId))));
-        }
+    public Page<RolePageDTO> getPageList(RolePageParam param) {
+        var page = sysRoleMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+        handlePageRecord(page);
+        page.getRecords().forEach(dto -> dto.setMenus(sysRoleMenuMapper.selectObjs(new LambdaQueryWrapper<SysRoleMenuEntity>()
+                .eq(SysRoleMenuEntity::getSysRoleId, dto.getRoleId())
+                .select(SysRoleMenuEntity::getSysMenuId))));
         return page;
     }
 

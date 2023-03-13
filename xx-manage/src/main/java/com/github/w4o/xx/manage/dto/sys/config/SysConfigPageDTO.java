@@ -12,12 +12,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "系统配置分页数据模型")
 public class SysConfigPageDTO extends BasePageDataDTO {
-    @Schema(title = "配置ID")
+    @Schema(description = "配置ID")
     private Long configId;
-    @Schema(title = "配置key")
+    @Schema(description = "配置key")
     private String configKey;
-    @Schema(title = "配置值")
+    @Schema(description = "配置值")
     private String configValue;
-    @Schema(title = "配置备注信息")
+    @Schema(description = "配置备注信息")
     private String remark;
 }

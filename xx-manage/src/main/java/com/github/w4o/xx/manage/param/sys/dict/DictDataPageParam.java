@@ -17,6 +17,6 @@ import javax.validation.constraints.NotNull;
 @Schema(name = "字典数据分页查询参数")
 public class DictDataPageParam extends BasePageParam {
     @NotNull
-    @Schema(title = "字典类型id")
+    @Schema(description = "字典类型id")
     private Long dictTypeId;
 }

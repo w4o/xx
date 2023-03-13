@@ -17,20 +17,20 @@ import javax.validation.constraints.NotNull;
 public class BasePageParam {
     @NotNull
     @Min(1)
-    @Schema(title = "页码", description = "默认为1")
+    @Schema(description = "页码")
     private Long pageNo = 1L;
     @NotNull
     @Max(100)
-    @Schema(title = "分页大小", description = "默认为99999")
+    @Schema(description = "分页大小")
     private Long pageSize = 99999L;
     /**
      * 排序列
      */
-    @Schema(title = "排序列")
+    @Schema(description = "排序列")
     private String sortColumn;
     /**
      * 排序类型
      */
-    @Schema(title = "排序类型", description = "asc/desc")
+    @Schema(description = "排序类型")
     private String sortType;
 }

@@ -1,23 +1,25 @@
 package com.github.w4o.xx.manage.controller.sys;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.manage.dto.sys.role.RolePageDTO;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleMenuParam;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleParam;
 import com.github.w4o.xx.manage.param.sys.role.ModifyRoleParam;
+import com.github.w4o.xx.manage.param.sys.role.RolePageParam;
 import com.github.w4o.xx.manage.service.SysRoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -37,9 +39,8 @@ public class SysRoleController {
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<?> findPage(@RequestParam("pageNo") @NotNull @Min(1) Long pageNo,
-                                    @RequestParam("pageSize") @NotNull @Max(100) Long pageSize) {
-        return CommonResult.success(sysRoleService.getPageList(pageNo, pageSize));
+    public CommonResult<Page<RolePageDTO>> findPage(@ParameterObject @ModelAttribute RolePageParam param) {
+        return CommonResult.success(sysRoleService.getPageList(param));
     }
 
     @Operation(summary = "添加角色")

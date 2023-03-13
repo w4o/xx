@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 @Builder
 @Schema(name = "登陆模型")
 public class LoginVO {
-    @Schema(title = "jwt Token")
+    @Schema(description = "jwt Token")
     private String accessToken;
-    @Schema(title = "刷新 Token，暂无")
+    @Schema(description = "刷新 Token，暂无")
     private String refreshToken;
-    @Schema(title = "过期时间")
+    @Schema(description = "过期时间")
     private LocalDateTime expires;
 }

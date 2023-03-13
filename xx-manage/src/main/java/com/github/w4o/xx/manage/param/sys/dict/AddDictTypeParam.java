@@ -14,9 +14,9 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "添加字典类型参数")
 public class AddDictTypeParam {
     @NotBlank
-    @Schema(title = "类型名")
+    @Schema(description = "类型名")
     private String name;
     @NotBlank
-    @Schema(title = "类型标签")
+    @Schema(description = "类型标签")
     private String label;
 }

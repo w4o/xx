@@ -16,10 +16,10 @@ import javax.validation.constraints.NotNull;
 public class AddRoleMenuParam {
 
     @NotNull
-    @Schema(title = "角色ID")
+    @Schema(description = "角色ID")
     private Long roleId;
 
     @NotNull
-    @Schema(title = "菜单ID")
+    @Schema(description = "菜单ID")
     private Long[] menuIds;
 }

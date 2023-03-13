@@ -20,28 +20,28 @@ public class CommonResult<T> {
     public final static int SUCCESS = 0;
     public final static String SUCCESS_MSG = "操作成功";
 
-    @Schema(title = "响应代码", description = "0：表示成功；非0：表示出错")
+    @Schema(description = "响应代码")
     private int code;
-    
+
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @Schema(title = "业务数据")
+    @Schema(description = "业务数据")
     private T data;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @Schema(title = "响应描述信息")
+    @Schema(description = "响应描述信息")
     private String msg;
 
-    @Schema(title = "接口版本")
+    @Schema(description = "接口版本")
     private String version;
 
-    @Schema(title = "接口执行时间")
+    @Schema(description = "接口执行时间")
     private String timestamp;
 
-    @Schema(title = "接口执行耗时(ms)")
+    @Schema(description = "接口执行耗时(ms)")
     private long spent;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @Schema(title = "跟踪信息", description = "接口调试信息，生产环境无此字段")
+    @Schema(description = "跟踪信息")
     private String trace;
 
     protected CommonResult(int code, String msg, T data) {

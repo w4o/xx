@@ -64,7 +64,7 @@ public class LogAspect {
             sysLog.setSucceed(succeed);
             sysLog.setMethod(RequestUtils.getRequestMethod());
             UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            sysLog.setUserName(userInfo.getUsername());
+            sysLog.setUsername(userInfo.getUsername());
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
             sysLog.setParams(objectMapper.writeValueAsString(joinPoint.getArgs()));

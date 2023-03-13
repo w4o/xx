@@ -24,7 +24,7 @@ public class SysLogEntity extends BaseEntity {
     /**
      * 用户名
      */
-    private String userName;
+    private String username;
 
     /**
      * 用户操作
