@@ -16,8 +16,8 @@ import lombok.EqualsAndHashCode;
 public class LogPageParam extends BasePageParam {
     @Schema(description = "用户名", example = "admin")
     private String username;
-    @Schema(description = "检索开始日期，格式：yyyy-MM-dd", example = "2020-01-01")
+    @Schema(description = "检索开始日期，格式：yyyy-MM-dd", pattern = "yyyy-MM-dd", example = "2020-01-01")
     private String startDate;
-    @Schema(description = "检索截止日期，格式：yyyy-MM-dd", example = "2020-01-01")
+    @Schema(description = "检索截止日期，格式：yyyy-MM-dd", pattern = "yyyy-MM-dd", example = "2020-01-01")
     private String endDate;
 }
