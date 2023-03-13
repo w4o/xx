@@ -55,4 +55,9 @@ public class SysUserEntity extends BaseDataEntity {
      */
     private Integer status;
 
+    /**
+     * 部门ID
+     */
+    private Long deptId;
+
 }
