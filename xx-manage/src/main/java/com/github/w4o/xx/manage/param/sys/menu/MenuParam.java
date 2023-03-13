@@ -1,6 +1,7 @@
 package com.github.w4o.xx.manage.param.sys.menu;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -13,60 +14,40 @@ import javax.validation.constraints.NotNull;
  * @author Frank
  */
 @Data
-
+@Schema(name = "菜单参数")
 public class MenuParam {
-    /**
-     * 路径
-     */
     @NotBlank
+    @Schema(title = "路径")
     private String path;
 
-    /**
-     * 菜单名称
-     */
     @NotBlank
+    @Schema(title = "菜单名称")
     private String name;
 
-    /**
-     * vue文件目录
-     */
     @NotBlank
+    @Schema(title = "vue文件目录")
     private String component;
 
-    /**
-     * 父菜单ID，一级菜单为0
-     */
     @NotNull
+    @Schema(title = "父菜单ID", defaultValue = "0", description = "一级菜单为0")
     private Long parentId = NumberUtils.LONG_ZERO;
 
-    /**
-     * 排序
-     */
+    @Schema(title = "排序")
     private Integer sort = NumberUtils.INTEGER_ZERO;
 
-    /**
-     * 重定向到子路由
-     */
+    @Schema(title = "重定向到子路由")
     private String redirect;
 
-    /**
-     * 菜单、面包屑、多标签页显示的名称
-     */
+    @Schema(title = "菜单、面包屑、多标签页显示的名称")
     private String title;
 
-    /**
-     * 图标
-     */
+    @Schema(title = "图标")
     private String icon;
 
-    /**
-     * 是否显示在菜单中显示隐藏路由
-     */
+    @Schema(title = "是否显示在菜单中显示隐藏路由")
     private Boolean hidden;
 
-    /**
-     * 是否显示在菜单中显示隐藏一级路由
-     */
+    @Schema(title = "是否显示在菜单中显示隐藏一级路由")
     private Boolean levelHidden;
 
 }

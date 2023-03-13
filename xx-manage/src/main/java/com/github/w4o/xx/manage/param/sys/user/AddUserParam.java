@@ -1,5 +1,6 @@
 package com.github.w4o.xx.manage.param.sys.user;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -11,21 +12,17 @@ import java.util.Set;
  * @author Frank
  */
 @Data
+@Schema(name = "添加用户参数")
 public class AddUserParam {
-    /**
-     * 用户名
-     */
+
     @NotBlank
+    @Schema(title = "用户名")
     private String username;
 
-    /**
-     * 用户密码
-     */
     @NotBlank
+    @Schema(title = "用户密码")
     private String password;
 
-    /**
-     * 角色
-     */
+    @Schema(title = "角色")
     private Set<Long> roles;
 }

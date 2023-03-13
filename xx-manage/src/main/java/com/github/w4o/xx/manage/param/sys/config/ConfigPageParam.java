@@ -1,6 +1,7 @@
 package com.github.w4o.xx.manage.param.sys.config;
 
 import com.github.w4o.xx.core.base.BasePageParam;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,5 +12,6 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Schema(name = "修改分页查询参数")
 public class ConfigPageParam extends BasePageParam {
 }

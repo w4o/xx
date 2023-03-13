@@ -1,5 +1,6 @@
 package com.github.w4o.xx.manage.param.sys.user;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Set;
@@ -10,10 +11,9 @@ import java.util.Set;
  * @author Frank
  */
 @Data
+@Schema(name = "修改用户参数")
 public class ModifyUserParam {
 
-    /**
-     * 角色
-     */
+    @Schema(title = "角色")
     private Set<Long> roles;
 }

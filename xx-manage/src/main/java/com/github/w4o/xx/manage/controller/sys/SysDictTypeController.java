@@ -5,6 +5,8 @@ import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictTypeParam;
 import com.github.w4o.xx.manage.service.SysDictTypeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +28,19 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/dictType")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Tag(name = "字典类型管理")
 public class SysDictTypeController {
 
     private final SysDictTypeService sysDictTypeService;
 
-    /**
-     * 分页查询
-     */
+    @Operation(summary = "分页查询")
     @GetMapping
     public CommonResult<?> findPage(@RequestParam("pageNo") @NotNull @Min(1) Long pageNo,
                                     @RequestParam("pageSize") @NotNull @Max(100) Long pageSize) {
         return CommonResult.success(sysDictTypeService.getPageList(pageNo, pageSize));
     }
 
-    /**
-     * 添加字典类型
-     */
+    @Operation(summary = "添加字典类型")
     @SysLog("添加字典类型")
     @PostMapping
     public CommonResult<?> add(@RequestBody @Valid AddDictTypeParam param) {
@@ -49,9 +48,7 @@ public class SysDictTypeController {
         return CommonResult.success();
     }
 
-    /**
-     * 修改字典类型
-     */
+    @Operation(summary = "修改字典类型")
     @SysLog("修改字典类型")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable("id") Long id,
@@ -60,9 +57,7 @@ public class SysDictTypeController {
         return CommonResult.success();
     }
 
-    /**
-     * 删除字典类型
-     */
+    @Operation(summary = "删除字典类型")
     @SysLog("删除字典类型")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable("id") Long id) {

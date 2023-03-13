@@ -6,6 +6,7 @@ import com.github.w4o.xx.manage.param.sys.dict.AddDictDataParam;
 import com.github.w4o.xx.manage.param.sys.dict.DictDataPageParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictDataParam;
 import com.github.w4o.xx.manage.service.SysDictDataService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/sys/dictData")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Tag(name = "字典管理")
 public class SysDictDataController {
 
     private final SysDictDataService sysDictDataService;

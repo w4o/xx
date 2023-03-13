@@ -5,6 +5,8 @@ import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.param.sys.menu.MenuParam;
 import com.github.w4o.xx.manage.service.SysMenuService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,12 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/menu")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Tag(name = "菜单管理")
 public class SysMenuController {
 
     private final SysMenuService sysMenuService;
 
-    /**
-     * 添加菜单
-     */
+    @Operation(summary = "添加菜单")
     @SysLog("添加菜单")
     @PostMapping
     public CommonResult<?> add(@RequestBody @Valid MenuParam param) {
@@ -38,9 +39,7 @@ public class SysMenuController {
         return CommonResult.success();
     }
 
-    /**
-     * 修改菜单
-     */
+    @Operation(summary = "修改菜单")
     @SysLog("修改菜单")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable("id") @NotNull Long id,
@@ -49,9 +48,7 @@ public class SysMenuController {
         return CommonResult.success();
     }
 
-    /**
-     * 删除菜单
-     */
+    @Operation(summary = "删除菜单")
     @SysLog("删除菜单")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable("id") @NotNull Long id) {
@@ -59,17 +56,13 @@ public class SysMenuController {
         return CommonResult.success();
     }
 
-    /**
-     * 查询菜单树
-     */
+    @Operation(summary = "查询菜单树")
     @GetMapping("/tree")
     public CommonResult<?> findMenuTree() {
         return CommonResult.success(sysMenuService.findMenuTree());
     }
 
-    /**
-     * 菜单树选项
-     */
+    @Operation(summary = "菜单树选项", description = "用于树形下拉列表数据")
     @GetMapping("/treeOption")
     public CommonResult<?> menuTreeOptions() {
         return CommonResult.success(sysMenuService.getMenuTreeOptions());

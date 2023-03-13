@@ -29,8 +29,8 @@ public class SysLogServiceImpl implements SysLogService {
     public Page<SysLogEntity> getPageList(LogPageParam param) {
         var queryWrapper = new LambdaQueryWrapper<SysLogEntity>()
                 .orderByDesc(SysLogEntity::getCreateTime);
-        if (StringUtils.isNotEmpty(param.getUserName())) {
-            queryWrapper.like(SysLogEntity::getUserName, param.getUserName());
+        if (StringUtils.isNotEmpty(param.getUsername())) {
+            queryWrapper.like(SysLogEntity::getUserName, param.getUsername());
         }
 
         if (StringUtils.isNotEmpty(param.getStartDate())) {

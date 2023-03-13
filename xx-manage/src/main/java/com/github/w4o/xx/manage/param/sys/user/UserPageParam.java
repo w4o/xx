@@ -1,6 +1,7 @@
 package com.github.w4o.xx.manage.param.sys.user;
 
 import com.github.w4o.xx.core.base.BasePageParam;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +12,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Schema(name = "用户分页查询参数")
 public class UserPageParam extends BasePageParam {
+    @Schema(title = "用户名")
     private String username;
 }

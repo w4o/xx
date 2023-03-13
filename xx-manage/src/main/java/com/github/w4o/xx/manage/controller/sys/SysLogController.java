@@ -3,6 +3,8 @@ package com.github.w4o.xx.manage.controller.sys;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.param.sys.log.LogPageParam;
 import com.github.w4o.xx.manage.service.SysLogService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/log")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Tag(name = "日志管理")
 public class SysLogController {
 
     private final SysLogService sysLogService;
 
-    /**
-     * 分页查询
-     */
+    @Operation(summary = "分页查询")
     @GetMapping
     public CommonResult<?> findPage(LogPageParam param) {
         return CommonResult.success(sysLogService.getPageList(param));
     }
 
-    /**
-     * 清除操作日志
-     */
+    @Operation(summary = "清除操作日志")
     @DeleteMapping("/clean")
     public CommonResult<?> clean() {
         sysLogService.clean();
