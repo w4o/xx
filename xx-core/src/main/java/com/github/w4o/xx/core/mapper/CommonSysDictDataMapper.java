@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author Frank
  */
-public interface BaseSysDictDataMapper extends BaseMapper<SysDictDataEntity> {
+public interface CommonSysDictDataMapper extends BaseMapper<SysDictDataEntity> {
 
     /**
      * 根据标签获取字典数据集合

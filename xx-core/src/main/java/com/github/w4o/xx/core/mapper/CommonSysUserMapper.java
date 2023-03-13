@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * @author Frank
  */
-public interface BaseSysUserMapper extends BaseMapper<SysUserEntity> {
+public interface CommonSysUserMapper extends BaseMapper<SysUserEntity> {
 
     /**
      * 根据id查用户名

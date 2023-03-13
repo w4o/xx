@@ -1,7 +1,7 @@
 package com.github.w4o.xx.manage.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.w4o.xx.core.mapper.BaseSysConfigMapper;
+import com.github.w4o.xx.core.mapper.CommonSysConfigMapper;
 import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
 
@@ -10,7 +10,7 @@ import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
  *
  * @author Frank
  */
-public interface SysConfigMapper extends BaseSysConfigMapper {
+public interface SysConfigMapper extends CommonSysConfigMapper {
 
     /**
      * 分页查询

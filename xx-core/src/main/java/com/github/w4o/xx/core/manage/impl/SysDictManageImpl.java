@@ -2,7 +2,7 @@ package com.github.w4o.xx.core.manage.impl;
 
 import com.github.w4o.xx.core.entity.SysDictDataEntity;
 import com.github.w4o.xx.core.manage.SysDictManage;
-import com.github.w4o.xx.core.mapper.BaseSysDictDataMapper;
+import com.github.w4o.xx.core.mapper.CommonSysDictDataMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,18 +20,18 @@ import java.util.Map;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SysDictManageImpl implements SysDictManage {
 
-    private final BaseSysDictDataMapper baseSysDictDataMapper;
+    private final CommonSysDictDataMapper commonSysDictDataMapper;
 
     @Override
     @Cacheable(cacheNames = "sysDictMap", unless = "#result == null")
     public List<Map<String, Object>> getDictMapByLabel(String label) {
-        return baseSysDictDataMapper.getByLabel(label);
+        return commonSysDictDataMapper.getByLabel(label);
     }
 
     @Override
     @Cacheable(cacheNames = "sysDictById", unless = "#result == null")
     public SysDictDataEntity getDictById(Long id) {
-        return baseSysDictDataMapper.selectById(id);
+        return commonSysDictDataMapper.selectById(id);
     }
 
     @Override

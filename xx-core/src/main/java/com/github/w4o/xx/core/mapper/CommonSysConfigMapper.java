@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
  *
  * @author Frank
  */
-public interface BaseSysConfigMapper extends BaseMapper<SysConfigEntity> {
+public interface CommonSysConfigMapper extends BaseMapper<SysConfigEntity> {
 
     /**
      * 根据key获取字符串value
