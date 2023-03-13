@@ -5,7 +5,7 @@ import com.github.w4o.xx.manage.dto.sys.log.LoginLogPageDTO;
 import com.github.w4o.xx.manage.param.sys.log.LoginLogPageParam;
 
 /**
- * 系统登陆日志服务接口
+ * 系统登录日志服务接口
  *
  * @author Frank
  */

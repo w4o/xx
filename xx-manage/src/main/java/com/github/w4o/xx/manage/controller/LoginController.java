@@ -42,12 +42,12 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 登陆控制器
+ * 登录控制器
  *
  * @author Frank
  */
 
-@Tag(name = "02. 系统用户登陆相关")
+@Tag(name = "02. 系统用户登录相关")
 @RestController
 @RequestMapping
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -65,7 +65,7 @@ public class LoginController {
     private final BusinessUtils businessUtils;
     private final RedisTemplate<String, Object> redisTemplate;
 
-    @Operation(summary = "登陆")
+    @Operation(summary = "登录")
     @PostMapping("/login")
     public CommonResult<LoginVO> login(@RequestBody @Valid LoginParam loginParam) {
         // 密码解密
@@ -94,7 +94,7 @@ public class LoginController {
                 .build());
     }
 
-    @Operation(summary = "获取登陆用户信息")
+    @Operation(summary = "获取登录用户信息")
     @GetMapping("/userInfo")
     public CommonResult<UserInfoVO> userInfo(Principal principal) {
         // TODO 测试用户信息

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Builder
-@Schema(name = "登陆模型")
+@Schema(name = "登录模型")
 public class LoginVO {
     @Schema(description = "jwt Token")
     private String accessToken;

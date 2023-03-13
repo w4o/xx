@@ -8,12 +8,12 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotBlank;
 
 /**
- * 登陆请求参数
+ * 登录请求参数
  *
  * @author Frank
  */
 @Data
-@Schema(name = "系统登陆参数")
+@Schema(name = "系统登录参数")
 public class LoginParam {
     @NotBlank
     @Length(max = 50)

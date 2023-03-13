@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 /**
- * 登陆用户信息
+ * 登录用户信息
  *
  * @author Frank
  */

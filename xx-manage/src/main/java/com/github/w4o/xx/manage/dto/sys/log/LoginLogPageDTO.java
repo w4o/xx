@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Frank
  */
 @Data
-@Schema(name = "登陆日志分页数据模型")
+@Schema(name = "登录日志分页数据模型")
 public class LoginLogPageDTO {
     @Schema(description = "日志ID")
     private Long id;

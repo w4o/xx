@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/sys/loginLog")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "12. 登陆日志管理")
+@Tag(name = "12. 登录日志管理")
 public class SysLoginLogController {
 
     private final SysLoginLogService sysLoginLogService;

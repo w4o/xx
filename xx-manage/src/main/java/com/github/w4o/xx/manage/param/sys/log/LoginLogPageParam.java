@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Schema(name = "登陆日志分页查询参数")
+@Schema(name = "登录日志分页查询参数")
 public class LoginLogPageParam extends BasePageParam {
     @Schema(description = "用户名", example = "admin")
     private String username;

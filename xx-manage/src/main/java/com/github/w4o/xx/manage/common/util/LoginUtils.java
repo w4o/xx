@@ -4,7 +4,7 @@ import com.github.w4o.xx.manage.common.UserInfo;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * 登陆信息工具类
+ * 登录信息工具类
  *
  * @author Frank
  */
