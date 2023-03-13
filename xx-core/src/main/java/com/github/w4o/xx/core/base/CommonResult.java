@@ -24,7 +24,7 @@ public class CommonResult<T> {
     private int code;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @Schema(description = "业务数据")
+    @Schema(title = "业务数据")
     private T data;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
