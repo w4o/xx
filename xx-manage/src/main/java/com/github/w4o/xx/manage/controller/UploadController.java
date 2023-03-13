@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author Frank
  */
-@Tag(name = "上传")
+@Tag(name = "03. 上传")
 @RestController
 @RequestMapping("/upload")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

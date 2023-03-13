@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/menu")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "菜单管理")
+@Tag(name = "10. 菜单管理")
 public class SysMenuController {
 
     private final SysMenuService sysMenuService;

@@ -41,7 +41,7 @@ import java.time.LocalDateTime;
  * @author Frank
  */
 
-@Tag(name = "系统用户登陆相关")
+@Tag(name = "02. 系统用户登陆相关")
 @RestController
 @RequestMapping
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/config")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "配置管理")
+@Tag(name = "09. 配置管理")
 public class SysConfigController {
 
     private final SysConfigService sysConfigService;

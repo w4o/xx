@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/role")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "角色管理")
+@Tag(name = "05. 角色管理")
 public class SysRoleController {
 
     private final SysRoleService sysRoleService;

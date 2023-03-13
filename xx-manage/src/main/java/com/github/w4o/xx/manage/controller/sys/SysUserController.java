@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "系统用户管理")
+@Tag(name = "06. 系统用户管理")
 public class SysUserController {
 
     private final SysUserService sysUserService;

@@ -30,7 +30,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/sys/dictType")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "字典类型管理")
+@Tag(name = "07. 字典类型管理")
 public class SysDictTypeController {
 
     private final SysDictTypeService sysDictTypeService;

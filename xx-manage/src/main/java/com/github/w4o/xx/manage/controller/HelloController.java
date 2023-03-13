@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "Hello接口")
+@Tag(name = "01. Hello接口")
 public class HelloController {
 
     private final HelloService helloService;

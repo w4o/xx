@@ -30,7 +30,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/sys/dictData")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "字典管理")
+@Tag(name = "08. 字典管理")
 public class SysDictDataController {
 
     private final SysDictDataService sysDictDataService;

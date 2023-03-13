@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/sys/log")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "日志管理")
+@Tag(name = "11. 日志管理")
 public class SysLogController {
 
     private final SysLogService sysLogService;
