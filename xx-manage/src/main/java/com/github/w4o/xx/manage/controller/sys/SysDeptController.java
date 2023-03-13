@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/sys/dept")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "配置管理")
+@Tag(name = "部门管理")
 public class SysDeptController {
 
     private final SysDeptService sysDeptService;
