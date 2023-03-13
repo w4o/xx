@@ -15,8 +15,14 @@ spring:
 springdoc:
   swagger-ui:
     enabled: true
+    tags-sorter: alpha
+    operations-sorter: alpha
   api-docs:
     enabled: true
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
 logging:
   level:
     com.github.w4o.xx: debug

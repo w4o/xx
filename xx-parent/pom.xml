@@ -27,7 +27,7 @@
         <poi-ooxml.version>5.2.2</poi-ooxml.version>
         <flowable.version>6.7.2</flowable.version>
         <aliyun-spring-boot-dependencies.version>1.0.0</aliyun-spring-boot-dependencies.version>
-        <springdoc.version>1.6.6</springdoc.version>
+        <springdoc.version>1.6.9</springdoc.version>
     </properties>
 
     <dependencyManagement>
@@ -63,10 +63,17 @@
                 <version>${flowable.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
+                <!--保持版本与Knife4j v4.0的版本一致，避免jar包冲突，因为Knife4j-v4.0.0版本依赖的springdoc版本是1.6.9 -->
                 <version>${springdoc.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>aliyun-spring-boot-dependencies</artifactId>
