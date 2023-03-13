@@ -38,7 +38,7 @@ import java.util.Objects;
 @Slf4j
 public class HttpTraceLogFilter extends OncePerRequestFilter implements Ordered {
     private static final String NEED_TRACE_PATH_PREFIX = "/";
-    private static final String[] IGNORE_TRACE_PATH_PREFIX = {"/v3/api-docs", "/swagger-ui"};
+    private static final String[] IGNORE_TRACE_PATH_PREFIX = {"/v3/api-docs", "/swagger-ui", "/webjars", "/doc.html", "/favicon.ico"};
     private static final String IGNORE_CONTENT_TYPE = "multipart/form-data";
     private final ObjectMapper mapper = new ObjectMapper();
 
