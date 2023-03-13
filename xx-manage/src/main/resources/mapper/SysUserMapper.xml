@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.manage.mapper.SysUserMapper">
+
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.user.UserPageDTO">
+        select sys_user.id as user_id,
+        sys_user.username,
+        sys_user.nick_name,
+        sys_user.avatar,
+        sys_user.email,
+        sys_user.mobile,
+        sys_user.`status`,
+        sys_user.create_by,
+        sys_user.create_time,
+        sys_user.last_update_by,
+        sys_user.last_update_time
+        from sys_user
+        where sys_user.deleted = 0
+        <if test="condition.username != null and condition.username != ''">
+            and sys_user.username like concat('%', #{condition.username}, '%')
+        </if>
+        order by sys_user.create_time desc
+    </select>
+</mapper>
