@@ -5,6 +5,7 @@ import com.github.w4o.xx.manage.param.sys.dept.AddDeptParam;
 import com.github.w4o.xx.manage.param.sys.dept.ModifyDeptParam;
 import com.github.w4o.xx.manage.service.SysDeptService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class SysDeptController {
     }
 
     @PutMapping("/{id}")
+    @Parameter(name = "id", required = true, description = "部门id")
     @Operation(summary = "修改部门")
     public CommonResult<?> modify(@PathVariable("id") @NotNull Long id,
                                   @RequestBody @Valid ModifyDeptParam param) {
@@ -44,6 +46,7 @@ public class SysDeptController {
     }
 
     @DeleteMapping("/{id}")
+    @Parameter(name = "id", required = true, description = "部门id")
     @Operation(summary = "删除部门")
     public CommonResult<?> delete(@PathVariable("id") @NotNull Long id) {
         sysDeptService.delete(id);

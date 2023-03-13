@@ -7,6 +7,7 @@ import com.github.w4o.xx.manage.param.sys.role.AddRoleParam;
 import com.github.w4o.xx.manage.param.sys.role.ModifyRoleParam;
 import com.github.w4o.xx.manage.service.SysRoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +51,7 @@ public class SysRoleController {
     }
 
     @Operation(summary = "修改角色")
+    @Parameter(name = "id", required = true, description = "角色id")
     @SysLog("修改角色")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable("id") @NotNull Long id,
@@ -59,6 +61,7 @@ public class SysRoleController {
     }
 
     @Operation(summary = "删除角色")
+    @Parameter(name = "id", required = true, description = "角色id")
     @SysLog("删除角色")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable("id") @NotNull Long id) {

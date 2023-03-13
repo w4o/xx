@@ -6,6 +6,7 @@ import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.param.sys.menu.MenuParam;
 import com.github.w4o.xx.manage.service.SysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,7 @@ public class SysMenuController {
     }
 
     @Operation(summary = "修改菜单")
+    @Parameter(name = "id", required = true, description = "菜单id")
     @SysLog("修改菜单")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable("id") @NotNull Long id,
@@ -49,6 +51,7 @@ public class SysMenuController {
     }
 
     @Operation(summary = "删除菜单")
+    @Parameter(name = "id", required = true, description = "菜单id")
     @SysLog("删除菜单")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable("id") @NotNull Long id) {

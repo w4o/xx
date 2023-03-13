@@ -6,6 +6,7 @@ import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictTypeParam;
 import com.github.w4o.xx.manage.service.SysDictTypeService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,7 @@ public class SysDictTypeController {
     }
 
     @Operation(summary = "添加字典类型")
+    @Parameter(name = "id", required = true, description = "字典类型id")
     @SysLog("添加字典类型")
     @PostMapping
     public CommonResult<?> add(@RequestBody @Valid AddDictTypeParam param) {
@@ -49,6 +51,7 @@ public class SysDictTypeController {
     }
 
     @Operation(summary = "修改字典类型")
+    @Parameter(name = "id", required = true, description = "字典类型id")
     @SysLog("修改字典类型")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable("id") Long id,
@@ -58,6 +61,7 @@ public class SysDictTypeController {
     }
 
     @Operation(summary = "删除字典类型")
+    @Parameter(name = "id", required = true, description = "字典类型id")
     @SysLog("删除字典类型")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable("id") Long id) {
