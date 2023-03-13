@@ -83,7 +83,7 @@ public class LoginController {
         return CommonResult.success(LoginVO.builder()
                 .accessToken(token)
                 .refreshToken("")
-                .expires(LocalDateTime.MAX)
+                .expires(LocalDateTime.now().plusSeconds(appConfig.getJwt().getExpire()))
                 .build());
     }
 
