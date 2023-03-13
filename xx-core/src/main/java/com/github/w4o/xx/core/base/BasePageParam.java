@@ -17,11 +17,11 @@ import javax.validation.constraints.NotNull;
 public class BasePageParam {
     @NotNull
     @Min(1)
-    @Schema(description = "页码")
+    @Schema(description = "页码", example = "1")
     private Long pageNo = 1L;
     @NotNull
     @Max(100)
-    @Schema(description = "分页大小")
+    @Schema(description = "分页大小", example = "20")
     private Long pageSize = 99999L;
     /**
      * 排序列

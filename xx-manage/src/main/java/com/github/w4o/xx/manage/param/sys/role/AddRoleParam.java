@@ -17,10 +17,10 @@ import javax.validation.constraints.NotNull;
 public class AddRoleParam {
 
     @NotBlank
-    @Schema(description = "角色名")
+    @Schema(description = "角色名", example = "管理员")
     private String name;
 
     @NotNull
-    @Schema(description = "菜单数组")
+    @Schema(description = "菜单数组", example = "[1,2,3]")
     private Long[] menus = new Long[0];
 }

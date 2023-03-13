@@ -14,6 +14,6 @@ import java.util.Set;
 @Schema(name = "修改用户参数")
 public class ModifyUserParam {
 
-    @Schema(description = "角色")
+    @Schema(description = "角色", example = "[1,2,3]")
     private Set<Long> roles;
 }

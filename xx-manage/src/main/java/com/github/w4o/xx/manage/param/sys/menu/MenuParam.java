@@ -17,37 +17,37 @@ import javax.validation.constraints.NotNull;
 @Schema(name = "菜单参数")
 public class MenuParam {
     @NotBlank
-    @Schema(description = "路径")
+    @Schema(description = "路径", example = "/sys/menu")
     private String path;
 
     @NotBlank
-    @Schema(description = "菜单名称")
+    @Schema(description = "菜单名称", example = "菜单管理")
     private String name;
 
     @NotBlank
-    @Schema(description = "vue文件目录")
+    @Schema(description = "vue文件目录", example = "sys/menu")
     private String component;
 
     @NotNull
-    @Schema(description = "父菜单ID", defaultValue = "0")
+    @Schema(description = "父菜单ID", defaultValue = "0", example = "0")
     private Long parentId = NumberUtils.LONG_ZERO;
 
-    @Schema(description = "排序")
+    @Schema(description = "排序", defaultValue = "0", example = "0")
     private Integer sort = NumberUtils.INTEGER_ZERO;
 
-    @Schema(description = "重定向到子路由")
+    @Schema(description = "重定向到子路由", example = "noRedirect")
     private String redirect;
 
-    @Schema(description = "菜单、面包屑、多标签页显示的名称")
+    @Schema(description = "菜单、面包屑、多标签页显示的名称", example = "菜单管理")
     private String title;
 
-    @Schema(description = "图标")
+    @Schema(description = "图标", example = "el-icon-s-help")
     private String icon;
 
-    @Schema(description = "是否显示在菜单中显示隐藏路由")
+    @Schema(description = "是否显示在菜单中显示隐藏路由", example = "true")
     private Boolean hidden;
 
-    @Schema(description = "是否显示在菜单中显示隐藏一级路由")
+    @Schema(description = "是否显示在菜单中显示隐藏一级路由", example = "true")
     private Boolean levelHidden;
 
 }

@@ -16,13 +16,13 @@ import java.util.Set;
 public class AddUserParam {
 
     @NotBlank
-    @Schema(description = "用户名")
+    @Schema(description = "用户名", example = "admin")
     private String username;
 
     @NotBlank
-    @Schema(description = "用户密码")
+    @Schema(description = "用户密码（做AES加密）", example = "KiFfbShnMS0ISIwPFEPk+g==")
     private String password;
 
-    @Schema(description = "角色")
+    @Schema(description = "角色", example = "[1,2,3]")
     private Set<Long> roles;
 }

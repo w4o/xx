@@ -18,22 +18,22 @@ import javax.validation.constraints.NotNull;
 public class AddDictDataParam {
 
     @NotNull
-    @Schema(description = "字典类型ID")
+    @Schema(description = "字典类型ID", example = "1")
     private Long dictTypeId;
 
     @NotBlank
-    @Schema(description = "字典值")
+    @Schema(description = "字典值", example = "1")
     private String value;
 
-    @Schema(description = "字典类型")
+    @Schema(description = "字典类型", example = "1")
     private String type;
 
-    @Schema(description = "字典描述")
+    @Schema(description = "字典描述", example = "描述信息xxx")
     private String description;
 
-    @Schema(description = "排序", defaultValue = "0")
+    @Schema(description = "排序", defaultValue = "0", example = "0")
     private Integer sort = NumberUtils.INTEGER_ZERO;
 
-    @Schema(description = "备注")
+    @Schema(description = "备注", example = "备注信息xxx")
     private String remark;
 }

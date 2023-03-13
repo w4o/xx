@@ -14,9 +14,9 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "修改密码参数")
 public class ChangePasswordParam {
     @NotBlank
-    @Schema(description = "旧密码")
+    @Schema(description = "旧密码（做AES加密）", example = "KiFfbShnMS0ISIwPFEPk+g==")
     private String oldPassword;
     @NotBlank
-    @Schema(description = "新密码")
+    @Schema(description = "新密码（做AES加密）", example = "KiFfbShnMS0ISIwPFEPk+g==")
     private String newPassword;
 }

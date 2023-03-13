@@ -14,6 +14,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "用户分页查询参数")
 public class UserPageParam extends BasePageParam {
-    @Schema(description = "用户名")
+    @Schema(description = "用户名", example = "admin")
     private String username;
 }
