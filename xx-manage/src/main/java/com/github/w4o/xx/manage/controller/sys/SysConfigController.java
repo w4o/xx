@@ -1,15 +1,19 @@
 package com.github.w4o.xx.manage.controller.sys;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
 import com.github.w4o.xx.manage.param.sys.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
 import com.github.w4o.xx.manage.param.sys.config.ModifyConfigParam;
 import com.github.w4o.xx.manage.service.SysConfigService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +45,7 @@ public class SysConfigController {
     }
 
     @Operation(summary = "修改配置")
+    @Parameter(name = "id", required = true, description = "配置id")
     @SysLog("修改配置")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable("id") Long id,
@@ -50,6 +55,7 @@ public class SysConfigController {
     }
 
     @Operation(summary = "删除配置")
+    @Parameter(name = "id", required = true, description = "配置id")
     @SysLog("删除配置")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable("id") @NotNull Long id) {
@@ -59,7 +65,7 @@ public class SysConfigController {
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<?> findPage(ConfigPageParam param) {
+    public CommonResult<Page<SysConfigPageDTO>> findPage(@ParameterObject @ModelAttribute ConfigPageParam param) {
         return CommonResult.success(sysConfigService.getPageList(param));
     }
 }

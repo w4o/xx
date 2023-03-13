@@ -7,6 +7,7 @@ import com.github.w4o.xx.core.entity.SysConfigEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.AssertUtils;
+import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
 import com.github.w4o.xx.manage.mapper.SysConfigMapper;
 import com.github.w4o.xx.manage.param.sys.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -34,14 +34,8 @@ public class SysConfigServiceImpl implements SysConfigService {
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public Page<Map<String, Object>> getPageList(ConfigPageParam param) {
-        return sysConfigMapper.selectMapsPage(new Page<>(param.getPageNo(), param.getPageSize()),
-                new LambdaQueryWrapper<SysConfigEntity>()
-                        .select(SysConfigEntity::getId,
-                                SysConfigEntity::getConfigKey,
-                                SysConfigEntity::getConfigValue,
-                                SysConfigEntity::getLastUpdateTime)
-                        .orderByAsc(SysConfigEntity::getConfigKey));
+    public Page<SysConfigPageDTO> getPageList(ConfigPageParam param) {
+        return sysConfigMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
     }
 
     @Override

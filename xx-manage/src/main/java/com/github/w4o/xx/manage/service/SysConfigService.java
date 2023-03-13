@@ -1,11 +1,10 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
 import com.github.w4o.xx.manage.param.sys.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
 import com.github.w4o.xx.manage.param.sys.config.ModifyConfigParam;
-
-import java.util.Map;
 
 /**
  * 系统配置服务接口
@@ -19,7 +18,7 @@ public interface SysConfigService {
      * @param param 请求参数
      * @return 分页列表
      */
-    Page<Map<String, Object>> getPageList(ConfigPageParam param);
+    Page<SysConfigPageDTO> getPageList(ConfigPageParam param);
 
     /**
      * 添加配置
