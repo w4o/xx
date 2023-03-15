@@ -3,10 +3,12 @@ package com.github.w4o.xx.core.base.service.impl;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.w4o.xx.core.base.dto.BasePageDataDTO;
+import com.github.w4o.xx.core.base.dto.BaseDataDTO;
 import com.github.w4o.xx.core.base.service.BaseService;
 import com.github.w4o.xx.core.mapper.CommonSysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @author Frank
@@ -17,10 +19,18 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
     private CommonSysUserMapper commonSysUserMapper;
 
     @Override
-    public void handlePageRecord(Page<? extends BasePageDataDTO> page) {
-        page.getRecords().forEach(record -> {
-            record.setCreateUser(commonSysUserMapper.selectUsernameById(record.getCreateBy()));
-            record.setLastUpdateUser(commonSysUserMapper.selectUsernameById(record.getLastUpdateBy()));
-        });
+    public void handlePageRecord(Page<? extends BaseDataDTO> page) {
+        page.getRecords().forEach(this::handleOneData);
+    }
+
+    @Override
+    public void handleListData(List<? extends BaseDataDTO> list) {
+        list.forEach(this::handleOneData);
+    }
+
+    @Override
+    public void handleOneData(BaseDataDTO data) {
+        data.setCreateUser(commonSysUserMapper.selectUsernameById(data.getCreateBy()));
+        data.setLastUpdateUser(commonSysUserMapper.selectUsernameById(data.getLastUpdateBy()));
     }
 }
