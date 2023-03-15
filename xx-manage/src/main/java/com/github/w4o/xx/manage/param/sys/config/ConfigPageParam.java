@@ -12,6 +12,6 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Schema(name = "修改分页查询参数")
+@Schema(name = "配置分页查询参数")
 public class ConfigPageParam extends BasePageParam {
 }
