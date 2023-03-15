@@ -1,6 +1,7 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.BaseService;
 import com.github.w4o.xx.core.entity.SysDictTypeEntity;
 import com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
@@ -12,7 +13,7 @@ import com.github.w4o.xx.manage.param.sys.dict.ModifyDictTypeParam;
  *
  * @author Frank
  */
-public interface SysDictTypeService {
+public interface SysDictTypeService extends BaseService<SysDictTypeEntity> {
 
     /**
      * 添加字典类型

@@ -1,6 +1,8 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.base.service.BaseService;
+import com.github.w4o.xx.core.entity.SysUserEntity;
 import com.github.w4o.xx.manage.dto.sys.user.UserPageDTO;
 import com.github.w4o.xx.manage.param.ChangePasswordParam;
 import com.github.w4o.xx.manage.param.sys.user.AddUserParam;
@@ -12,7 +14,7 @@ import com.github.w4o.xx.manage.param.sys.user.UserPageParam;
  *
  * @author Frank
  */
-public interface SysUserService {
+public interface SysUserService extends BaseService<SysUserEntity> {
 
     /**
      * 添加用户
