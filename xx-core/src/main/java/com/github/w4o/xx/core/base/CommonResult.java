@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * @author Frank
  */
 @Data
-@Schema(name = "API通用数据")
+@Schema(name = "API通用数据", description = "通用返回格式")
 public class CommonResult<T> {
 
     public final static int SUCCESS = 0;
@@ -24,7 +24,7 @@ public class CommonResult<T> {
     private int code;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @Schema(title = "业务数据")
+    @Schema(description = "业务数据")
     private T data;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
