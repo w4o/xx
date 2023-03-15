@@ -3,7 +3,7 @@ package com.github.w4o.xx.manage.controller.sys;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.dto.sys.role.RolePageDTO;
+import com.github.w4o.xx.manage.dto.sys.role.RoleDTO;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleMenuParam;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleParam;
 import com.github.w4o.xx.manage.param.sys.role.ModifyRoleParam;
@@ -39,7 +39,7 @@ public class SysRoleController {
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<Page<RolePageDTO>> findPage(@ParameterObject @ModelAttribute RolePageParam param) {
+    public CommonResult<Page<RoleDTO>> findPage(@ParameterObject @ModelAttribute RolePageParam param) {
         return CommonResult.success(sysRoleService.getPageList(param));
     }
 

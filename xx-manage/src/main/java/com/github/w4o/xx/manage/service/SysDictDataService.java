@@ -3,7 +3,7 @@ package com.github.w4o.xx.manage.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.base.service.BaseService;
 import com.github.w4o.xx.core.entity.SysDictDataEntity;
-import com.github.w4o.xx.manage.dto.sys.dict.DictDataPageDTO;
+import com.github.w4o.xx.manage.dto.sys.dict.DictDataDTO;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictDataParam;
 import com.github.w4o.xx.manage.param.sys.dict.DictDataPageParam;
 import com.github.w4o.xx.manage.param.sys.dict.ModifyDictDataParam;
@@ -28,7 +28,7 @@ public interface SysDictDataService extends BaseService<SysDictDataEntity> {
      * @param param 请求参数
      * @return 分页列表
      */
-    Page<DictDataPageDTO> getPageList(DictDataPageParam param);
+    Page<DictDataDTO> getPageList(DictDataPageParam param);
 
     /**
      * 修改字典信息

@@ -1,6 +1,6 @@
 package com.github.w4o.xx.manage.dto.sys.role;
 
-import com.github.w4o.xx.core.base.dto.BasePageDataDTO;
+import com.github.w4o.xx.core.base.dto.BaseDataDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "角色分页数据模型")
-public class RolePageDTO extends BasePageDataDTO {
+public class RoleDTO extends BaseDataDTO {
     @Schema(description = "角色ID")
     private Long roleId;
     @Schema(description = "角色名")

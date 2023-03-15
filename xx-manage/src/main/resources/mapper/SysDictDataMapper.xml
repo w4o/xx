@@ -3,7 +3,7 @@
 
 <mapper namespace="com.github.w4o.xx.manage.mapper.SysDictDataMapper">
 
-    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.dict.DictDataPageDTO">
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.dict.DictDataDTO">
         select id,
                `value`,
                label,

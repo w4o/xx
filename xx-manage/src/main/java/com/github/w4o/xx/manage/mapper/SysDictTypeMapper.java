@@ -3,7 +3,7 @@ package com.github.w4o.xx.manage.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.SysDictTypeEntity;
-import com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO;
+import com.github.w4o.xx.manage.dto.sys.dict.DictTypeDTO;
 import com.github.w4o.xx.manage.param.sys.dict.DictTypePageParam;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,5 +21,5 @@ public interface SysDictTypeMapper extends BaseMapper<SysDictTypeEntity> {
      * @param param 查询参数
      * @return 分页数据
      */
-    Page<DictTypePageDTO> findPage(Page<?> page, @Param("condition") DictTypePageParam param);
+    Page<DictTypeDTO> findPage(Page<?> page, @Param("condition") DictTypePageParam param);
 }

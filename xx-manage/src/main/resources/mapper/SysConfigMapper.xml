@@ -3,7 +3,7 @@
 
 <mapper namespace="com.github.w4o.xx.manage.mapper.SysConfigMapper">
 
-    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO">
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.config.SysConfigDTO">
         select sys_config.id as config_id,
                sys_config.config_key,
                sys_config.config_value,

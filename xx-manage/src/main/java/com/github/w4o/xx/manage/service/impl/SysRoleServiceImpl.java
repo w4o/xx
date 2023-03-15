@@ -8,7 +8,7 @@ import com.github.w4o.xx.core.entity.SysRoleMenuEntity;
 import com.github.w4o.xx.core.entity.SysUserRoleEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
-import com.github.w4o.xx.manage.dto.sys.role.RolePageDTO;
+import com.github.w4o.xx.manage.dto.sys.role.RoleDTO;
 import com.github.w4o.xx.manage.mapper.SysRoleMapper;
 import com.github.w4o.xx.manage.mapper.SysRoleMenuMapper;
 import com.github.w4o.xx.manage.mapper.SysUserRoleMapper;
@@ -40,7 +40,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEn
     private final SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
-    public Page<RolePageDTO> getPageList(RolePageParam param) {
+    public Page<RoleDTO> getPageList(RolePageParam param) {
         var page = sysRoleMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
         handlePageRecord(page);
         page.getRecords().forEach(dto -> dto.setMenus(sysRoleMenuMapper.selectObjs(new LambdaQueryWrapper<SysRoleMenuEntity>()

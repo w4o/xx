@@ -3,7 +3,7 @@ package com.github.w4o.xx.manage.controller.sys;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
+import com.github.w4o.xx.manage.dto.sys.config.SysConfigDTO;
 import com.github.w4o.xx.manage.param.sys.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
 import com.github.w4o.xx.manage.param.sys.config.ModifyConfigParam;
@@ -65,7 +65,7 @@ public class SysConfigController {
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<Page<SysConfigPageDTO>> findPage(@ParameterObject @ModelAttribute ConfigPageParam param) {
+    public CommonResult<Page<SysConfigDTO>> findPage(@ParameterObject @ModelAttribute ConfigPageParam param) {
         return CommonResult.success(sysConfigService.getPageList(param));
     }
 }

@@ -12,7 +12,7 @@ import com.github.w4o.xx.core.util.AssertUtils;
 import com.github.w4o.xx.core.util.BusinessUtils;
 import com.github.w4o.xx.manage.common.config.AppConfig;
 import com.github.w4o.xx.manage.common.util.LoginUtils;
-import com.github.w4o.xx.manage.dto.sys.user.UserPageDTO;
+import com.github.w4o.xx.manage.dto.sys.user.UserDTO;
 import com.github.w4o.xx.manage.mapper.SysUserMapper;
 import com.github.w4o.xx.manage.mapper.SysUserRoleMapper;
 import com.github.w4o.xx.manage.param.ChangePasswordParam;
@@ -110,7 +110,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserEn
     }
 
     @Override
-    public Page<UserPageDTO> getPageList(UserPageParam param) {
+    public Page<UserDTO> getPageList(UserPageParam param) {
         var page = sysUserMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
         handlePageRecord(page);
         page.getRecords().forEach(dto -> dto.setRoleList(sysUserRoleMapper.findRoleByUserId(dto.getUserId())));

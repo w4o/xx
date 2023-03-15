@@ -8,7 +8,7 @@ import com.github.w4o.xx.core.entity.SysConfigEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.AssertUtils;
-import com.github.w4o.xx.manage.dto.sys.config.SysConfigPageDTO;
+import com.github.w4o.xx.manage.dto.sys.config.SysConfigDTO;
 import com.github.w4o.xx.manage.mapper.SysConfigMapper;
 import com.github.w4o.xx.manage.param.sys.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.sys.config.ConfigPageParam;
@@ -35,8 +35,8 @@ public class SysConfigServiceImpl extends BaseServiceImpl<SysConfigMapper, SysCo
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public Page<SysConfigPageDTO> getPageList(ConfigPageParam param) {
-        Page<SysConfigPageDTO> page = sysConfigMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+    public Page<SysConfigDTO> getPageList(ConfigPageParam param) {
+        Page<SysConfigDTO> page = sysConfigMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
         handlePageRecord(page);
         return page;
     }

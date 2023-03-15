@@ -3,7 +3,7 @@
 
 <mapper namespace="com.github.w4o.xx.manage.mapper.SysUserMapper">
 
-    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.user.UserPageDTO">
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.user.UserDTO">
         select sys_user.id as user_id,
         sys_user.username,
         sys_user.nick_name,

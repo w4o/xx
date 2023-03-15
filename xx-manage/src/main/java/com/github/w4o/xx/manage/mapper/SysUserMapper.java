@@ -3,7 +3,7 @@ package com.github.w4o.xx.manage.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.SysUserEntity;
-import com.github.w4o.xx.manage.dto.sys.user.UserPageDTO;
+import com.github.w4o.xx.manage.dto.sys.user.UserDTO;
 import com.github.w4o.xx.manage.param.sys.user.UserPageParam;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,5 +21,5 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
      * @param param 查询参数
      * @return 分页数据
      */
-    Page<UserPageDTO> findPage(Page<?> page, @Param("condition") UserPageParam param);
+    Page<UserDTO> findPage(Page<?> page, @Param("condition") UserPageParam param);
 }

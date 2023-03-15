@@ -1,7 +1,7 @@
 package com.github.w4o.xx.manage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.w4o.xx.manage.dto.sys.role.RolePageDTO;
+import com.github.w4o.xx.manage.dto.sys.role.RoleDTO;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleMenuParam;
 import com.github.w4o.xx.manage.param.sys.role.AddRoleParam;
 import com.github.w4o.xx.manage.param.sys.role.ModifyRoleParam;
@@ -23,7 +23,7 @@ public interface SysRoleService {
      * @param param 请求参数
      * @return 分页列表
      */
-    Page<RolePageDTO> getPageList(RolePageParam param);
+    Page<RoleDTO> getPageList(RolePageParam param);
 
     /**
      * 添加角色

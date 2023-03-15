@@ -1,6 +1,6 @@
 package com.github.w4o.xx.manage.dto.sys.user;
 
-import com.github.w4o.xx.core.base.dto.BasePageDataDTO;
+import com.github.w4o.xx.core.base.dto.BaseDataDTO;
 import com.github.w4o.xx.manage.dto.sys.role.UserRoleDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "用户分页数据模型")
-public class UserPageDTO extends BasePageDataDTO {
+public class UserDTO extends BaseDataDTO {
 
     @Schema(description = "用户ID")
     private Long userId;

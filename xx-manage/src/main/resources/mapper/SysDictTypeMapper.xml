@@ -3,7 +3,7 @@
 
 <mapper namespace="com.github.w4o.xx.manage.mapper.SysDictTypeMapper">
 
-    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO">
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.dict.DictTypeDTO">
         select sys_dict_type.id as dict_type_id,
                sys_dict_type.label,
                sys_dict_type.name,

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.github.w4o.xx.manage.mapper.SysRoleMapper">
 
-    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.role.RolePageDTO">
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.role.RoleDTO">
         select sys_role.id as role_id,
                sys_role.`name`,
                sys_role.sort,

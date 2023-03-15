@@ -6,7 +6,7 @@ import com.github.w4o.xx.core.constant.Constant;
 import com.github.w4o.xx.core.entity.SysDictDataEntity;
 import com.github.w4o.xx.core.entity.SysDictTypeEntity;
 import com.github.w4o.xx.core.util.AssertUtils;
-import com.github.w4o.xx.manage.dto.sys.dict.DictDataPageDTO;
+import com.github.w4o.xx.manage.dto.sys.dict.DictDataDTO;
 import com.github.w4o.xx.manage.mapper.SysDictDataMapper;
 import com.github.w4o.xx.manage.mapper.SysDictTypeMapper;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictDataParam;
@@ -51,8 +51,8 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataMapper, S
     }
 
     @Override
-    public Page<DictDataPageDTO> getPageList(DictDataPageParam param) {
-        Page<DictDataPageDTO> page = sysDictDataMapper.findPage(new Page<>(param.getPageNo(), param.getDictTypeId()), param);
+    public Page<DictDataDTO> getPageList(DictDataPageParam param) {
+        Page<DictDataDTO> page = sysDictDataMapper.findPage(new Page<>(param.getPageNo(), param.getDictTypeId()), param);
         handlePageRecord(page);
         return page;
     }

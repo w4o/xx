@@ -2,7 +2,7 @@ package com.github.w4o.xx.manage.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.mapper.CommonSysDictDataMapper;
-import com.github.w4o.xx.manage.dto.sys.dict.DictDataPageDTO;
+import com.github.w4o.xx.manage.dto.sys.dict.DictDataDTO;
 import com.github.w4o.xx.manage.param.sys.dict.DictDataPageParam;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,6 +20,6 @@ public interface SysDictDataMapper extends CommonSysDictDataMapper {
      * @param param 查询参数
      * @return 分页数据
      */
-    Page<DictDataPageDTO> findPage(Page<?> page, @Param("condition") DictDataPageParam param);
+    Page<DictDataDTO> findPage(Page<?> page, @Param("condition") DictDataPageParam param);
 
 }

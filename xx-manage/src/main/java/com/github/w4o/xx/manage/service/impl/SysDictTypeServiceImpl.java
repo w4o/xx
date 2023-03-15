@@ -7,7 +7,7 @@ import com.github.w4o.xx.core.entity.SysDictTypeEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.AssertUtils;
-import com.github.w4o.xx.manage.dto.sys.dict.DictTypePageDTO;
+import com.github.w4o.xx.manage.dto.sys.dict.DictTypeDTO;
 import com.github.w4o.xx.manage.mapper.SysDictTypeMapper;
 import com.github.w4o.xx.manage.param.sys.dict.AddDictTypeParam;
 import com.github.w4o.xx.manage.param.sys.dict.DictTypePageParam;
@@ -30,8 +30,8 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeMapper, S
     private final SysDictTypeMapper sysDictTypeMapper;
 
     @Override
-    public Page<DictTypePageDTO> getPageList(DictTypePageParam param) {
-        Page<DictTypePageDTO> page = sysDictTypeMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
+    public Page<DictTypeDTO> getPageList(DictTypePageParam param) {
+        Page<DictTypeDTO> page = sysDictTypeMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
         handlePageRecord(page);
         return page;
     }

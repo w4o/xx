@@ -1,6 +1,6 @@
 package com.github.w4o.xx.manage.dto.sys.dict;
 
-import com.github.w4o.xx.core.base.dto.BasePageDataDTO;
+import com.github.w4o.xx.core.base.dto.BaseDataDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "字典类型分页数据模型")
-public class DictTypePageDTO extends BasePageDataDTO {
+public class DictTypeDTO extends BaseDataDTO {
     @Schema(description = "字典类型ID")
     private Long dictTypeId;
     @Schema(description = "字典类型标签")
