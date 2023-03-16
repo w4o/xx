@@ -1,5 +1,22 @@
 # xx-service
 
+一个基于 SpringBoot 后台权限管理服务端项目
+
+## 项目结构
+
+```
+.
+├── LICENSE
+├── README.md
+├── docs
+├── pom.xml
+├── xx-applet   // 小程序服务
+├── xx-core     // 核心模块
+├── xx-front    // PC前端服务
+├── xx-manage   // PC后台管理服务
+└── xx-parent   // Parent
+```
+
 ## 技术栈
 
 * JDK \>= 17
@@ -44,3 +61,7 @@
 [书写良好的 commit message](https://loveky.github.io/2018/06/04/write-good-commit-message/)
 
 [神器 SpringDoc 横空出世，最适合 SpringBoot 的API文档工具来了~](https://blog.csdn.net/zhenghongcs/article/details/123812583)
+
+[Knife4j](https://doc.xiaominfo.com/)
+
+[Spring Boot 整合流程引擎 Flowable，So Easy！](https://www.51cto.com/article/708150.html)
