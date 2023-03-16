@@ -12,6 +12,7 @@
         <module>xx-parent</module>
         <module>xx-core</module>
         <module>xx-manage</module>
+        <module>xx-front</module>
         <module>xx-applet</module>
     </modules>
 
