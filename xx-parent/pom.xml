@@ -28,6 +28,7 @@
         <flowable.version>6.7.2</flowable.version>
         <aliyun-spring-boot-dependencies.version>1.0.0</aliyun-spring-boot-dependencies.version>
         <springdoc.version>1.6.9</springdoc.version>
+        <weixin-java-miniapp.version>4.4.0</weixin-java-miniapp.version>
     </properties>
 
     <dependencyManagement>
@@ -72,6 +73,16 @@
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <!--保持版本与Knife4j v4.0的版本一致，避免jar包冲突，因为Knife4j-v4.0.0版本依赖的springdoc版本是1.6.9 -->
                 <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-spring-boot-starter</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-miniapp-spring-boot-starter</artifactId>
+                <version>${weixin-java-miniapp.version}</version>
             </dependency>
 
             <dependency>
