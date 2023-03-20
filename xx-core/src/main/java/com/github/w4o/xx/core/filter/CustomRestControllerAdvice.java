@@ -1,7 +1,9 @@
 package com.github.w4o.xx.core.filter;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.exception.CustomException;
+import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.BusinessUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import com.github.w4o.xx.core.exception.ErrorCode;
 
 /**
  * 自定义异常处理
@@ -51,7 +52,7 @@ public class CustomRestControllerAdvice implements ResponseBodyAdvice<Object> {
         }
     }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, MismatchedInputException.class})
     public CommonResult<?> badRequestException(Exception e) {
         if (businessUtils.isDebug()) {
             return CommonResult.error(ErrorCode.E400, e.getMessage());
