@@ -75,11 +75,6 @@
                 <version>${springdoc.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-spring-boot-starter</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>wx-java-miniapp-spring-boot-starter</artifactId>
                 <version>${weixin-java-miniapp.version}</version>
