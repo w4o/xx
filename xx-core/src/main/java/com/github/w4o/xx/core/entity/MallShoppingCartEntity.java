@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @TableName(value = "mall_shopping_cart", autoResultMap = true)
-public class MallShoppingCart extends BaseDataEntity {
+public class MallShoppingCartEntity extends BaseDataEntity {
 
     /**
      * 小程序用户id
