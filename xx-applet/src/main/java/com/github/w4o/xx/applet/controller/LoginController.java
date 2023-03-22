@@ -37,6 +37,6 @@ public class LoginController {
     @GetMapping("/userInfo")
     @CheckToken
     public CommonResult<UserInfoVO> userInfo() {
-        return CommonResult.success();
+        return CommonResult.success(loginService.getUserInfo());
     }
 }
