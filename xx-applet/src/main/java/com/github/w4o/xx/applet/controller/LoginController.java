@@ -28,7 +28,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @Operation(summary = "登陆")
-    @PostMapping
+    @PostMapping("/login")
     public CommonResult<LoginVO> login(@RequestBody LoginParam param) {
         return CommonResult.success(loginService.login(param));
     }
