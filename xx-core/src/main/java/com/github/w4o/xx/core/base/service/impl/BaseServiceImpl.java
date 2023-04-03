@@ -30,7 +30,11 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
 
     @Override
     public void handleOneData(BaseDataDTO data) {
-        data.setCreateUser(commonSysUserMapper.selectUsernameById(data.getCreateBy()));
-        data.setLastUpdateUser(commonSysUserMapper.selectUsernameById(data.getLastUpdateBy()));
+        if (data.getCreateBy() != null) {
+            data.setCreateUser(commonSysUserMapper.selectUsernameById(data.getCreateBy()));
+        }
+        if (data.getLastUpdateBy() != null) {
+            data.setLastUpdateUser(commonSysUserMapper.selectUsernameById(data.getLastUpdateBy()));
+        }
     }
 }
