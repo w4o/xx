@@ -30,3 +30,5 @@ dependency-reduced-pom.xml
 *.idea
 
 application-*.yml
+deploy
+deploy.sh
