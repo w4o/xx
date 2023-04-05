@@ -1,11 +1,13 @@
 package com.github.w4o.xx.core.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.github.w4o.xx.core.base.BaseDataEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
+import java.util.List;
 
 /**
  * 系统菜单表实体
@@ -61,6 +63,11 @@ public class SysMenuEntity extends BaseDataEntity {
     private Boolean hidden;
 
     /**
+     * 菜单外链链接
+     */
+    private String link;
+
+    /**
      * 是否显示在菜单中显示隐藏一级路由
      */
     private Boolean levelHidden;
@@ -70,5 +77,24 @@ public class SysMenuEntity extends BaseDataEntity {
      */
     private Integer sort;
 
+    /**
+     * 权限标识
+     */
+    @TableField(typeHandler = com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler.class)
+    private List<String> roles;
 
+    /**
+     * 是否为外链
+     */
+    private Boolean isIframe;
+
+    /**
+     * 菜单是否固定
+     */
+    private Boolean isAffix;
+
+    /**
+     * 菜单是否缓存
+     */
+    private Boolean isKeepAlive;
 }

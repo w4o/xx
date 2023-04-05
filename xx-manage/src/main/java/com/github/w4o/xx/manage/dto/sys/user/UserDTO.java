@@ -32,4 +32,8 @@ public class UserDTO extends BaseDataDTO {
     private Integer status;
     @Schema(description = "角色列表")
     private List<UserRoleDTO> roleList;
+    @Schema(description = "部门")
+    private String deptName;
+    @Schema(description = "描述")
+    private String description;
 }

@@ -61,7 +61,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEn
     public void update(Long id, ModifyDeptParam param) {
         SysDeptEntity queryEntity = sysDeptMapper.selectById(id);
         AssertUtils.notNull(queryEntity);
-        queryEntity.setDeptName(param.getDeptName());
+        queryEntity.setName(param.getDeptName());
         queryEntity.setSort(param.getSort());
         sysDeptMapper.updateById(queryEntity);
     }
@@ -76,7 +76,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEn
             tree.setId(treeNode.getId());
             tree.setParentId(treeNode.getParentId());
             tree.setWeight(treeNode.getSort().toString());
-            tree.setName(treeNode.getDeptName());
+            tree.setName(treeNode.getName());
         });
     }
 }

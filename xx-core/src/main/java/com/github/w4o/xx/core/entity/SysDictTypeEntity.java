@@ -31,6 +31,11 @@ public class SysDictTypeEntity extends BaseDataEntity {
     private String label;
 
     /**
+     * 是否启用
+     */
+    private Boolean enabled;
+
+    /**
      * 备注
      */
     private String remark;

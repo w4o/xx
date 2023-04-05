@@ -23,8 +23,19 @@ public class SysRoleEntity extends BaseDataEntity {
     /**
      * 角色名
      */
-    private String name;
-
+    private String roleName;
+    /**
+     * 角色标识
+     */
+    private String roleCode;
+    /**
+     * 描述
+     */
+    private String description;
+    /**
+     * 是否启用
+     */
+    private Boolean enabled;
     /**
      * 排序
      */

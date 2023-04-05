@@ -7,6 +7,7 @@ import com.github.w4o.xx.core.constant.Constant;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.manage.common.util.JwtUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +31,7 @@ import java.io.PrintWriter;
  *
  * @author Frank
  */
+@Slf4j
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
@@ -65,6 +67,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             } catch (UsernameNotFoundException e) {
                 throw new CustomException(ErrorCode.E1002);
             } catch (Exception e) {
+                log.error("", e);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 PrintWriter writer = response.getWriter();

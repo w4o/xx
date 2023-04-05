@@ -17,9 +17,15 @@ public class RoleDTO extends BaseDataDTO {
     @Schema(description = "角色ID")
     private Long roleId;
     @Schema(description = "角色名")
-    private String name;
+    private String roleName;
+    @Schema(description = "角色标识")
+    private String roleCode;
+    @Schema(description = "是否启用")
+    private Boolean enabled;
     @Schema(description = "排序")
     private Integer sort;
+    @Schema(description = "描述")
+    private String description;
     @Schema(description = "菜单ID列表")
     private List<Object> menus;
 }

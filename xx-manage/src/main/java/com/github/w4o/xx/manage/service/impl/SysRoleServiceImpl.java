@@ -54,7 +54,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEn
     public void add(AddRoleParam param) {
         // 判断名称是否重复
         Long count = sysRoleMapper.selectCount(new LambdaQueryWrapper<SysRoleEntity>()
-                .eq(SysRoleEntity::getName, param.getName()));
+                .eq(SysRoleEntity::getRoleName, param.getRoleName()));
         if (count > 0) {
             throw new CustomException(ErrorCode.E1008);
         }
@@ -83,12 +83,12 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEn
         }
         // 判断名称是否重复
         Long count = sysRoleMapper.selectCount(new LambdaQueryWrapper<SysRoleEntity>()
-                .eq(SysRoleEntity::getName, param.getName())
+                .eq(SysRoleEntity::getRoleName, param.getName())
                 .ne(SysRoleEntity::getId, id));
         if (count > 0) {
             throw new CustomException(ErrorCode.E1008);
         }
-        queryEntity.setName(param.getName());
+        queryEntity.setRoleName(param.getName());
         sysRoleMapper.updateById(queryEntity);
 
         if (param.getMenus().length > 0) {
@@ -122,7 +122,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEn
     @Override
     public List<Map<String, Object>> getAll() {
         return sysRoleMapper.selectMaps(new LambdaQueryWrapper<SysRoleEntity>()
-                .select(SysRoleEntity::getName, SysRoleEntity::getId));
+                .select(SysRoleEntity::getRoleName, SysRoleEntity::getId));
     }
 
     @Override

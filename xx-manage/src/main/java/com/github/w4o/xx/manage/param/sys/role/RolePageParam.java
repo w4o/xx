@@ -12,4 +12,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "角色分页查询参数")
 public class RolePageParam extends BasePageParam {
+    @Schema(description = "检索字符串")
+    private String search;
 }

@@ -10,7 +10,6 @@ import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.AssertUtils;
 import com.github.w4o.xx.core.util.BusinessUtils;
-import com.github.w4o.xx.manage.common.config.AppConfig;
 import com.github.w4o.xx.manage.common.util.LoginUtils;
 import com.github.w4o.xx.manage.dto.sys.user.UserDTO;
 import com.github.w4o.xx.manage.mapper.SysUserMapper;
@@ -39,7 +38,6 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserEn
     private final SysUserMapper sysUserMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
     private final BusinessUtils businessUtils;
-    private final AppConfig appConfig;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -53,7 +51,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserEn
         SysUserEntity sysUserEntity = new SysUserEntity();
         BeanUtils.copyProperties(param, sysUserEntity);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
-        String password = businessUtils.aesDecrypt(appConfig.getAesKey(), param.getPassword());
+        String password = businessUtils.decrypt(param.getPassword());
         sysUserEntity.setPassword(encoder.encode(password));
         sysUserEntity.setStatus(1);
         sysUserMapper.insert(sysUserEntity);
@@ -133,8 +131,8 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserEn
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
-        String oldPassword = businessUtils.aesDecrypt(appConfig.getAesKey(), param.getOldPassword());
-        String newPassword = businessUtils.aesDecrypt(appConfig.getAesKey(), param.getNewPassword());
+        String oldPassword = businessUtils.decrypt(param.getOldPassword());
+        String newPassword = businessUtils.decrypt(param.getNewPassword());
 
         if (!encoder.matches(oldPassword, queryEntity.getPassword())) {
             throw new CustomException(ErrorCode.E1012);

@@ -8,5 +8,5 @@ import lombok.Data;
 @Data
 public class UserRoleDTO {
     private Long roleId;
-    private Long roleName;
+    private String roleName;
 }

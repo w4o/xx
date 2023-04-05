@@ -7,6 +7,8 @@
         select sys_dict_type.id as dict_type_id,
                sys_dict_type.label,
                sys_dict_type.name,
+               sys_dict_type.enabled,
+               sys_dict_type.remark,
                sys_dict_type.create_by,
                sys_dict_type.create_time,
                sys_dict_type.last_update_by,

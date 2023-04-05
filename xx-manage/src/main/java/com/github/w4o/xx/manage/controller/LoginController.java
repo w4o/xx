@@ -69,14 +69,14 @@ public class LoginController {
     @PostMapping("/login")
     public CommonResult<LoginVO> login(@RequestBody @Valid LoginParam loginParam) {
         // 密码解密
-        String password = businessUtils.aesDecrypt(appConfig.getAesKey(), loginParam.getPassword());
+        String password = businessUtils.decrypt(loginParam.getPassword());
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginParam.getUsername(), password);
         Authentication authentication;
         try {
             authentication = authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException ignore) {
-            throw new CustomException(ErrorCode.E401);
+            throw new CustomException(ErrorCode.E1002);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginParam.getUsername());

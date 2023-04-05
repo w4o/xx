@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 @Schema(name = "API通用数据", description = "通用返回格式")
 public class CommonResult<T> {
 
-    public final static int SUCCESS = 0;
+    public final static int SUCCESS = 200;
     public final static String SUCCESS_MSG = "操作成功";
 
     @Schema(description = "响应代码")

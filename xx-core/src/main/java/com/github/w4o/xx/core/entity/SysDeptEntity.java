@@ -23,7 +23,7 @@ public class SysDeptEntity extends BaseDataEntity {
     /**
      * 部门名
      */
-    private String deptName;
+    private String name;
 
     /**
      * 上级部门ID， 一级部门为0
@@ -34,6 +34,16 @@ public class SysDeptEntity extends BaseDataEntity {
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 描述
+     */
+    private String description;
+
+    /**
+     * 是否启用
+     */
+    private Boolean enabled;
 
 
 }

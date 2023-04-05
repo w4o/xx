@@ -11,15 +11,18 @@
         sys_user.email,
         sys_user.mobile,
         sys_user.`status`,
+        sys_user.`description`,
         sys_user.create_by,
         sys_user.create_time,
         sys_user.last_update_by,
-        sys_user.last_update_time
+        sys_user.last_update_time,
+        sys_dept.dept_name
         from sys_user
+        left join sys_dept on sys_user.dept_id = sys_dept.id
         where sys_user.deleted = 0
         <if test="condition.username != null and condition.username != ''">
             and sys_user.username like concat('%', #{condition.username}, '%')
         </if>
-        order by sys_user.create_time desc
+        order by sys_user.id
     </select>
 </mapper>
