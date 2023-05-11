@@ -1,12 +1,12 @@
-package com.github.w4o.xx.core.util;
+package com.github.w4o.xx.core.util.id;
+
+import org.springframework.stereotype.Service;
 
 /**
- * ID生成器
- *
  * @author Frank
- * @link <a href="https://blog.csdn.net/weixin_43100896/article/details/109325873">参考</a>
  */
-public class IdGenerator {
+@Service
+public class SnowflakeIdService {
     /**
      * 开始时间截
      */
@@ -45,12 +45,12 @@ public class IdGenerator {
     /**
      * 工作机器ID(0~31)
      */
-    private final long workerId;
+    private final long workerId = 0;
 
     /**
      * 数据中心ID(0~31)
      */
-    private final long datacenterId;
+    private final long datacenterId = 0;
 
     /**
      * 毫秒内序列(0~4095)
@@ -65,11 +65,8 @@ public class IdGenerator {
 
     /**
      * 构造函数
-     *
-     * @param workerId     工作ID (0~31)
-     * @param datacenterId 数据中心ID (0~31)
      */
-    public IdGenerator(long workerId, long datacenterId) {
+    public SnowflakeIdService() {
         //支持的最大机器id，结果是31 (这个移位算法可以很快地计算出几位二进制数所能表示的最大十进制数)
         long maxWorkerId = ~(-1L << workerIdBits);
         if (workerId > maxWorkerId || workerId < 0) {
@@ -80,8 +77,6 @@ public class IdGenerator {
         if (datacenterId > maxDatacenterId || datacenterId < 0) {
             throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
-        this.workerId = workerId;
-        this.datacenterId = datacenterId;
     }
 
 
@@ -161,4 +156,5 @@ public class IdGenerator {
     protected long timeGen() {
         return System.currentTimeMillis();
     }
+
 }

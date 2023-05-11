@@ -1,7 +1,7 @@
 package com.github.w4o.xx.core.filter;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import com.github.w4o.xx.core.util.IdGenerator;
+import com.github.w4o.xx.core.util.id.IdGenerator;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class CustomIdGenerator implements IdentifierGenerator {
     @Override
     public Long nextId(Object entity) {
-        IdGenerator idGenerator = new IdGenerator(0, 0);
-        return idGenerator.nextId();
+        return IdGenerator.nextCommonId();
     }
 }
