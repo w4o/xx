@@ -1,15 +1,16 @@
 package com.github.w4o.xx.front.common.filter;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import com.github.w4o.xx.core.annotation.CheckToken;
 import com.github.w4o.xx.core.constant.Constant;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.front.common.util.JwtUtils;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class AuthenticationInterceptor implements AsyncHandlerInterceptor {
     private JwtUtils jwtUtils;
 
     @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) {
+    public boolean preHandle(@NonNull HttpServletRequest httpServletRequest, @NonNull HttpServletResponse httpServletResponse, @NonNull Object object) {
 
         // 如果不是映射到方法直接通过
         if (!(object instanceof HandlerMethod handlerMethod)) {

@@ -4,7 +4,6 @@ import com.github.w4o.xx.core.base.CommonResult;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,11 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ControllerAspect {
 
-    @Pointcut(value = "execution(* com.github.w4o.xx.*.controller.*.*(..))")
-    public void controller() {
-    }
-
-    @Around("controller()")
+    @Around("execution(* com.github.w4o.xx.*.controller..*(..))")
     public Object doController(ProceedingJoinPoint joinPoint) throws Throwable {
         // 记录方法开始时间
         long startTime = System.currentTimeMillis();
