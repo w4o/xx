@@ -1,5 +1,7 @@
 package com.github.w4o.xx.manage.service;
 
+import com.github.w4o.xx.core.base.service.BaseService;
+import com.github.w4o.xx.core.entity.SysMenuEntity;
 import com.github.w4o.xx.manage.param.sys.menu.MenuParam;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  *
  * @author Frank
  */
-public interface SysMenuService {
+public interface SysMenuService extends BaseService<SysMenuEntity> {
 
     /**
      * 添加菜单
@@ -45,7 +47,7 @@ public interface SysMenuService {
      *
      * @return 菜单树
      */
-    List<?> findMenuTree();
+    List<?> findTableTree();
 
     /**
      * 获取菜单树数据

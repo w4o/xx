@@ -47,7 +47,19 @@ public class MenuParam {
     @Schema(description = "是否显示在菜单中显示隐藏路由", example = "true")
     private Boolean hidden;
 
+    @Schema(description = "菜单外链链接", example = "http://xxxxx.xx")
+    private String link;
+
     @Schema(description = "是否显示在菜单中显示隐藏一级路由", example = "true")
     private Boolean levelHidden;
+
+    @Schema(description = "是否为外链", example = "true")
+    private Boolean isIframe;
+
+    @Schema(description = "菜单是否固定", example = "true")
+    private Boolean isAffix;
+
+    @Schema(description = "菜单是否缓存", example = "true")
+    private Boolean isKeepAlive;
 
 }

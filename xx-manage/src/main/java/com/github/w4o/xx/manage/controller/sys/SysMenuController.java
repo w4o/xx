@@ -62,7 +62,7 @@ public class SysMenuController {
     @Operation(summary = "查询菜单树")
     @GetMapping("/tree")
     public CommonResult<?> findMenuTree() {
-        return CommonResult.success(sysMenuService.findMenuTree());
+        return CommonResult.success(sysMenuService.findTableTree());
     }
 
     @Operation(summary = "菜单树选项", description = "用于树形下拉列表数据")
