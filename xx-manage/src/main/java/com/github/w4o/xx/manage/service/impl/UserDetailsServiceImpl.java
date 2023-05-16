@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.w4o.xx.core.entity.SysUserEntity;
 import com.github.w4o.xx.manage.common.UserInfo;
 import com.github.w4o.xx.manage.mapper.SysUserMapper;
+import com.github.w4o.xx.manage.mapper.SysUserRoleMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final SysUserMapper sysUserMapper;
+    private final SysUserRoleMapper sysUserRoleMapper;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -34,7 +36,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (querySysUser.getStatus() != 1) {
             throw new UsernameNotFoundException("username:" + userName + "已被禁用");
         }
-        return new UserInfo(querySysUser.getId(), userName, querySysUser.getPassword(), new ArrayList<>());
+        UserInfo userInfo = new UserInfo(querySysUser.getId(), userName, querySysUser.getPassword(), new ArrayList<>());
+        // 查询角色
+        userInfo.setRoles(sysUserRoleMapper.findRoleIdByUserId(querySysUser.getId()));
+        return userInfo;
     }
 
 }

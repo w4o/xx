@@ -23,4 +23,13 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
      */
     @Select("select sys_role.id as role_id, sys_role.role_name from sys_role, sys_user_role where sys_user_role.deleted =0 and sys_role.id = sys_user_role.sys_role_id and sys_user_role.sys_user_id = #{userId} ")
     List<UserRoleDTO> findRoleByUserId(@Param("userId") long userId);
+
+    /**
+     * 根据用户id查询角色id
+     *
+     * @param userId 用户id
+     * @return 角色id
+     */
+    @Select("select sys_role_id from sys_user_role where deleted =0 and sys_user_id = #{userId} ")
+    List<Long> findRoleIdByUserId(@Param("userId") long userId);
 }
