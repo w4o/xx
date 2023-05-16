@@ -23,6 +23,9 @@ public class CommonResult<T> {
     @Schema(description = "响应代码")
     private int code;
 
+    @Schema(description = "接口是否成功")
+    private boolean success = true;
+
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @Schema(description = "业务数据")
     private T data;
@@ -44,14 +47,16 @@ public class CommonResult<T> {
     @Schema(description = "跟踪信息")
     private String trace;
 
-    protected CommonResult(int code, String msg, T data) {
+    protected CommonResult(boolean success, int code, String msg, T data) {
+        this.success = success;
         this.code = code;
         this.msg = msg;
         this.data = data;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
-    protected CommonResult(int code, String msg, String trac) {
+    protected CommonResult(boolean success, int code, String msg, String trac) {
+        this.success = success;
         this.code = code;
         this.msg = msg;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -59,18 +64,18 @@ public class CommonResult<T> {
     }
 
     public static <T> CommonResult<T> success(T data) {
-        return new CommonResult<>(SUCCESS, SUCCESS_MSG, data);
+        return new CommonResult<>(true, SUCCESS, SUCCESS_MSG, data);
     }
 
     public static <T> CommonResult<T> success() {
-        return new CommonResult<>(SUCCESS, SUCCESS_MSG, null);
+        return new CommonResult<>(true, SUCCESS, SUCCESS_MSG, null);
     }
 
     public static <T> CommonResult<T> error(CommonError error) {
-        return new CommonResult<>(error.getCode(), error.getMessage(), null);
+        return new CommonResult<>(false, error.getCode(), error.getMessage(), null);
     }
 
     public static <T> CommonResult<T> error(CommonError error, String trace) {
-        return new CommonResult<>(error.getCode(), error.getMessage(), trace);
+        return new CommonResult<>(false, error.getCode(), error.getMessage(), trace);
     }
 }
