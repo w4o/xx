@@ -83,25 +83,25 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEn
         }
         // 判断名称是否重复
         Long count = sysRoleMapper.selectCount(new LambdaQueryWrapper<SysRoleEntity>()
-                .eq(SysRoleEntity::getRoleName, param.getName())
+                .eq(SysRoleEntity::getRoleName, param.getRoleName())
                 .ne(SysRoleEntity::getId, id));
         if (count > 0) {
             throw new CustomException(ErrorCode.E1008);
         }
-        queryEntity.setRoleName(param.getName());
+        BeanUtils.copyProperties(param, queryEntity);
         sysRoleMapper.updateById(queryEntity);
 
-        if (param.getMenus().length > 0) {
-            // 删除角色菜单
-            sysRoleMenuMapper.delete(new LambdaQueryWrapper<SysRoleMenuEntity>().eq(SysRoleMenuEntity::getSysRoleId, id));
-            // 添加角色菜单信息
-            for (Long menuId : param.getMenus()) {
-                SysRoleMenuEntity sysRoleMenu = new SysRoleMenuEntity();
-                sysRoleMenu.setSysMenuId(menuId);
-                sysRoleMenu.setSysRoleId(id);
-                sysRoleMenuMapper.insert(sysRoleMenu);
-            }
-        }
+        // 删除角色菜单
+        sysRoleMenuMapper.delete(new LambdaQueryWrapper<SysRoleMenuEntity>()
+                .eq(SysRoleMenuEntity::getSysRoleId, id)
+        );
+        // 添加角色菜单信息
+        param.getMenus().forEach(menuId -> {
+            SysRoleMenuEntity sysRoleMenu = new SysRoleMenuEntity();
+            sysRoleMenu.setSysMenuId(menuId);
+            sysRoleMenu.setSysRoleId(id);
+            sysRoleMenuMapper.insert(sysRoleMenu);
+        });
     }
 
     @Override

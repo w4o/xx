@@ -6,6 +6,8 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 添加角色请求参数
@@ -32,5 +34,5 @@ public class AddRoleParam {
     private Boolean enabled = true;
     @NotNull
     @Schema(description = "菜单数组", example = "[1,2,3]")
-    private Long[] menus = new Long[0];
+    private Set<Long> menus = new HashSet<>();
 }
