@@ -8,16 +8,21 @@
 .
 ├── LICENSE
 ├── README.md
+├── api             // java 服务端
+│   ├── pom.xml
+│   ├── xx-applet   // 小程序服务
+│   ├── xx-core     // 核心模块
+│   ├── xx-front    // PC前端服务
+│   ├── xx-manage   // PC后台管理服务
+│   └── xx-parent   // Parent
+├── docker
 ├── docs
-├── pom.xml
-├── xx-applet   // 小程序服务
-├── xx-core     // 核心模块
-├── xx-front    // PC前端服务
-├── xx-manage   // PC后台管理服务
-└── xx-parent   // Parent
+└── manage          // 管理端页面
 ```
 
 ## 技术栈
+
+### api
 
 * JDK \>= 17
 * [SpringBoot](https://spring.io/projects/spring-boot) 2.6.x
@@ -27,6 +32,10 @@
 * [JWT](https://jwt.io/)
 * [Lombok](https://projectlombok.org/)
 * [SpringDoc](https://springdoc.org/)
+
+### manage
+
+待补充
 
 ## 如何参与项目
 
