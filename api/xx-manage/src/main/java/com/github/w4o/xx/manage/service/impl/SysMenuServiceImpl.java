@@ -111,14 +111,11 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuEn
             // vue
             metaMap.put("title", treeNode.getTitle());
             metaMap.put("isLink", treeNode.getLink());
-            metaMap.put("isHide", treeNode.getHidden());
+            metaMap.put("isHide", treeNode.getIsHide());
             metaMap.put("isKeepAlive", treeNode.getIsKeepAlive());
             metaMap.put("isAffix", treeNode.getIsAffix());
             metaMap.put("isIframe", treeNode.getIsIframe());
             metaMap.put("icon", treeNode.getIcon());
-            // antd pro
-            //tree.put("name", treeNode.getTitle());
-            //metaMap.put("icon", treeNode.getIcon());
             tree.put("meta", metaMap);
         });
     }

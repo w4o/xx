@@ -58,7 +58,7 @@ public class SysMenuEntity extends BaseDataEntity {
     /**
      * 是否显示在菜单中显示隐藏路由
      */
-    private Boolean hidden;
+    private Boolean isHide;
 
     /**
      * 菜单外链链接
@@ -69,12 +69,6 @@ public class SysMenuEntity extends BaseDataEntity {
      * 是否为外链
      */
     private Boolean isLink;
-
-    /**
-     * 是否显示在菜单中显示隐藏一级路由
-     */
-    private Boolean levelHidden;
-
     /**
      * 排序
      */
@@ -94,9 +88,4 @@ public class SysMenuEntity extends BaseDataEntity {
      * 菜单是否缓存
      */
     private Boolean isKeepAlive;
-
-    /**
-     * 是否隐藏
-     */
-    private Boolean isHide;
 }
