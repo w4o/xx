@@ -31,21 +31,26 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEntity> implements SysDeptService {
 
-    private final SysDeptMapper sysDeptMapper;
     private final SysUserMapper sysUserMapper;
 
     @Override
 
     public void add(AddDeptParam param) {
+        boolean exists = baseMapper.exists(new LambdaQueryWrapper<SysDeptEntity>()
+                .eq(SysDeptEntity::getName, param.getName())
+                .eq(SysDeptEntity::getParentId, param.getParentId()));
+        if (exists) {
+            throw new CustomException(ErrorCode.E1015);
+        }
         SysDeptEntity sysDeptEntity = new SysDeptEntity();
         BeanUtils.copyProperties(param, sysDeptEntity);
-        sysDeptMapper.insert(sysDeptEntity);
+        baseMapper.insert(sysDeptEntity);
     }
 
     @Override
     public void delete(Long id) {
         // 判断是否存在下级部门
-        Long deptCount = sysDeptMapper.selectCount(new LambdaQueryWrapper<SysDeptEntity>().eq(SysDeptEntity::getParentId, id));
+        Long deptCount = baseMapper.selectCount(new LambdaQueryWrapper<SysDeptEntity>().eq(SysDeptEntity::getParentId, id));
         if (deptCount.compareTo(0L) > 0) {
             throw new CustomException(ErrorCode.E1004);
         }
@@ -54,21 +59,27 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEn
         if (userCount.compareTo(0L) > 0) {
             throw new CustomException(ErrorCode.E1005);
         }
-        sysDeptMapper.deleteById(id);
+        baseMapper.deleteById(id);
     }
 
     @Override
     public void update(Long id, ModifyDeptParam param) {
-        SysDeptEntity queryEntity = sysDeptMapper.selectById(id);
+        SysDeptEntity queryEntity = baseMapper.selectById(id);
         AssertUtils.notNull(queryEntity);
-        queryEntity.setName(param.getDeptName());
-        queryEntity.setSort(param.getSort());
-        sysDeptMapper.updateById(queryEntity);
+        boolean exists = baseMapper.exists(new LambdaQueryWrapper<SysDeptEntity>()
+                .eq(SysDeptEntity::getName, param.getName())
+                .eq(SysDeptEntity::getParentId, queryEntity.getParentId())
+                .ne(SysDeptEntity::getId, id));
+        if (exists) {
+            throw new CustomException(ErrorCode.E1015);
+        }
+        BeanUtils.copyProperties(param, queryEntity);
+        baseMapper.updateById(queryEntity);
     }
 
     @Override
     public List<?> findTree() {
-        List<SysDeptEntity> deptList = sysDeptMapper.selectList(new QueryWrapper<>());
+        List<SysDeptEntity> deptList = baseMapper.selectList(new QueryWrapper<>());
         TreeNodeConfig treeNodeConfig = new TreeNodeConfig();
         treeNodeConfig.setWeightKey("sort");
         treeNodeConfig.setDeep(3);

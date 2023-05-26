@@ -15,11 +15,13 @@ import javax.validation.constraints.NotNull;
 public class AddDeptParam {
     @Schema(description = "部门名", example = "技术部")
     @NotBlank
-    private String deptName;
+    private String name;
     @Schema(description = "上级部门ID", example = "0")
     @NotNull
     private Long parentId = NumberUtils.LONG_ZERO;
     @Schema(description = "排序", example = "0")
     @NotNull
     private Integer sort = NumberUtils.INTEGER_ZERO;
+    @Schema(description = "描述", example = "技术部")
+    private String description;
 }
