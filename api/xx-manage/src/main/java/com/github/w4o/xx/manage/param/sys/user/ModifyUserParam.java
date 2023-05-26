@@ -3,6 +3,7 @@ package com.github.w4o.xx.manage.param.sys.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 /**
@@ -13,7 +14,15 @@ import java.util.Set;
 @Data
 @Schema(name = "修改用户参数")
 public class ModifyUserParam {
-
-    @Schema(description = "角色", example = "[1,2,3]")
+    @NotBlank
+    @Schema(description = "昵称", example = "管理员")
+    private String nickName;
+    @Schema(description = "邮箱", example = "a@b.c")
+    private String email;
+    @Schema(description = "手机号", example = "13888888888")
+    private String mobile;
+    @Schema(description = "描述")
+    private String description;
+    @Schema(description = "角色(可多个)", example = "[1,2,3]")
     private Set<Long> roles;
 }

@@ -53,7 +53,6 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserEn
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         String password = businessUtils.decrypt(param.getPassword());
         sysUserEntity.setPassword(encoder.encode(password));
-        sysUserEntity.setStatus(1);
         sysUserMapper.insert(sysUserEntity);
 
         long userId = sysUserEntity.getId();
