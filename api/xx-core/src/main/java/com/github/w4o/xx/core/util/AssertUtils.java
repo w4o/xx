@@ -15,4 +15,10 @@ public class AssertUtils {
             throw new CustomException(ErrorCode.E404, "空（null）断言触发的数据异常");
         }
     }
+
+    public static void notNull(Object obj, ErrorCode code) {
+        if (obj == null) {
+            throw new CustomException(code);
+        }
+    }
 }
