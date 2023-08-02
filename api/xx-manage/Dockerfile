@@ -1,4 +1,4 @@
-FROM openjdk:17-ea-jdk-oracle
+FROM openjdk:17-oracle
 
 VOLUME /tmp
 

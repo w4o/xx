@@ -16,5 +16,5 @@ public interface UploadService {
      * @param file 文件
      * @return 响应信息
      */
-    UploadVO uploadImage(MultipartFile file);
+    UploadVO uploadImage(MultipartFile file, Long categoryId);
 }

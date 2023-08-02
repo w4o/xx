@@ -16,8 +16,7 @@
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
 						<el-form-item label="关联角色">
 							<el-select v-model="state.ruleForm.roleSign" placeholder="请选择" clearable class="w100">
-								<el-option label="超级管理员" value="admin"></el-option>
-								<el-option label="普通用户" value="common"></el-option>
+								<el-option v-for="item in state.roleData" :key="item.id" :label="item.roleName" :value="item.id" />
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -89,13 +88,18 @@
 </template>
 
 <script setup lang="ts" name="systemUserDialog">
-import { reactive, ref } from 'vue';
+import {reactive, ref} from 'vue';
+import {useRoleApi} from '/@/api/system/role';
+import {useDeptApi} from "/@/api/system/dept";
 
 // 定义子组件向父组件传值/事件
 const emit = defineEmits(['refresh']);
 
 // 定义变量内容
 const userDialogFormRef = ref();
+const roleApi = useRoleApi();
+const deptApi = useDeptApi();
+
 const state = reactive({
 	ruleForm: {
 		userName: '', // 账户名称
@@ -110,7 +114,8 @@ const state = reactive({
 		status: true, // 用户状态
 		description: '', // 用户描述
 	},
-	deptData: [] as DeptTreeType[], // 部门数据
+  roleData: [] as any, // 角色数据
+  deptData: [] as any,
 	dialog: {
 		isShowDialog: false,
 		type: '',
@@ -134,7 +139,8 @@ const openDialog = (type: string, row: RowUserType) => {
 		// });
 	}
 	state.dialog.isShowDialog = true;
-	getMenuData();
+  getRoleData();
+  getDeptData();
 };
 // 关闭弹窗
 const closeDialog = () => {
@@ -150,34 +156,15 @@ const onSubmit = () => {
 	emit('refresh');
 	// if (state.dialog.type === 'add') { }
 };
-// 初始化部门数据
-const getMenuData = () => {
-	state.deptData.push({
-		deptName: 'vueNextAdmin',
-		createTime: new Date().toLocaleString(),
-		status: true,
-		sort: Math.random(),
-		description: '顶级部门',
-		id: Math.random(),
-		children: [
-			{
-				deptName: 'IT外包服务',
-				createTime: new Date().toLocaleString(),
-				status: true,
-				sort: Math.random(),
-				description: '总部',
-				id: Math.random(),
-			},
-			{
-				deptName: '资本控股',
-				createTime: new Date().toLocaleString(),
-				status: true,
-				sort: Math.random(),
-				description: '分部',
-				id: Math.random(),
-			},
-		],
-	});
+
+const getRoleData = async () => {
+  const data = await roleApi.option();
+  state.roleData = {...data}
+};
+
+const getDeptData = async () => {
+  const data = await deptApi.tree();
+  state.deptData = {...data}
 };
 
 // 暴露变量

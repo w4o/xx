@@ -31,7 +31,8 @@ public class UploadController {
 
     @Operation(summary = "上传图片")
     @PostMapping(value = "/image")
-    public CommonResult<?> image(@RequestParam(value = "file") MultipartFile file) {
-        return CommonResult.success(uploadService.uploadImage(file));
+    public CommonResult<?> image(@RequestParam(value = "file") MultipartFile file,
+                                 @RequestParam(value = "categoryId", required = false, defaultValue = "0") Long categoryId) {
+        return CommonResult.success(uploadService.uploadImage(file, categoryId));
     }
 }

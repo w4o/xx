@@ -37,7 +37,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEn
 
     public void add(AddDeptParam param) {
         boolean exists = baseMapper.exists(new LambdaQueryWrapper<SysDeptEntity>()
-                .eq(SysDeptEntity::getName, param.getName())
+                .eq(SysDeptEntity::getDeptName, param.getDeptName())
                 .eq(SysDeptEntity::getParentId, param.getParentId()));
         if (exists) {
             throw new CustomException(ErrorCode.E1015);
@@ -67,7 +67,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEn
         SysDeptEntity queryEntity = baseMapper.selectById(id);
         AssertUtils.notNull(queryEntity);
         boolean exists = baseMapper.exists(new LambdaQueryWrapper<SysDeptEntity>()
-                .eq(SysDeptEntity::getName, param.getName())
+                .eq(SysDeptEntity::getDeptName, param.getName())
                 .eq(SysDeptEntity::getParentId, queryEntity.getParentId())
                 .ne(SysDeptEntity::getId, id));
         if (exists) {
@@ -87,7 +87,11 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDeptEn
             tree.setId(treeNode.getId());
             tree.setParentId(treeNode.getParentId());
             tree.setWeight(treeNode.getSort().toString());
-            tree.setName(treeNode.getName());
+            tree.setName(treeNode.getDeptName());
+            tree.put("enabled", treeNode.getEnabled());
+            tree.put("description", treeNode.getDescription());
+            tree.put("createTime", treeNode.getCreateTime());
+            tree.put("deptName", treeNode.getDeptName());
         });
     }
 }

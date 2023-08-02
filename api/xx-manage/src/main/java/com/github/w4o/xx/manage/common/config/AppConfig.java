@@ -46,4 +46,5 @@ public class AppConfig {
         @NotBlank
         private String rootPath;
     }
+
 }

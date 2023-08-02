@@ -29,6 +29,12 @@ export function useRoleApi() {
                 url: `/sys/role/${id}`,
                 method: 'delete'
             })
+        },
+        option: () => {
+            return request({
+                url: `/sys/role/option`,
+                method: 'get'
+            })
         }
     }
 }

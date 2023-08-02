@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class AddDeptParam {
     @Schema(description = "部门名", example = "技术部")
     @NotBlank
-    private String name;
+    private String deptName;
     @Schema(description = "上级部门ID", example = "0")
     @NotNull
     private Long parentId = NumberUtils.LONG_ZERO;

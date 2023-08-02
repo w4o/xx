@@ -38,6 +38,7 @@ app:
     secret: xxxx
     expire: 7200
   aes-key: c66ea7ef288d93fc
+  encrypted: false
   oss:
     domain: https://oss-domain
     bucket: xxx

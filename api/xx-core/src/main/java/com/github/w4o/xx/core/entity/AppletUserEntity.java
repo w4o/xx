@@ -8,6 +8,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 /**
+ * 小程序用户表实体
+ *
  * @author Frank
  */
 @Getter
@@ -50,7 +52,16 @@ public class AppletUserEntity extends BaseEntity {
      * 推荐人
      */
     private Long referrer;
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
+    /**
+     * 最后登录IP
+     */
     private String lastLoginIp;
+    /**
+     * 最后登录时间
+     */
     private LocalDateTime lastLoginTime;
 }

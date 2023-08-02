@@ -51,7 +51,12 @@
             </el-col>
             <el-col :span="1"></el-col>
             <el-col :span="8">
-                <el-button class="login-content-code" v-waves>1234</el-button>
+              <el-button class="login-content-code" v-waves>
+                <el-image  :src="state.captchaUrl" @click="changeCaptcha">
+                  <template #placeholder>加载中...</template>
+                </el-image>
+              </el-button>
+
             </el-col>
         </el-form-item>
         <el-form-item class="login-animation4">
@@ -64,7 +69,7 @@
 </template>
 
 <script setup lang="ts" name="loginAccount">
-import {computed, reactive} from 'vue';
+import {computed, onMounted, reactive} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {ElMessage} from 'element-plus';
 import {useI18n} from 'vue-i18n';
@@ -91,10 +96,12 @@ const state = reactive({
         username: 'admin',
         password: '123123cC',
         verificationCode: '1234',
+        captchaKey:'',
     },
     loading: {
         signIn: false,
     },
+    captchaUrl: '',
 });
 
 // 时间获取
@@ -151,6 +158,16 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
     }
     state.loading.signIn = false;
 };
+
+const changeCaptcha = async () => {
+  const data = await loginApi.captcha();
+  state.captchaUrl = 'data:image/jpg;base64,' + data.captchaImg
+  state.ruleForm.captchaKey = data.captchaKey
+}
+onMounted(() => {
+    // 初始化验证码
+    changeCaptcha();
+});
 </script>
 
 <style scoped lang="scss">

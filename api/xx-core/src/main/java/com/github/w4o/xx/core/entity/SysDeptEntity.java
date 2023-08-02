@@ -23,7 +23,7 @@ public class SysDeptEntity extends BaseDataEntity {
     /**
      * 部门名
      */
-    private String name;
+    private String deptName;
 
     /**
      * 上级部门ID， 一级部门为0
