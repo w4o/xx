@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.base.service.BaseService;
 import com.github.w4o.xx.core.entity.CmsPostEntity;
 import com.github.w4o.xx.manage.dto.cms.post.PostDTO;
-import com.github.w4o.xx.manage.param.cms.post.AddPostParam;
-import com.github.w4o.xx.manage.param.cms.post.ModifyPostParam;
 import com.github.w4o.xx.manage.param.cms.post.PostPageParam;
+import com.github.w4o.xx.manage.param.cms.post.PostParam;
 
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public interface CmsPostService extends BaseService<CmsPostEntity> {
      *
      * @param param 请求参数
      */
-    void add(AddPostParam param);
+    void add(PostParam param);
 
     /**
      * 修改文章
@@ -37,7 +36,7 @@ public interface CmsPostService extends BaseService<CmsPostEntity> {
      * @param id    文章id
      * @param param 请求参数
      */
-    void update(long id, ModifyPostParam param);
+    void update(long id, PostParam param);
 
     /**
      * 删除文章

@@ -1,9 +1,9 @@
 package com.github.w4o.xx.manage.controller.applet;
 
+import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.param.applet.nav.AddNavParam;
-import com.github.w4o.xx.manage.param.applet.nav.ModifyNavParam;
 import com.github.w4o.xx.manage.param.applet.nav.NavPageParam;
+import com.github.w4o.xx.manage.param.applet.nav.NavParam;
 import com.github.w4o.xx.manage.service.AppletNavService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,21 +38,24 @@ public class AppletNavController {
         return CommonResult.success(appletNavService.getPageList(param));
     }
 
+    @SysLog("添加小程序导航")
     @Operation(summary = "添加导航")
     @PostMapping
-    public CommonResult<?> add(@RequestBody @Valid AddNavParam param) {
+    public CommonResult<?> add(@RequestBody @Valid NavParam param) {
         appletNavService.add(param);
         return CommonResult.success();
     }
 
+    @SysLog("修改小程序导航")
     @Operation(summary = "修改导航")
     @PutMapping("/{navId}")
     public CommonResult<?> modify(@PathVariable("navId") @NotNull Long navId,
-                                  @RequestBody @Valid ModifyNavParam param) {
+                                  @RequestBody @Valid NavParam param) {
         appletNavService.update(navId, param);
         return CommonResult.success();
     }
 
+    @SysLog("删除小程序导航类")
     @Operation(summary = "删除导航类")
     @DeleteMapping("/{navId}")
     public CommonResult<?> delete(@PathVariable("navId") @NotNull Long navId) {

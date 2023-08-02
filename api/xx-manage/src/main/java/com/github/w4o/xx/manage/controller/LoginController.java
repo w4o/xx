@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -68,6 +70,14 @@ public class LoginController {
     @Operation(summary = "登录")
     @PostMapping("/login")
     public CommonResult<LoginVO> login(@RequestBody @Valid LoginParam loginParam) {
+        if (!businessUtils.isDebug()) {
+            String cacheKey = "captcha:" + loginParam.getCaptchaKey();
+            String code = (String) redisTemplate.opsForValue().get(cacheKey);
+            redisTemplate.delete(Objects.requireNonNull(redisTemplate.keys(cacheKey)));
+            if (StringUtils.isEmpty(code) || !StringUtils.equalsIgnoreCase(loginParam.getVerificationCode(), code)) {
+                return CommonResult.error(ErrorCode.E1003);
+            }
+        }
         // 密码解密
         String password = businessUtils.decrypt(loginParam.getPassword());
 

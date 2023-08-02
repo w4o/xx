@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.base.service.BaseService;
 import com.github.w4o.xx.core.entity.CmsCategoryEntity;
 import com.github.w4o.xx.manage.dto.cms.category.CategoryDTO;
-import com.github.w4o.xx.manage.param.cms.category.AddCategoryParam;
 import com.github.w4o.xx.manage.param.cms.category.CategoryPageParam;
-import com.github.w4o.xx.manage.param.cms.category.ModifyCategoryParam;
+import com.github.w4o.xx.manage.param.cms.category.CategoryParam;
 import com.github.w4o.xx.manage.vo.cms.category.CategoryVO;
+
+import java.util.List;
 
 /**
  * 文章分类服务接口
@@ -28,7 +29,7 @@ public interface CmsCategoryService extends BaseService<CmsCategoryEntity> {
      *
      * @param param 请求参数
      */
-    CategoryVO add(AddCategoryParam param);
+    CategoryVO add(CategoryParam param);
 
     /**
      * 修改分类
@@ -36,7 +37,7 @@ public interface CmsCategoryService extends BaseService<CmsCategoryEntity> {
      * @param id    分类id
      * @param param 请求参数
      */
-    void update(long id, ModifyCategoryParam param);
+    void update(long id, CategoryParam param);
 
     /**
      * 删除分类
@@ -45,11 +46,5 @@ public interface CmsCategoryService extends BaseService<CmsCategoryEntity> {
      */
     void delete(long id);
 
-    /**
-     * 根据名称获取分类
-     *
-     * @param name 分类名称
-     * @return 分类
-     */
-    CategoryVO getByName(String name);
+    List<?> getTree();
 }

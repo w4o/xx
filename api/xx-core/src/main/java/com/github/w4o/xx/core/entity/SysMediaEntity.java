@@ -14,6 +14,11 @@ import lombok.Setter;
 @Setter
 @TableName("sys_media")
 public class SysMediaEntity extends BaseEntity {
+    
+    /**
+     * 媒体分类ID
+     */
+    private Long mediaCategoryId;
     /**
      * 媒体标题
      */
@@ -30,4 +35,8 @@ public class SysMediaEntity extends BaseEntity {
      * 媒体类型  1:图片
      */
     private Integer type;
+
+    // 常量信息 ============================================================<<<
+
+    public static int TYPE_IMAGE = 1;
 }

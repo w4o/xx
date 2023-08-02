@@ -1,5 +1,6 @@
 package com.github.w4o.xx.manage.controller.applet;
 
+import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.param.applet.config.AddConfigParam;
 import com.github.w4o.xx.manage.param.applet.config.ConfigPageParam;
@@ -38,14 +39,16 @@ public class AppletConfigController {
         return CommonResult.success(appletConfigService.getPageList(param));
     }
 
-    @Operation(summary = "添加配置")
+    @SysLog("添加小程序配置")
+    @Operation(summary = "添加小程序配置")
     @PostMapping
     public CommonResult<?> add(@RequestBody @Valid AddConfigParam param) {
         appletConfigService.add(param);
         return CommonResult.success();
     }
 
-    @Operation(summary = "修改配置")
+    @SysLog("修改小程序配置")
+    @Operation(summary = "修改小程序配置")
     @PutMapping("/{configId}")
     public CommonResult<?> modify(@PathVariable("configId") @NotNull Long configId,
                                   @RequestBody @Valid ModifyConfigParam param) {
@@ -53,7 +56,8 @@ public class AppletConfigController {
         return CommonResult.success();
     }
 
-    @Operation(summary = "删除配置类")
+    @SysLog("删除小程序配置类")
+    @Operation(summary = "删除小程序配置类")
     @DeleteMapping("/{configId}")
     public CommonResult<?> delete(@PathVariable("configId") @NotNull Long configId) {
         appletConfigService.delete(configId);

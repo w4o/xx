@@ -23,5 +23,11 @@ export function useLoginApi() {
 				data,
 			});
 		},
+		captcha: () =>{
+			return request({
+				url: '/captcha?_t=' + new Date().getTime(),
+				method: 'get',
+			});
+		}
 	};
 }

@@ -1,9 +1,9 @@
 package com.github.w4o.xx.manage.controller.cms;
 
+import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.param.cms.category.AddCategoryParam;
 import com.github.w4o.xx.manage.param.cms.category.CategoryPageParam;
-import com.github.w4o.xx.manage.param.cms.category.ModifyCategoryParam;
+import com.github.w4o.xx.manage.param.cms.category.CategoryParam;
 import com.github.w4o.xx.manage.service.CmsCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,20 +38,23 @@ public class CmsCategoryController {
         return CommonResult.success(cmsCategoryService.getPageList(param));
     }
 
+    @SysLog("添加分类")
     @Operation(summary = "添加分类")
     @PostMapping
-    public CommonResult<?> add(@RequestBody @Valid AddCategoryParam param) {
+    public CommonResult<?> add(@RequestBody @Valid CategoryParam param) {
         return CommonResult.success(cmsCategoryService.add(param));
     }
 
+    @SysLog("修改分类")
     @Operation(summary = "修改分类")
     @PutMapping("/{categoryId}")
     public CommonResult<?> modify(@PathVariable("categoryId") @NotNull Long categoryId,
-                                  @RequestBody @Valid ModifyCategoryParam param) {
+                                  @RequestBody @Valid CategoryParam param) {
         cmsCategoryService.update(categoryId, param);
         return CommonResult.success();
     }
 
+    @SysLog("删除分类")
     @Operation(summary = "删除分类")
     @DeleteMapping("/{categoryId}")
     public CommonResult<?> delete(@PathVariable("categoryId") @NotNull Long categoryId) {
@@ -59,9 +62,10 @@ public class CmsCategoryController {
         return CommonResult.success();
     }
 
-    @Operation(summary = "根据分类名称获取分类信息")
-    @GetMapping("/name/{name}")
-    public CommonResult<?> getByName(@PathVariable("name") @NotNull String name) {
-        return CommonResult.success(cmsCategoryService.getByName(name));
+    @Operation(summary = "获取分类树")
+    @GetMapping("/tree")
+    public CommonResult<?> getTree() {
+        return CommonResult.success(cmsCategoryService.getTree());
     }
+
 }

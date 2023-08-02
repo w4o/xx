@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.base.service.BaseService;
 import com.github.w4o.xx.core.entity.CmsTagEntity;
 import com.github.w4o.xx.manage.dto.cms.tag.TagDTO;
-import com.github.w4o.xx.manage.param.cms.tag.AddTagParam;
-import com.github.w4o.xx.manage.param.cms.tag.ModifyTagParam;
 import com.github.w4o.xx.manage.param.cms.tag.TagPageParam;
+import com.github.w4o.xx.manage.param.cms.tag.TagParam;
 import com.github.w4o.xx.manage.vo.cms.tag.TagVO;
 
 /**
@@ -28,7 +27,7 @@ public interface CmsTagService extends BaseService<CmsTagEntity> {
      *
      * @param param 请求参数
      */
-    TagVO add(AddTagParam param);
+    TagVO add(TagParam param);
 
     /**
      * 修改标签
@@ -36,7 +35,7 @@ public interface CmsTagService extends BaseService<CmsTagEntity> {
      * @param id    标签id
      * @param param 请求参数
      */
-    void update(long id, ModifyTagParam param);
+    void update(long id, TagParam param);
 
     /**
      * 删除标签

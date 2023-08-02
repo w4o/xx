@@ -12,8 +12,8 @@ import static com.github.w4o.xx.core.entity.CmsPostEntity.STATUS_DRAFT;
  * @author Frank
  */
 @Data
-@Schema(name = "修改文章参数")
-public class ModifyPostParam {
+@Schema(name = "添加文章参数")
+public class PostParam {
     @Schema(description = "文章摘要")
     private String summary;
     @NotBlank

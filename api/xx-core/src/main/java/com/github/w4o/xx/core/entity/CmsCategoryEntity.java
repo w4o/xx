@@ -15,6 +15,10 @@ import lombok.Setter;
 @TableName(value = "cms_category")
 public class CmsCategoryEntity extends BaseDataEntity {
     /**
+     * 父级ID
+     */
+    private Long parentId;
+    /**
      * 分类名称
      */
     private String name;

@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
  * @author Frank
  */
 @Data
-@Schema(name = "添加小程序导航请求参数")
-public class AddNavParam {
+@Schema(name = "添加/修改小程序导航请求参数")
+public class NavParam {
     @NotBlank
     @Schema(description = "名称")
     private String name;
@@ -19,6 +19,8 @@ public class AddNavParam {
     private String icon;
     @Schema(description = "链接/路径")
     private String path;
+    @Schema(description = "分享图")
+    private String shareImage;
     @Schema(description = "排序")
     private Integer sort = 0;
 }

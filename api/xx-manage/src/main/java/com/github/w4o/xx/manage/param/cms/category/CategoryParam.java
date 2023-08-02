@@ -4,13 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Frank
  */
 @Data
-@Schema(name = "修改文章分类参数")
-public class ModifyCategoryParam {
+@Schema(name = "添加/修改文章分类参数")
+public class CategoryParam {
+    @NotNull
+    private Long parentId = 0L;
     @NotBlank
     @Schema(description = "分类名称")
     private String name;

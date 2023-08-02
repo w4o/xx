@@ -6,9 +6,8 @@ import com.github.w4o.xx.core.entity.AppletBannerEntity;
 import com.github.w4o.xx.core.util.AssertUtils;
 import com.github.w4o.xx.manage.dto.applet.banner.BannerDTO;
 import com.github.w4o.xx.manage.mapper.AppletBannerMapper;
-import com.github.w4o.xx.manage.param.applet.banner.AddBannerParam;
 import com.github.w4o.xx.manage.param.applet.banner.BannerPageParam;
-import com.github.w4o.xx.manage.param.applet.banner.ModifyBannerParam;
+import com.github.w4o.xx.manage.param.applet.banner.BannerParam;
 import com.github.w4o.xx.manage.service.AppletBannerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,14 +33,14 @@ public class AppletBannerServiceImpl extends BaseServiceImpl<AppletBannerMapper,
     }
 
     @Override
-    public void add(AddBannerParam param) {
+    public void add(BannerParam param) {
         AppletBannerEntity entity = new AppletBannerEntity();
         BeanUtils.copyProperties(param, entity);
         save(entity);
     }
 
     @Override
-    public void update(long id, ModifyBannerParam param) {
+    public void update(long id, BannerParam param) {
         AppletBannerEntity entity = baseMapper.selectById(id);
         AssertUtils.notNull(entity);
         BeanUtils.copyProperties(param, entity);

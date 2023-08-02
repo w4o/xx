@@ -1,5 +1,7 @@
 package com.github.w4o.xx.manage.service.impl;
 
+import cn.hutool.core.lang.tree.TreeNodeConfig;
+import cn.hutool.core.lang.tree.TreeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.base.service.impl.BaseServiceImpl;
@@ -10,9 +12,8 @@ import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.manage.dto.cms.category.CategoryDTO;
 import com.github.w4o.xx.manage.mapper.CmsCategoryMapper;
 import com.github.w4o.xx.manage.mapper.CmsPostCategoryMapper;
-import com.github.w4o.xx.manage.param.cms.category.AddCategoryParam;
 import com.github.w4o.xx.manage.param.cms.category.CategoryPageParam;
-import com.github.w4o.xx.manage.param.cms.category.ModifyCategoryParam;
+import com.github.w4o.xx.manage.param.cms.category.CategoryParam;
 import com.github.w4o.xx.manage.service.CmsCategoryService;
 import com.github.w4o.xx.manage.vo.cms.category.CategoryVO;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 文章分类服务实现类
@@ -43,7 +46,7 @@ public class CmsCategoryServiceImpl extends BaseServiceImpl<CmsCategoryMapper, C
     }
 
     @Override
-    public CategoryVO add(AddCategoryParam param) {
+    public CategoryVO add(CategoryParam param) {
         boolean exists = baseMapper.exists(new LambdaQueryWrapper<CmsCategoryEntity>()
                 .eq(CmsCategoryEntity::getName, param.getName()));
         if (exists) {
@@ -62,7 +65,7 @@ public class CmsCategoryServiceImpl extends BaseServiceImpl<CmsCategoryMapper, C
     }
 
     @Override
-    public void update(long id, ModifyCategoryParam param) {
+    public void update(long id, CategoryParam param) {
 
         boolean exists = baseMapper.exists(new LambdaQueryWrapper<CmsCategoryEntity>()
                 .eq(CmsCategoryEntity::getName, param.getName())
@@ -86,15 +89,18 @@ public class CmsCategoryServiceImpl extends BaseServiceImpl<CmsCategoryMapper, C
     }
 
     @Override
-    public CategoryVO getByName(String name) {
-        CmsCategoryEntity entity = baseMapper.selectOne(new LambdaQueryWrapper<CmsCategoryEntity>()
-                .eq(CmsCategoryEntity::getName, name));
+    public List<?> getTree() {
+        List<CmsCategoryEntity> categoryList = baseMapper.selectList(new LambdaQueryWrapper<>());
 
-        return CategoryVO.builder()
-                .categoryId(entity.getId())
-                .name(entity.getName())
-                .description(entity.getDescription())
-                .thumbnail(entity.getThumbnail())
-                .build();
+        TreeNodeConfig treeNodeConfig = new TreeNodeConfig();
+        treeNodeConfig.setWeightKey("id");
+        treeNodeConfig.setDeep(3);
+
+        return TreeUtil.build(categoryList, 0L, treeNodeConfig, (treeNode, tree) -> {
+            tree.setId(treeNode.getId());
+            tree.setParentId(treeNode.getParentId());
+            tree.setWeight(treeNode.getId().toString());
+            tree.setName(treeNode.getName());
+        });
     }
 }

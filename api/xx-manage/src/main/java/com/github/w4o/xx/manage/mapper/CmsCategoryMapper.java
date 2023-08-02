@@ -20,4 +20,5 @@ public interface CmsCategoryMapper extends BaseMapper<CmsCategoryEntity> {
      * @return 分页数据
      */
     Page<CategoryDTO> findPage(Page<?> page, CategoryPageParam param);
+
 }

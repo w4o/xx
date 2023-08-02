@@ -1,9 +1,8 @@
 package com.github.w4o.xx.manage.controller.cms;
 
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.param.cms.tag.AddTagParam;
-import com.github.w4o.xx.manage.param.cms.tag.ModifyTagParam;
 import com.github.w4o.xx.manage.param.cms.tag.TagPageParam;
+import com.github.w4o.xx.manage.param.cms.tag.TagParam;
 import com.github.w4o.xx.manage.service.CmsTagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,14 +39,14 @@ public class CmsTagController {
 
     @Operation(summary = "添加标签")
     @PostMapping
-    public CommonResult<?> add(@RequestBody @Valid AddTagParam param) {
+    public CommonResult<?> add(@RequestBody @Valid TagParam param) {
         return CommonResult.success(cmsTagService.add(param));
     }
 
     @Operation(summary = "修改标签")
     @PutMapping("/{tagId}")
     public CommonResult<?> modify(@PathVariable("tagId") @NotNull Long tagId,
-                                  @RequestBody @Valid ModifyTagParam param) {
+                                  @RequestBody @Valid TagParam param) {
         cmsTagService.update(tagId, param);
         return CommonResult.success();
     }

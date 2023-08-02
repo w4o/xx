@@ -1,39 +1,32 @@
 import request from '/@/utils/request';
 
-
-export function useRoleApi() {
+export function useCategoryApi() {
     return {
         findPage: (params?: object) => {
             return request({
-                url: '/sys/role',
+                url: '/cms/category',
                 method: 'get',
                 params
             })
         },
         add: (data?: object) => {
             return request({
-                url: '/sys/role',
+                url: '/cms/category',
                 method: 'post',
                 data
             })
         },
         update: (id: string, data?: object) => {
             return request({
-                url: `/sys/role/${id}`,
+                url: `/cms/category/${id}`,
                 method: 'put',
                 data
             })
         },
         delete: (id: string) => {
             return request({
-                url: `/sys/role/${id}`,
+                url: `/cms/category/${id}`,
                 method: 'delete'
-            })
-        },
-        option: () => {
-            return request({
-                url: `/sys/role/option`,
-                method: 'get'
             })
         }
     }

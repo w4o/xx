@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @Schema(name = "添加文章标签参数")
-public class AddTagParam {
+public class TagParam {
     @NotBlank
     @Schema(description = "标签名称")
     private String name;

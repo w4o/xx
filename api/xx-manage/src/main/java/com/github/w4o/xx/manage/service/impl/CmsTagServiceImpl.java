@@ -10,9 +10,8 @@ import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.manage.dto.cms.tag.TagDTO;
 import com.github.w4o.xx.manage.mapper.CmsPostTagMapper;
 import com.github.w4o.xx.manage.mapper.CmsTagMapper;
-import com.github.w4o.xx.manage.param.cms.tag.AddTagParam;
-import com.github.w4o.xx.manage.param.cms.tag.ModifyTagParam;
 import com.github.w4o.xx.manage.param.cms.tag.TagPageParam;
+import com.github.w4o.xx.manage.param.cms.tag.TagParam;
 import com.github.w4o.xx.manage.service.CmsTagService;
 import com.github.w4o.xx.manage.vo.cms.tag.TagVO;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,7 @@ public class CmsTagServiceImpl extends BaseServiceImpl<CmsTagMapper, CmsTagEntit
     }
 
     @Override
-    public TagVO add(AddTagParam param) {
+    public TagVO add(TagParam param) {
         boolean exists = baseMapper.exists(new LambdaQueryWrapper<CmsTagEntity>()
                 .eq(CmsTagEntity::getName, param.getName()));
         if (exists) {
@@ -61,7 +60,7 @@ public class CmsTagServiceImpl extends BaseServiceImpl<CmsTagMapper, CmsTagEntit
     }
 
     @Override
-    public void update(long id, ModifyTagParam param) {
+    public void update(long id, TagParam param) {
         boolean exists = baseMapper.exists(new LambdaQueryWrapper<CmsTagEntity>()
                 .eq(CmsTagEntity::getName, param.getName())
                 .ne(CmsTagEntity::getId, id));

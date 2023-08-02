@@ -1,9 +1,9 @@
 package com.github.w4o.xx.manage.controller.cms;
 
+import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.param.cms.post.AddPostParam;
-import com.github.w4o.xx.manage.param.cms.post.ModifyPostParam;
 import com.github.w4o.xx.manage.param.cms.post.PostPageParam;
+import com.github.w4o.xx.manage.param.cms.post.PostParam;
 import com.github.w4o.xx.manage.service.CmsPostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,21 +41,24 @@ public class CmsPostController {
         return CommonResult.success(cmsPostService.getPageList(param));
     }
 
+    @SysLog("添加文章")
     @Operation(summary = "添加文章")
     @PostMapping
-    public CommonResult<?> add(@RequestBody @Valid AddPostParam param) {
+    public CommonResult<?> add(@RequestBody @Valid PostParam param) {
         cmsPostService.add(param);
         return CommonResult.success();
     }
 
+    @SysLog("修改文章")
     @Operation(summary = "修改文章")
     @PutMapping("/{postId}")
     public CommonResult<?> modify(@PathVariable("postId") @NotNull Long postId,
-                                  @RequestBody @Valid ModifyPostParam param) {
+                                  @RequestBody @Valid PostParam param) {
         cmsPostService.update(postId, param);
         return CommonResult.success();
     }
 
+    @SysLog("删除文章")
     @Operation(summary = "删除文章")
     @DeleteMapping("/{postId}")
     public CommonResult<?> delete(@PathVariable("postId") @NotNull Long postId) {
@@ -69,6 +72,7 @@ public class CmsPostController {
         return CommonResult.success(cmsPostService.detail(postId));
     }
 
+    @SysLog("文章标记为发布")
     @Operation(summary = "文章标记为发布")
     @PutMapping("/{postId}/publish")
     public CommonResult<?> modifyPublish(@PathVariable("postId") @NotNull Long postId) {
@@ -76,6 +80,7 @@ public class CmsPostController {
         return CommonResult.success();
     }
 
+    @SysLog("文章标记为草稿")
     @Operation(summary = "文章标记为草稿")
     @PutMapping("/{postId}/draft")
     public CommonResult<?> modifyDraft(@PathVariable("postId") @NotNull Long postId) {

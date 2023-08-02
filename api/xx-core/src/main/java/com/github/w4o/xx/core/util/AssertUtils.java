@@ -21,4 +21,16 @@ public class AssertUtils {
             throw new CustomException(code);
         }
     }
+
+    public static void isNull(Object obj, ErrorCode code) {
+        if (obj != null) {
+            throw new CustomException(code);
+        }
+    }
+
+    public static void isFalse(boolean expression, ErrorCode code) {
+        if (expression) {
+            throw new CustomException(code);
+        }
+    }
 }
