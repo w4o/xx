@@ -109,19 +109,16 @@ declare interface SysUserState {
 declare type DeptTreeType = {
 	deptName: string;
 	createTime: string;
-	status: boolean;
+	enabled: boolean;
 	sort: number;
 	description: string;
-	id: number | string;
+	id: string;
 	children?: DeptTreeType[];
 };
 
 // dept
 declare interface RowDeptType extends DeptTreeType {
-	deptLevel: string[];
-	person: string;
-	phone: string;
-	email: string;
+	parentId: string;
 }
 
 interface SysDeptTableType extends TableType {
@@ -155,6 +152,29 @@ interface SysDicTableType extends TableType {
 declare interface SysDicState {
 	tableData: SysDicTableType;
 }
+
+/**
+ * views cms
+ */
+// category
+declare interface RowCategoryType {
+	categoryId: string;
+	name: string;
+	description: string;
+	postCount: number,
+	createTime: string;
+	sort: number;
+	thumbnail: string;
+}
+
+interface CmsCategoryTableType extends TableType {
+	data: RowCategoryType[];
+}
+
+declare interface CmsCategoryState {
+	tableData: CmsCategoryTableType;
+}
+
 
 /**
  * views pages
