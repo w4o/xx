@@ -5,15 +5,18 @@
 
     <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.dict.DictTypeDTO">
         select sys_dict_type.id as dict_type_id,
-               sys_dict_type.label,
-               sys_dict_type.name,
-               sys_dict_type.enabled,
-               sys_dict_type.remark,
-               sys_dict_type.create_by,
-               sys_dict_type.create_time,
-               sys_dict_type.last_update_by,
-               sys_dict_type.last_update_time
+        sys_dict_type.label,
+        sys_dict_type.name,
+        sys_dict_type.enabled,
+        sys_dict_type.remark,
+        sys_dict_type.create_by,
+        sys_dict_type.create_time,
+        sys_dict_type.last_update_by,
+        sys_dict_type.last_update_time
         from sys_dict_type
         where sys_dict_type.deleted = 0
+        <if test="condition.name != null and condition.name != ''">
+            and sys_dict_type.name like concat('%', #{condition.name}, '%')
+        </if>
     </select>
 </mapper>
