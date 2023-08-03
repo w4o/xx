@@ -1,6 +1,7 @@
 package com.github.w4o.xx.manage.controller.sys;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.manage.dto.sys.media.MediaDTO;
 import com.github.w4o.xx.manage.param.sys.media.MediaPageParam;
@@ -35,13 +36,15 @@ public class SysMediaController {
     }
 
     @Operation(summary = "修改媒体信息")
+    @SysLog("修改媒体信息")
     @PutMapping("/{id}")
     public CommonResult<?> modify(@PathVariable Long id, @RequestBody MediaParam param) {
         sysMediaService.update(id, param);
         return CommonResult.success();
     }
 
-    @Operation(summary = "删除媒体")
+    @Operation(summary = "删除媒体信息")
+    @SysLog("删除媒体信息")
     @DeleteMapping("/{id}")
     public CommonResult<?> delete(@PathVariable Long id) {
         sysMediaService.removeById(id);

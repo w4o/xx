@@ -1,7 +1,7 @@
 package com.github.w4o.xx.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.github.w4o.xx.core.base.BaseEntity;
+import com.github.w4o.xx.core.base.BaseDataEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_media")
-public class SysMediaEntity extends BaseEntity {
-    
+public class SysMediaEntity extends BaseDataEntity {
+
     /**
      * 媒体分类ID
      */
