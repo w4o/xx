@@ -3,6 +3,7 @@ package com.github.w4o.xx.core.manage.impl;
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSException;
+import com.aliyun.oss.model.ObjectMetadata;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.manage.UploadManage;
@@ -55,10 +56,13 @@ public class UploadManageImpl implements UploadManage {
                 now.getYear() + "/" + now.getMonthValue() + "/" + now.getDayOfMonth() +
                 "/" + fileName;
 
-        String url = ossDomain + filePath;
+        String url = ossDomain + "/" + filePath;
+
+        ObjectMetadata meta = new ObjectMetadata();
+        meta.setContentType("image/jpg");
 
         try {
-            ossClient.putObject(ossBucket, filePath, file.getInputStream());
+            ossClient.putObject(ossBucket, filePath, file.getInputStream(), meta);
         } catch (OSSException | ClientException e) {
             log.error("OSS上传文件失败", e);
             throw e;
