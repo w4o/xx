@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
 @Schema(name = "媒体数据模型")
 public class MediaDTO extends BaseDataDTO {
     private Long mediaId;
+    private Long mediaCategoryId;
     private String title;
     private String url;
     private String description;
