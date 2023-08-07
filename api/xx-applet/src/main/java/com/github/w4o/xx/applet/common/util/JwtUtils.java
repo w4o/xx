@@ -31,6 +31,7 @@ public class JwtUtils {
     private static final String CLAIM_KEY_OPEN_ID = "open_id";
     private static final String CLAIM_KEY_USER_ID = "user_id";
     private static final String CLAIM_KEY_SESSION_KEY = "session_key";
+    private static final String CLAIM_KEY_USERNAME = "sub";
 
     public String generateToken(LoginUser loginUser) {
         // expire time
@@ -55,12 +56,35 @@ public class JwtUtils {
                 .sign(Algorithm.HMAC256(appConfig.getJwt().getSecret()));
     }
 
+    public String generateToken(long userId, String openId) {
+
+
+        // expire time
+        Calendar nowTime = Calendar.getInstance();
+        nowTime.add(Calendar.SECOND, appConfig.getJwt().getExpire());
+        Date expiresDate = nowTime.getTime();
+
+        Date iatDate = new Date();
+
+        // header Map
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("alg", "HS256");
+        map.put("typ", "JWT");
+
+        return JWT.create()
+                .withHeader(map)
+                .withIssuedAt(iatDate)
+                .withExpiresAt(expiresDate)
+                .withClaim(CLAIM_KEY_USER_ID, userId)
+                .withClaim(CLAIM_KEY_USERNAME, openId)
+                .sign(Algorithm.HMAC256(appConfig.getJwt().getSecret()));
+    }
+
     public LoginUser getLoginUserFromToken(String token) {
         Map<String, Claim> map = getClaimsFromToken(token);
         return LoginUser.builder()
-                .openId(map.get(CLAIM_KEY_OPEN_ID).asString())
+                .openId(map.get(CLAIM_KEY_USERNAME).asString())
                 .userId(map.get(CLAIM_KEY_USER_ID).asLong())
-                .sessionKey(map.get(CLAIM_KEY_SESSION_KEY).asString())
                 .build();
     }
 

@@ -5,26 +5,23 @@ server:
 spring:
   profiles:
     active: dev
+  aop:
+    auto: true
+    proxy-target-class: true
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initial-size: 5
-      max-active: 20
-      min-idle: 5
-      max-wait: 600000
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      time-between-eviction-runs-millis: 600000
-      filter:
-        # sql 防注入
-        wall:
-          enabled: true
-          db-type: mysql
-          config:
-            drop-table-allow: false
-  session:
-    store-type: none
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5       # 最小连接数
+      maximum-pool-size: 20 # 最大连接数
+      auto-commit: true     # 自动提交
+  data:
+    redis:
+      lettuce:
+        pool:
+          max-wait: 30000 # 连接池最大阻塞等待时间(使用负数表示没有限制,默认-1)
+          max-active: 100 # 连接池最大连接数(使用负数表示没有限制,默认8)
+          max-idle: 20    # 连接池中的最大空闲连接(默认8)
+          min-idle: 5     # 连接池中的最小空闲连接(默认0)
   servlet:
     multipart:
       max-file-size: 100MB

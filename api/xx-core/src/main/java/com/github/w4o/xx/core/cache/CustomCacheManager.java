@@ -1,6 +1,5 @@
 package com.github.w4o.xx.core.cache;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -19,9 +18,8 @@ public class CustomCacheManager extends RedisCacheManager {
         super(cacheWriter, defaultCacheConfiguration);
     }
 
-    @NotNull
     @Override
-    protected RedisCache createRedisCache(@NotNull String name, RedisCacheConfiguration cacheConfig) {
+    protected RedisCache createRedisCache(String name, RedisCacheConfiguration cacheConfig) {
         String[] array = StringUtils.delimitedListToStringArray(name, "#");
         name = array[0];
         // 解析TTL

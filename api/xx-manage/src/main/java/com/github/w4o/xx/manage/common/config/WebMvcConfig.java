@@ -1,6 +1,5 @@
 package com.github.w4o.xx.manage.common.config;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -19,12 +18,12 @@ import java.util.List;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
-    public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
     }
 
     @Override
-    public void extendMessageConverters(@NotNull List<HttpMessageConverter<?>> converters) {
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 
     }
 

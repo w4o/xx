@@ -7,7 +7,6 @@ import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.core.util.BusinessUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
@@ -84,17 +83,17 @@ public class CustomRestControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public boolean supports(@NotNull MethodParameter methodParameter, @NotNull Class<? extends HttpMessageConverter<?>> aClass) {
+    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
         return true;
     }
 
     @Override
     public Object beforeBodyWrite(Object body,
-                                  @NotNull MethodParameter methodParameter,
-                                  @NotNull MediaType mediaType,
-                                  @NotNull Class<? extends HttpMessageConverter<?>> aClass,
-                                  @NotNull ServerHttpRequest serverHttpRequest,
-                                  @NotNull ServerHttpResponse serverHttpResponse) {
+                                  MethodParameter methodParameter,
+                                  MediaType mediaType,
+                                  Class<? extends HttpMessageConverter<?>> aClass,
+                                  ServerHttpRequest serverHttpRequest,
+                                  ServerHttpResponse serverHttpResponse) {
         if (body instanceof CommonResult<?> commonResult) {
             commonResult.setVersion(version);
             return commonResult;

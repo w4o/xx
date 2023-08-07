@@ -2,6 +2,7 @@ package com.github.w4o.xx.core.manage.impl;
 
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.github.w4o.xx.core.exception.CustomException;
@@ -30,13 +31,18 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UploadManageImpl implements UploadManage {
 
-    @Value("${app.oss.domain}")
+    @Value("${app.upload.oss.domain}")
     private String ossDomain;
-    @Value("${app.oss.bucket}")
+    @Value("${app.upload.oss.bucket}")
     private String ossBucket;
-    @Value("${app.oss.root-path}")
+    @Value("${app.upload.oss.root-path}")
     private String ossRootPath;
-    private final OSS ossClient;
+    @Value("${app.upload.oss.access-key}")
+    private String accessKey;
+    @Value("${app.upload.oss.secret-key}")
+    private String secretKey;
+    @Value("${app.upload.oss.endpoint}")
+    private String endpoint;
 
     @Override
     public UploadVO upload(MultipartFile file, List<String> extList, String path) throws IOException {
@@ -62,6 +68,7 @@ public class UploadManageImpl implements UploadManage {
         meta.setContentType("image/jpg");
 
         try {
+            OSS ossClient = new OSSClientBuilder().build(endpoint, accessKey, secretKey);
             ossClient.putObject(ossBucket, filePath, file.getInputStream(), meta);
         } catch (OSSException | ClientException e) {
             log.error("OSS上传文件失败", e);

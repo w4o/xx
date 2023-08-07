@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import static com.github.w4o.xx.core.entity.CmsPostEntity.STATUS_DRAFT;
 import static com.github.w4o.xx.core.entity.CmsPostEntity.STATUS_PUBLISH;

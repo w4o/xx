@@ -1,7 +1,6 @@
 package com.github.w4o.xx.front.common.config;
 
 import com.github.w4o.xx.front.common.filter.AuthenticationInterceptor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -22,12 +21,12 @@ import java.util.List;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
-    public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
     }
 
     @Override
-    public void extendMessageConverters(@NotNull List<HttpMessageConverter<?>> converters) {
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 
     }
 

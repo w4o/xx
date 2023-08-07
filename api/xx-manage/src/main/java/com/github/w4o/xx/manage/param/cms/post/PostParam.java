@@ -3,7 +3,8 @@ package com.github.w4o.xx.manage.param.cms.post;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Set;
 
 import static com.github.w4o.xx.core.entity.CmsPostEntity.STATUS_DRAFT;
