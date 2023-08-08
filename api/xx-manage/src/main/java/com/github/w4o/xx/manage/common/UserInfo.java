@@ -13,12 +13,11 @@ import java.util.List;
  *
  * @author Frank
  */
+@Getter
 public class UserInfo extends User {
 
-    @Getter
     private final Long userId;
     @Setter
-    @Getter
     private List<Long> roles;
 
     public UserInfo(Long userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {

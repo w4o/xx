@@ -4,6 +4,7 @@ import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
 
 import java.time.Duration;
@@ -18,8 +19,9 @@ public class CustomCacheManager extends RedisCacheManager {
         super(cacheWriter, defaultCacheConfiguration);
     }
 
+    @NonNull
     @Override
-    protected RedisCache createRedisCache(String name, RedisCacheConfiguration cacheConfig) {
+    protected RedisCache createRedisCache(@NonNull String name, RedisCacheConfiguration cacheConfig) {
         String[] array = StringUtils.delimitedListToStringArray(name, "#");
         name = array[0];
         // 解析TTL

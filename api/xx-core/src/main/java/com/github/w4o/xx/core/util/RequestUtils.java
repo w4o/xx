@@ -1,11 +1,10 @@
 package com.github.w4o.xx.core.util;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 请求工具类
@@ -39,7 +38,7 @@ public class RequestUtils {
     public static String getIpAddress(HttpServletRequest request) {
         for (String header : HEADERS_TO_TRY) {
             String ip = request.getHeader(header);
-            if (ip != null && ip.length() != 0 && !UNKNOWN_REMOTE_ADDRESS.equalsIgnoreCase(ip)) {
+            if (ip != null && !ip.isEmpty() && !UNKNOWN_REMOTE_ADDRESS.equalsIgnoreCase(ip)) {
                 return ip;
             }
         }
