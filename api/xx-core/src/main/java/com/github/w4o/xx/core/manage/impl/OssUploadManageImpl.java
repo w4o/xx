@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,8 +29,9 @@ import java.util.UUID;
  */
 @Slf4j
 @Component
+@ConditionalOnProperty(name = "app.upload.type", havingValue = "oss")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class UploadManageImpl implements UploadManage {
+public class OssUploadManageImpl implements UploadManage {
 
     @Value("${app.upload.oss.domain}")
     private String ossDomain;

@@ -26,19 +26,18 @@ logging:
   level:
     com.github.w4o.xx: debug
 
-alibaba:
-  cloud:
-    access-key: xxxxxx
-    secret-key: xxxxxx
-    oss:
-      endpoint: oss-cn-beijing.aliyuncs.com
 app:
   jwt:
     secret: xxxx
     expire: 7200
   aes-key: c66ea7ef288d93fc
   encrypted: false
-  oss:
-    domain: https://oss-domain
-    bucket: xxx
-    root-path: /xxx
+  upload:
+    type: oss # oss, local, cos, qiniu
+    oss:
+      access-key: xxxxx
+      secret-key: xxxxx
+      endpoint: oss-cn-beijing.aliyuncs.com
+      domain: https://xxx-dev.oss-cn-beijing.aliyuncs.com
+      bucket: xxx-dev
+      root-path: xxx/
