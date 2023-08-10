@@ -45,17 +45,24 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChainBean(HttpSecurity http) throws Exception {
         return http
-                .cors(AbstractHttpConfigurer::disable)
+                // 禁用basic明文验证
+                .httpBasic(AbstractHttpConfigurer::disable)
+                // 前后端分离架构不需要csrf保护
+                .csrf(AbstractHttpConfigurer::disable)
+                // 禁用默认登录页
+                .formLogin(AbstractHttpConfigurer::disable)
+                // 禁用默认登出页
+                .logout(AbstractHttpConfigurer::disable)
+
                 .sessionManagement(sessionManagementCustomizer -> sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS).sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::none))
                 .authorizeHttpRequests(authorizeRequestsCustomizer -> authorizeRequestsCustomizer
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/login", "/captcha").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/captcha").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/swagger**/**", "/v3/**", "/favicon.ico", "/webjars/**", "/doc.html").permitAll()
                         .anyRequest().authenticated()
                 )
-                .logout(logoutConfigurer -> logoutConfigurer.logoutSuccessHandler((request, response, authentication) -> {
-                }))
-                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)
                 .build()
                 ;
