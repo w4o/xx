@@ -1,6 +1,7 @@
 package com.github.w4o.xx.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.github.w4o.xx.core.base.BaseDataEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName(value = "applet_nav")
-public class AppletNavEntity {
+public class AppletNavEntity extends BaseDataEntity {
     /**
      * 名称
      */

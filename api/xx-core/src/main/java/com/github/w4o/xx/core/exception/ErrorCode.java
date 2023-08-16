@@ -8,6 +8,7 @@ import lombok.Getter;
  *
  * @author Frank
  */
+@Getter
 public enum ErrorCode implements CommonError {
 
     // > 全局错误码 ================================
@@ -65,9 +66,7 @@ public enum ErrorCode implements CommonError {
     E9999(9999, "未知错误"),
     ;
 
-    @Getter
     private final int code;
-    @Getter
     private final String message;
 
     ErrorCode(int code, String message) {

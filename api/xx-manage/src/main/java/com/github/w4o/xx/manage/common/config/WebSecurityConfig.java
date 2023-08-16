@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,21 +45,18 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChainBean(HttpSecurity http) throws Exception {
         return http
-                .cors().and()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .sessionFixation().none().and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/login", "/captcha").permitAll()
-                // Swagger的资源路径需要允许访问
-                .antMatchers(HttpMethod.GET, "/swagger**/**", "/v3/**", "/favicon.ico", "/webjars/**", "/doc.html")
-                .permitAll()
-                .anyRequest().authenticated().and()
-                .logout().logoutSuccessHandler((request, response, authentication) -> {
-                }).and()
+                .cors(AbstractHttpConfigurer::disable)
+                .sessionManagement(sessionManagementCustomizer -> sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS).sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::none))
+                .authorizeHttpRequests(authorizeRequestsCustomizer -> authorizeRequestsCustomizer
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/login", "/captcha").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/swagger**/**", "/v3/**", "/favicon.ico", "/webjars/**", "/doc.html").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .logout(logoutConfigurer -> logoutConfigurer.logoutSuccessHandler((request, response, authentication) -> {
+                }))
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
-                .headers().cacheControl().and().and().userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsService)
                 .build()
                 ;
     }

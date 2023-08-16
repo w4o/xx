@@ -1,7 +1,0 @@
-# AutoConfiguration
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.github.w4o.xx.core.config.DruidConfig,\
-com.github.w4o.xx.core.config.HttpTraceConfig,\
-com.github.w4o.xx.core.config.MybatisPlusConfig,\
-com.github.w4o.xx.core.config.RedisConfig, \
-com.github.w4o.xx.core.config.ObjectMapperConfig

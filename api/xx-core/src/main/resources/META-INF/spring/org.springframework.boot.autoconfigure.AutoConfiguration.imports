@@ -1,0 +1,5 @@
+# AutoConfiguration
+com.github.w4o.xx.core.config.HttpTraceConfig
+com.github.w4o.xx.core.config.MybatisPlusConfig
+com.github.w4o.xx.core.config.RedisConfig
+com.github.w4o.xx.core.config.ObjectMapperConfig

@@ -1,4 +1,4 @@
-# xx-service
+# xx
 
 一个基于 SpringBoot 后台权限管理服务端项目
 
@@ -25,7 +25,7 @@
 ### api
 
 * JDK \>= 17
-* [SpringBoot](https://spring.io/projects/spring-boot) 2.6.x
+* [SpringBoot](https://spring.io/projects/spring-boot) 3.1.x
 * SpringSecurity
 * [MyBatis](https://github.com/mybatis)
 * [MyBatis-Plus](https://baomidou.com/)
@@ -35,7 +35,13 @@
 
 ### manage
 
-待补充
+* vue3.x
+* CompositionAPI setup 语法糖
+* typescript
+* vite
+* element plus
+* vue-router-next
+* pinia 
 
 ## 如何参与项目
 

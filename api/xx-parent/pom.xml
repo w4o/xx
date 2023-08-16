@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.13</version>
+        <version>3.1.2</version>
         <relativePath/>
     </parent>
 
@@ -21,7 +21,7 @@
         <java.version>17</java.version>
         <druid.version>1.2.12</druid.version>
         <hutool.version>5.8.11</hutool.version>
-        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.3</mybatis-plus.version>
         <java-jwt.version>4.2.1</java-jwt.version>
         <log4j2.version>2.17.0</log4j2.version>
         <poi-ooxml.version>5.2.2</poi-ooxml.version>
@@ -29,7 +29,9 @@
         <aliyun-spring-boot-dependencies.version>1.0.0</aliyun-spring-boot-dependencies.version>
         <springdoc.version>1.6.15</springdoc.version>
         <weixin-java-miniapp.version>4.4.0</weixin-java-miniapp.version>
-        <knife4j.version>4.1.0</knife4j.version>
+        <knife4j.version>4.2.0</knife4j.version>
+        <aliyun-sdk-oss.version>3.17.1</aliyun-sdk-oss.version>
+        <cos_api.version>5.6.75</cos_api.version>
     </properties>
 
     <dependencyManagement>
@@ -46,7 +48,17 @@
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-crypto</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-captcha</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
             <dependency>
@@ -66,7 +78,7 @@
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
             <dependency>
@@ -86,6 +98,17 @@
                 <version>${aliyun-spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>${cos_api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

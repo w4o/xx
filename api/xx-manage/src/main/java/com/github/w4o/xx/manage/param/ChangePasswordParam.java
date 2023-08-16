@@ -3,7 +3,7 @@ package com.github.w4o.xx.manage.param;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * 修改密码请求参数

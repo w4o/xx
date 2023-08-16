@@ -1,20 +1,19 @@
 package com.github.w4o.xx.core.exception;
 
+import com.github.w4o.xx.core.base.CommonError;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.github.w4o.xx.core.base.CommonError;
 
 /**
  * 自定义异常
  *
  * @author Frank
  */
+@Getter
 @ResponseStatus(HttpStatus.OK)
 public class CustomException extends RuntimeException {
-    @Getter
     private final CommonError error;
-    @Getter
     private String customMsg;
 
     public CustomException(CommonError error) {

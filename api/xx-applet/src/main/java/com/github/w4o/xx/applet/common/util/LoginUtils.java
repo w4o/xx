@@ -31,6 +31,10 @@ public class LoginUtils {
         return (LoginUser) obj;
     }
 
+    public static String getOpenId() {
+        return getLoginInfo().getOpenId();
+    }
+
     /**
      * 获取登录id
      *

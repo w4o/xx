@@ -14,4 +14,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "字典数据类型分页查询参数")
 public class DictTypePageParam extends BasePageParam {
+    private String name;
 }

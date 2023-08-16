@@ -6,6 +6,7 @@
     <select id="findPage" resultType="com.github.w4o.xx.manage.dto.sys.media.MediaDTO">
         select
         id as mediaId,
+        media_category_id,
         title,
         url,
         description,

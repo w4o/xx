@@ -5,15 +5,14 @@ import com.github.w4o.xx.core.annotation.CheckToken;
 import com.github.w4o.xx.core.constant.Constant;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 import static com.github.w4o.xx.core.constant.Constant.AUTH_USER;
@@ -29,7 +28,7 @@ public class AuthenticationInterceptor implements AsyncHandlerInterceptor {
     private JwtUtils jwtUtils;
 
     @Override
-    public boolean preHandle(@NotNull HttpServletRequest httpServletRequest, @NotNull HttpServletResponse httpServletResponse, @NotNull Object object) {
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) {
 
         // 如果不是映射到方法直接通过
         if (!(object instanceof HandlerMethod handlerMethod)) {

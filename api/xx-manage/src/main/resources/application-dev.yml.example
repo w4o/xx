@@ -2,16 +2,15 @@ server:
   port: 9001
 spring:
   datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1:3306/xxx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false
-      username: root
-      password: 123456
-      validation-query: SELECT 1
-  redis:
-    database: 0
-    host: 127.0.0.1
-    port: 6379
+    url: jdbc:mysql://127.0.0.1:3306/xxx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false
+    username: root
     password: 123456
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
 springdoc:
   swagger-ui:
     enabled: true
@@ -27,19 +26,18 @@ logging:
   level:
     com.github.w4o.xx: debug
 
-alibaba:
-  cloud:
-    access-key: xxxxxx
-    secret-key: xxxxxx
-    oss:
-      endpoint: oss-cn-beijing.aliyuncs.com
 app:
   jwt:
     secret: xxxx
     expire: 7200
   aes-key: c66ea7ef288d93fc
   encrypted: false
-  oss:
-    domain: https://oss-domain
-    bucket: xxx
-    root-path: /xxx
+  upload:
+    type: oss # oss, local, cos, qiniu
+    oss:
+      access-key: xxxxx
+      secret-key: xxxxx
+      endpoint: oss-cn-beijing.aliyuncs.com
+      domain: https://xxx-dev.oss-cn-beijing.aliyuncs.com
+      bucket: xxx-dev
+      root-path: xxx/
