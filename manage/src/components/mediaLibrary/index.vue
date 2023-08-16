@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts" setup>
-import {defineAsyncComponent, onMounted, ref} from "vue";
+import {defineAsyncComponent, onMounted, ref, watch} from "vue";
 import {mediaCategoryApi} from "/@/api/system/mediaCategory";
 import {mediaApi} from "/@/api/system/media";
 import {ElLoading} from "element-plus";
@@ -86,6 +86,12 @@ const props = defineProps({
   editModal: {
     type: Boolean,
     default: false
+  },
+  defaultCheckedIds: {
+    type: Array,
+    default: () => {
+      return []
+    }
   }
 })
 
@@ -143,6 +149,7 @@ const getMedia = () => {
   const loading = ElLoading.service({background: 'rgba(0, 0, 0, 0.3)'})
   MediaApi.getMedia(mediaParams.value).then(res => {
     mediaData.value = res
+    defaultChecked()
   }).finally(() => {
     loading.close()
   })
@@ -156,6 +163,7 @@ const uploadRequest = (res: any) => {
   }
   UploadApi.uploadImage(data).then(() => {
     getMedia()
+  }).finally(() => {
     loading.close()
   })
 }
@@ -185,6 +193,19 @@ const handleClickMedia = (data: any) => {
     }
   }
 }
+
+const defaultChecked = () => {
+  if (props.defaultCheckedIds) {
+    props.defaultCheckedIds.forEach(id => {
+      currentMedia.value.push(mediaData.value.records.find((item: any) => item.mediaId === id))
+    })
+  }
+}
+
+watch(() => props.defaultCheckedIds, () => {
+  defaultChecked()
+  emit('update:value', currentMedia.value)
+})
 
 onMounted(async () => {
   getMedia()
