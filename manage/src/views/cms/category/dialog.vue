@@ -1,34 +1,44 @@
 <template>
   <div class="cms-category-dialog-container">
-    <el-dialog :title="state.dialog.title" v-model="state.dialog.isShowDialog">
-      <el-form ref="dialogFormRef" :model="state.ruleForm" size="default" label-width="90px" :rules="state.rules">
+    <el-dialog v-model="state.dialog.isShowDialog" :title="state.dialog.title">
+      <el-form ref="dialogFormRef" :model="state.ruleForm" :rules="state.rules" label-width="90px" size="default">
         <el-form-item label="分类名称" prop="name">
-          <el-input v-model="state.ruleForm.name" placeholder="请输入分类名称" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="排序" prop="sort">
-          <el-input-number v-model="state.ruleForm.sort" :min="0" :max="999" controls-position="right"
-                           placeholder="请输入排序"/>
+          <el-input v-model="state.ruleForm.name" clearable placeholder="请输入分类名称"></el-input>
         </el-form-item>
         <el-form-item label="分类描述" prop="description">
-          <el-input type="textarea" v-model="state.ruleForm.description" placeholder="请输入分类描述" clearable></el-input>
+          <el-input v-model="state.ruleForm.description" clearable placeholder="请输入分类描述"
+                    type="textarea"></el-input>
         </el-form-item>
         <el-form-item label="特色图片" prop="thumbnail">
-          <el-upload v-model="state.ruleForm.thumbnail" ></el-upload>
+          <div
+              style="border: 1px solid #dedfe0; border-radius: 5px; display: flex; justify-content: center; align-items: center; width: 55px; height: 55px"
+              @click="mediaRef.show()">
+            <img v-if="mediaData?.mediaId" :alt="mediaData.description" :src="mediaData.url" height="55"
+                 style="border-radius: 5px"
+                 width="55">
+            <el-icon v-else color="#dedfe0" size="35">
+              <ele-Plus/>
+            </el-icon>
+          </div>
         </el-form-item>
       </el-form>
       <template #footer>
 				<span class="dialog-footer">
-					<el-button @click="onCancel" size="default">取 消</el-button>
-					<el-button type="primary" @click="onSubmit" size="default">{{ state.dialog.submitTxt }}</el-button>
+					<el-button size="default" @click="onCancel">取 消</el-button>
+					<el-button size="default" type="primary" @click="onSubmit">{{ state.dialog.submitTxt }}</el-button>
 				</span>
       </template>
     </el-dialog>
   </div>
-</template>
-<script setup lang="ts" name="cmsCategoryDialog">
 
-import {nextTick, reactive, ref} from "vue";
+  <MediaLibraryDialog ref="mediaRef" v-model:value="mediaData"/>
+</template>
+<script lang="ts" name="cmsCategoryDialog" setup>
+
+import {defineAsyncComponent, nextTick, reactive, ref} from "vue";
 import {useCategoryApi} from "/@/api/cms/category";
+
+const MediaLibraryDialog = defineAsyncComponent(() => import('/@/components/mediaLibrary/mediaLibraryDialog.vue'))
 
 const categoryApi = useCategoryApi();
 // 定义子组件向父组件传值/事件
@@ -39,19 +49,28 @@ const state = reactive({
     isShowDialog: false,
     title: '',
     submitTxt: '',
-    type:'',
+    type: '',
   },
   ruleForm: {
     categoryId: '',
-    name:'',
+    name: '',
     description: '',
     thumbnail: '',
-    sort: '',
   },
   rules: {
-
+    name: [
+      {required: true, message: '请输入分类名称', trigger: 'blur'},
+      {min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur'},
+    ],
+    description: [
+      {required: true, message: '请输入分类描述', trigger: 'blur'},
+      {min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'blur'},
+    ]
   }
 })
+
+const mediaData = ref({} as any)
+const mediaRef = ref()
 
 // 打开弹窗
 const openDialog = (type: string, row: RowCategoryType) => {
@@ -72,6 +91,7 @@ const openDialog = (type: string, row: RowCategoryType) => {
   }
   state.dialog.type = type;
   state.dialog.isShowDialog = true;
+  mediaData.value = {}
 };
 // 关闭弹窗
 const closeDialog = () => {
@@ -83,15 +103,18 @@ const onCancel = () => {
 };
 // 提交
 const onSubmit = () => {
-  dialogFormRef.value.validate(async (valid:any) => {
+  dialogFormRef.value.validate(async (valid: any) => {
     if (!valid) return;
+
+    const data = {...state.ruleForm};
+    data.thumbnail = mediaData.value.url
 
     if (state.dialog.type === 'add') {
       // 新增
-      await categoryApi.add(state.ruleForm)
+      await categoryApi.add(data)
     } else {
       // 修改
-      await categoryApi.update(state.ruleForm.categoryId, state.ruleForm)
+      await categoryApi.update(data.categoryId, data)
     }
     closeDialog();
     emit('refresh');

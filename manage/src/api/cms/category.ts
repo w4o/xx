@@ -28,6 +28,12 @@ export function useCategoryApi() {
                 url: `/cms/category/${id}`,
                 method: 'delete'
             })
+        },
+        findTree: () => {
+            return request({
+                url: '/cms/category/tree',
+                method: 'get'
+            })
         }
     }
 }
