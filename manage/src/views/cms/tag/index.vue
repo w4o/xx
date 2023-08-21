@@ -1,6 +1,6 @@
 <template>
-  <div class="cms-tag-container layout-padding">
-    <div class="cms-tag-padding layout-padding-auto layout-padding-view">
+  <div class="system-dic-container layout-padding">
+    <el-card class="layout-padding-auto" shadow="hover">
       <div class="cms-tag-search mb15">
         <el-input v-model="state.tableData.param.search" clearable placeholder="请输入标签名称或描述"
                   size="default" style="max-width: 180px"></el-input>
@@ -55,7 +55,7 @@
           @current-change="onHandleCurrentChange"
       >
       </el-pagination>
-    </div>
+    </el-card>
     <TagDialog ref="tagDialogRef" @refresh="getTableData()"/>
   </div>
 </template>
@@ -138,28 +138,14 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.cms-tag-container {
-  .cms-tag-padding {
-    padding: 15px;
-
-    .el-table {
-      flex: 1;
-    }
-  }
-
-  .image-slot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: var(--el-fill-color-light);
-    color: var(--el-text-color-secondary);
-    font-size: 30px;
-  }
-
-  .image-slot .el-icon {
-    font-size: 30px;
-  }
+.image-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--el-fill-color-light);
+  color: var(--el-text-color-secondary);
+  font-size: 30px;
 }
 </style>
