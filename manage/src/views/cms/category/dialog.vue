@@ -13,7 +13,7 @@
           <div
               style="border: 1px solid #dedfe0; border-radius: 5px; display: flex; justify-content: center; align-items: center; width: 55px; height: 55px"
               @click="mediaRef.show()">
-            <img v-if="mediaData?.mediaId" :alt="mediaData.description" :src="mediaData.url" height="55"
+            <img v-if="state.ruleForm.thumbnail" :src="state.ruleForm.thumbnail" alt="" height="55"
                  style="border-radius: 5px"
                  width="55">
             <el-icon v-else color="#dedfe0" size="35">
@@ -35,7 +35,7 @@
 </template>
 <script lang="ts" name="cmsCategoryDialog" setup>
 
-import {defineAsyncComponent, nextTick, reactive, ref} from "vue";
+import {defineAsyncComponent, nextTick, reactive, ref, watch} from "vue";
 import {useCategoryApi} from "/@/api/cms/category";
 
 const MediaLibraryDialog = defineAsyncComponent(() => import('/@/components/mediaLibrary/mediaLibraryDialog.vue'))
@@ -120,6 +120,11 @@ const onSubmit = () => {
     emit('refresh');
   });
 };
+
+watch(() => mediaData.value, (val) => {
+  state.ruleForm.thumbnail = val.url
+})
+
 // 暴露变量
 defineExpose({
   openDialog,
