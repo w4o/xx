@@ -65,7 +65,7 @@
 
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" name="mediaLibraryIndex" setup>
 import {defineAsyncComponent, onMounted, ref, watch} from "vue";
 import {mediaCategoryApi} from "/@/api/system/mediaCategory";
 import {mediaApi} from "/@/api/system/media";

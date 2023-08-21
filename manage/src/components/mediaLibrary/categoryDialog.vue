@@ -36,7 +36,7 @@
   </el-dialog>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" name="mediaLibraryCategoryDialog" setup>
 import {nextTick, ref} from "vue";
 import {mediaCategoryApi} from "/@/api/system/mediaCategory";
 import {ElLoading, ElMessageBox} from 'element-plus'
