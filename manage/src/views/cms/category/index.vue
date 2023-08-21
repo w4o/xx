@@ -2,8 +2,8 @@
   <div class="cms-category-container layout-padding">
     <div class="cms-category-padding layout-padding-auto layout-padding-view">
       <div class="cms-category-search mb15">
-        <el-input v-model="state.tableData.param.search" placeholder="请输入分类名称" size="default"
-                  style="max-width: 180px"></el-input>
+        <el-input v-model="state.tableData.param.search" clearable placeholder="请输入分类名称或描述"
+                  size="default" style="max-width: 180px"></el-input>
         <el-button class="ml10" size="default" type="primary" @click="onSearch">
           <el-icon>
             <ele-Search/>

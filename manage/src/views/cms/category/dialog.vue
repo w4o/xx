@@ -107,7 +107,7 @@ const onSubmit = () => {
     if (!valid) return;
 
     const data = {...state.ruleForm};
-    data.thumbnail = mediaData.value.url
+    data.thumbnail = mediaData.value.url || ''
 
     if (state.dialog.type === 'add') {
       // 新增
