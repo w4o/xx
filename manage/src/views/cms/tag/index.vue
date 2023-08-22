@@ -14,7 +14,7 @@
           <el-icon>
             <ele-FolderAdd/>
           </el-icon>
-          新增分类
+          新增标签
         </el-button>
       </div>
       <el-table v-loading="state.tableData.loading" :data="state.tableData.data" style="width: 100%">
