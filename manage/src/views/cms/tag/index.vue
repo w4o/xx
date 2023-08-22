@@ -32,8 +32,8 @@
             </el-image>
           </template>
         </el-table-column>
-        <el-table-column label="分类名称" prop="name" show-overflow-tooltip></el-table-column>
-        <el-table-column label="分类描述" prop="description" show-overflow-tooltip></el-table-column>
+        <el-table-column label="标签名称" prop="name" show-overflow-tooltip></el-table-column>
+        <el-table-column label="标签描述" prop="description" show-overflow-tooltip></el-table-column>
         <el-table-column label="文章数量" prop="postCount" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作" width="100">
           <template #default="scope">
@@ -99,17 +99,17 @@ const onSearch = () => {
   state.tableData.param.pageNo = 1;
   getTableData();
 };
-// 打开新增分类弹窗
+// 打开新增标签弹窗
 const onOpenAddTag = (type: string) => {
   tagDialogRef.value?.openDialog(type)
 }
-// 打开编辑分类弹窗
+// 打开编辑标签弹窗
 const onOpenEditTag = (type: string, row) => {
   tagDialogRef.value?.openDialog(type, row)
 }
-// 删除分类
+// 删除标签
 const onRowDel = (row) => {
-  ElMessageBox.confirm(`此操作将永久删除分类：“${row.name}”，是否继续?`, '提示', {
+  ElMessageBox.confirm(`此操作将永久删除标签：“${row.name}”，是否继续?`, '提示', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning',
