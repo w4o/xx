@@ -42,4 +42,12 @@ public interface AppletBannerService extends BaseService<AppletBannerEntity> {
      * @param id 轮播图id
      */
     void delete(long id);
+
+    /**
+     * 更新轮播图是否显示
+     *
+     * @param id      轮播图id
+     * @param visible 是否显示
+     */
+    void updateVisible(long id, boolean visible);
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.CmsPostEntity;
 import com.github.w4o.xx.manage.dto.cms.post.PostDTO;
 import com.github.w4o.xx.manage.param.cms.post.PostPageParam;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public interface CmsPostMapper extends BaseMapper<CmsPostEntity> {
      * @param param 查询参数
      * @return 分页数据
      */
-    Page<PostDTO> findPage(Page<?> page, PostPageParam param);
+    Page<PostDTO> findPage(Page<?> page, @Param("condition") PostPageParam param);
 
     /**
      * 获取文章详细信息

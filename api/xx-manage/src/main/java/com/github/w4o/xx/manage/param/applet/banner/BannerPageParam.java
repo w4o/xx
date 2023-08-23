@@ -12,4 +12,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "小程序轮播图分页查询参数")
 public class BannerPageParam extends BasePageParam {
+    private String position;
 }

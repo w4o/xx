@@ -8,6 +8,9 @@ import com.github.w4o.xx.manage.param.cms.tag.TagPageParam;
 import com.github.w4o.xx.manage.param.cms.tag.TagParam;
 import com.github.w4o.xx.manage.vo.cms.tag.TagVO;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 文章标签服务接口
  *
@@ -51,4 +54,12 @@ public interface CmsTagService extends BaseService<CmsTagEntity> {
      * @return 标签
      */
     TagVO getByName(String name);
+
+    /**
+     * 根据名字获取前10个标签
+     *
+     * @param name 标签名字
+     * @return 标签列表
+     */
+    List<Map<String, Object>> getTop10ByName(String name);
 }

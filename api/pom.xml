@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.w4o.xx</groupId>
     <artifactId>xx-service</artifactId>
-    <version>1.0</version>
+    <version>2.1</version>
     <packaging>pom</packaging>
 
     <modules>

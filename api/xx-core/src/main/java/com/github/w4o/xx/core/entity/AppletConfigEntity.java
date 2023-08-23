@@ -22,4 +22,12 @@ public class AppletConfigEntity extends BaseDataEntity {
      * 配置Value
      */
     private String configValue;
+    /**
+     * 配置描述
+     */
+    private String description;
+    /**
+     * 配置类别 1:文本 2:图片
+     */
+    private Integer type;
 }

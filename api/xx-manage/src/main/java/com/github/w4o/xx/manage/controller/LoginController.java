@@ -21,6 +21,7 @@ import com.github.w4o.xx.manage.vo.LoginVO;
 import com.github.w4o.xx.manage.vo.UserInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -35,8 +36,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -65,13 +64,12 @@ public class LoginController {
     private final SysMenuService sysMenuService;
     private final SysLoginLogService sysLoginLogService;
     private final AppConfig appConfig;
-    private final BusinessUtils businessUtils;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Operation(summary = "登录")
     @PostMapping("/login")
     public CommonResult<LoginVO> login(@RequestBody @Valid LoginParam loginParam) {
-        if (!businessUtils.isDebug()) {
+        if (!BusinessUtils.isDebug()) {
             String cacheKey = "captcha:" + loginParam.getCaptchaKey();
             String code = (String) redisTemplate.opsForValue().get(cacheKey);
             redisTemplate.delete(Objects.requireNonNull(redisTemplate.keys(cacheKey)));
@@ -80,7 +78,7 @@ public class LoginController {
             }
         }
         // 密码解密
-        String password = businessUtils.decrypt(loginParam.getPassword());
+        String password = BusinessUtils.decrypt(loginParam.getPassword());
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginParam.getUsername(), password);
         Authentication authentication;

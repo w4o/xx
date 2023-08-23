@@ -1,15 +1,14 @@
 package com.github.w4o.xx.manage.param.applet.nav;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 /**
  * @author Frank
  */
 @Data
-@Schema(name = "添加/修改小程序导航请求参数")
+@Schema(name = "添加或修改小程序导航请求参数")
 public class NavParam {
     @NotBlank
     @Schema(description = "名称")

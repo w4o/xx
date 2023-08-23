@@ -6,15 +6,14 @@ import com.github.w4o.xx.manage.param.cms.tag.TagParam;
 import com.github.w4o.xx.manage.service.CmsTagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springdoc.api.annotations.ParameterObject;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 文章标签控制器
@@ -61,6 +60,6 @@ public class CmsTagController {
     @Operation(summary = "根据标签名称获取标签信息")
     @GetMapping("/name/{name}")
     public CommonResult<?> getByName(@PathVariable("name") @NotNull String name) {
-        return CommonResult.success(cmsTagService.getByName(name));
+        return CommonResult.success(cmsTagService.getTop10ByName(name));
     }
 }

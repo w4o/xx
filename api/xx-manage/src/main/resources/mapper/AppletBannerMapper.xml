@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.manage.mapper.AppletBannerMapper">
+
+    <select id="findPage" resultType="com.github.w4o.xx.manage.dto.applet.banner.BannerDTO">
+        select id as bannerId,
+        url,
+        path,
+        title,
+        description,
+        sort,
+        type,
+        visible,
+        position,
+        start_time,
+        end_time,
+        create_by, create_time, last_update_by, last_update_time
+        from applet_banner where deleted = 0
+        <if test="condition.position != null and condition.position != ''">
+            and position = #{condition.position}
+        </if>
+        order by sort desc
+    </select>
+</mapper>

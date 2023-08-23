@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 8080
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/xxx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false
@@ -30,14 +30,24 @@ app:
   jwt:
     secret: xxxx
     expire: 7200
-  aes-key: c66ea7ef288d93fc
+  aes-key: cxxxxc
   encrypted: false
   upload:
     type: oss # oss, local, cos, qiniu
     oss:
-      access-key: xxxxx
-      secret-key: xxxxx
+      access-key: LTAI5xxx
+      secret-key: IAJrzxxx
       endpoint: oss-cn-beijing.aliyuncs.com
       domain: https://xxx-dev.oss-cn-beijing.aliyuncs.com
       bucket: xxx-dev
       root-path: xxx/
+    cos:
+      access-key: AKIDxxx
+      secret-key: yhCxQxxx
+      region: ap-nanjing
+      bucket: wp-1311
+      domain: https://wp-1311.cos.ap-nanjing.myqcloud.com/
+      root-path: /images
+    local:
+      url: http://xxxx.xxx/upload
+      path: /Users/frank/docker/nginx/www/upload

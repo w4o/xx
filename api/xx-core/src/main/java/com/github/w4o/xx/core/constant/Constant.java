@@ -12,4 +12,9 @@ public interface Constant {
      * Redis缓存前缀
      */
     String REDIS_CACHE_PREFIX = "caching:";
+
+    /**
+     * 短信缓存前缀
+     */
+    String REDIS_SMS_CODE_PREFIX = "sms:code:";
 }

@@ -7,15 +7,14 @@ import com.github.w4o.xx.manage.param.applet.banner.BannerParam;
 import com.github.w4o.xx.manage.service.AppletBannerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springdoc.api.annotations.ParameterObject;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 小程序轮播图管理控制器
@@ -60,6 +59,22 @@ public class AppletBannerController {
     @DeleteMapping("/{bannerId}")
     public CommonResult<?> delete(@PathVariable("bannerId") @NotNull Long bannerId) {
         appletBannerService.delete(bannerId);
+        return CommonResult.success();
+    }
+
+    @SysLog("显示轮播图")
+    @Operation(summary = "显示轮播图")
+    @PutMapping("/{bannerId}/visible")
+    public CommonResult<?> visible(@PathVariable("bannerId") @NotNull Long bannerId) {
+        appletBannerService.updateVisible(bannerId, true);
+        return CommonResult.success();
+    }
+
+    @SysLog("隐藏轮播图")
+    @Operation(summary = "隐藏轮播图")
+    @PutMapping("/{bannerId}/invisible")
+    public CommonResult<?> invisible(@PathVariable("bannerId") @NotNull Long bannerId) {
+        appletBannerService.updateVisible(bannerId, false);
         return CommonResult.success();
     }
 }

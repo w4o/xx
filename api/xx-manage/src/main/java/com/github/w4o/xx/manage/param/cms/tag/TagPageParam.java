@@ -12,4 +12,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "文章标签分页查询参数")
 public class TagPageParam extends BasePageParam {
+    private String search;
 }

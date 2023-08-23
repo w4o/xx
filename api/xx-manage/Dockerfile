@@ -11,7 +11,4 @@ ENV TZ=Asia/Shanghai
 
 ENV VERSION=1.0
 
-ENTRYPOINT ["java", "-jar", "/app.jar", \
-            "--add-opens java.base/java.lang=ALL-UNNAMED", \
-            "--spring.profiles.active=dev", \
-            "--app.version=${VERSION}"]
+ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=dev", "--app.version=${VERSION}"]

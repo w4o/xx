@@ -1,17 +1,18 @@
 server:
-  port: 9001
+  port: 8080
 spring:
   datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1:3306/xxx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false
-      username: root
-      password: 123456
-      validation-query: SELECT 1
-  redis:
-    database: 0
-    host: 127.0.0.1
-    port: 6379
+    url: jdbc:mysql://127.0.0.1:3306/xxx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false
+    username: root
     password: 123456
+    validation-query: SELECT 1
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+
 springdoc:
   swagger-ui:
     enabled: true
@@ -26,22 +27,41 @@ knife4j:
 logging:
   level:
     com.github.w4o.xx: debug
+
 wx:
   miniapp:
-    appid: xxxxxxx
-    secret: xxxxxxxxxxxxxxxxxxxx
-alibaba:
-  cloud:
-    access-key: xxxxxx
-    secret-key: xxxxxx
-    oss:
-      endpoint: oss-cn-beijing.aliyuncs.com
+    appid: wxaxxxxxxxxxxxxx
+    secret: 5ab6xxxxxxxxxxxxxxxxxxxxxx96b20
+
 app:
   jwt:
     secret: xxxx
     expire: 7200
-  aes-key: c66ea7ef288d93fc
-  oss:
-    domain: https://oss-domain
-    bucket: xxx
-    root-path: /xxx
+  aes-key: cxxxxxxxxxxxxxc
+  encrypted: false
+  sms:
+    type: aliyun
+    aliyun:
+      access-key: LTAI5txxxxxxxxxxxxx
+      secret-key: WdeYE7xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      sign: 短信签名
+      tpl: SMS_164375051
+  upload:
+    type: oss # oss, local, cos, qiniu
+    oss:
+      access-key: LTAI5xxxxxxxxxxxx
+      secret-key: IAJrzrE5Okxxxxxxxxxxxxxxxxxxxxxxxx
+      endpoint: oss-cn-beijing.aliyuncs.com
+      domain: https://xxx-dev.oss-cn-beijing.aliyuncs.com
+      bucket: xxx-dev
+      root-path: xxx/
+    cos:
+      access-key: AKIDUxxxxxxxxxxxxxxxxxxxx
+      secret-key: yhCSUxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      region: ap-nanjing
+      bucket: wp-131000000
+      domain: https://wp-131000000.cos.ap-nanjing.myqcloud.com/
+      root-path: /images
+    local:
+      url: http://xxxx.xxx/upload
+      path: /Users/frank/docker/nginx/www/upload

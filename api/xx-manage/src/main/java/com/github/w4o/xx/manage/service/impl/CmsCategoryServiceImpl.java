@@ -93,8 +93,6 @@ public class CmsCategoryServiceImpl extends BaseServiceImpl<CmsCategoryMapper, C
         List<CmsCategoryEntity> categoryList = baseMapper.selectList(new LambdaQueryWrapper<>());
 
         TreeNodeConfig treeNodeConfig = new TreeNodeConfig();
-        treeNodeConfig.setWeightKey("id");
-        treeNodeConfig.setDeep(3);
 
         return TreeUtil.build(categoryList, 0L, treeNodeConfig, (treeNode, tree) -> {
             tree.setId(treeNode.getId());

@@ -50,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
         WxMaPhoneNumberInfo wxMaPhoneNumberInfo;
         // 获取用户手机号
         try {
-            wxMaPhoneNumberInfo = wxMaService.getUserService().getNewPhoneNoInfo(code);
+            wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(code);
         } catch (WxErrorException e) {
             log.error("获取用户手机号异常", e);
             return null;
@@ -83,7 +83,6 @@ public class LoginServiceImpl implements LoginService {
         }
 
         String token = jwtUtils.generateToken(LoginUser.builder()
-                .sessionKey(session.getSessionKey())
                 .userId(appletUser.getId())
                 .openId(appletUser.getOpenId())
                 .build());

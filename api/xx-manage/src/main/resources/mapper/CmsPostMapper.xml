@@ -25,27 +25,29 @@
     </resultMap>
 
     <select id="findPage" resultMap="postPageMap">
-        select cms_post.id       as postId,
-               cms_post.title,
-               cms_post.summary,
-               cms_post.content,
-               cms_post.thumbnail,
-               cms_post.status,
-               cms_post.create_by,
-               cms_post.create_time,
-               cms_post.last_update_by,
-               cms_post.last_update_time,
-               cms_category.id   as categoryId,
-               cms_category.name as categoryName,
-               cms_tag.id        as tagId,
-               cms_tag.name      as tagName
+        select cms_post.id as postId,
+        cms_post.title,
+        cms_post.summary,
+        cms_post.thumbnail,
+        cms_post.status,
+        cms_post.create_by,
+        cms_post.create_time,
+        cms_post.last_update_by,
+        cms_post.last_update_time,
+        cms_category.id as categoryId,
+        cms_category.name as categoryName,
+        cms_tag.id as tagId,
+        cms_tag.name as tagName
         from cms_post
-                 left join cms_post_category
-                           on cms_post.id = cms_post_category.post_id and cms_post_category.deleted = 0
-                 left join cms_category on cms_category.id = cms_post_category.category_id and cms_category.deleted = 0
-                 left join cms_post_tag on cms_post_tag.post_id = cms_post.id and cms_post_tag.deleted = 0
-                 left join cms_tag on cms_tag.id = cms_post_tag.tag_id and cms_tag.deleted = 0
+        left join cms_post_category
+        on cms_post.id = cms_post_category.post_id and cms_post_category.deleted = 0
+        left join cms_category on cms_category.id = cms_post_category.category_id and cms_category.deleted = 0
+        left join cms_post_tag on cms_post_tag.post_id = cms_post.id and cms_post_tag.deleted = 0
+        left join cms_tag on cms_tag.id = cms_post_tag.tag_id and cms_tag.deleted = 0
         where cms_post.deleted = 0
+        <if test="condition.search != null and condition.search != ''">
+            and cms_post.title like concat('%', #{condition.search}, '%')
+        </if>
         order by cms_post.create_time desc
     </select>
 </mapper>

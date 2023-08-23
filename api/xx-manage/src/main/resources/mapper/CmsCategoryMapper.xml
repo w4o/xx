@@ -5,15 +5,20 @@
 
     <select id="findPage" resultType="com.github.w4o.xx.manage.dto.cms.category.CategoryDTO">
         select id as categoryId,
-               name,
-               description,
-               thumbnail,
-               create_by,
-               create_time,
-               last_update_by,
-               last_update_time
+        name,
+        description,
+        parent_id,
+        thumbnail,
+        create_by,
+        create_time,
+        last_update_by,
+        last_update_time
         from cms_category
         where deleted = 0
+        <if test="condition.search != null and condition.search != ''">
+            and (name like concat('%', #{condition.search}, '%') or description like concat('%', #{condition.search},
+            '%'))
+        </if>
         order by create_time desc
     </select>
 </mapper>

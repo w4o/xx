@@ -43,9 +43,10 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRoleEn
     public Page<RoleDTO> getPageList(RolePageParam param) {
         var page = sysRoleMapper.findPage(new Page<>(param.getPageNo(), param.getPageSize()), param);
         handlePageRecord(page);
-        page.getRecords().forEach(dto -> dto.setMenus(sysRoleMenuMapper.selectObjs(new LambdaQueryWrapper<SysRoleMenuEntity>()
-                .eq(SysRoleMenuEntity::getSysRoleId, dto.getRoleId())
-                .select(SysRoleMenuEntity::getSysMenuId))));
+        page.getRecords().forEach(dto -> dto.setMenus(
+                sysRoleMenuMapper.selectObjs(new LambdaQueryWrapper<SysRoleMenuEntity>()
+                        .eq(SysRoleMenuEntity::getSysRoleId, dto.getRoleId())
+                        .select(SysRoleMenuEntity::getSysMenuId))));
         return page;
     }
 

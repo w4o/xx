@@ -20,6 +20,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 文章表服务实现类
  *
@@ -94,5 +97,10 @@ public class CmsTagServiceImpl extends BaseServiceImpl<CmsTagMapper, CmsTagEntit
                     .build();
         }
         return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> getTop10ByName(String name) {
+        return baseMapper.findTop10ByName(name);
     }
 }

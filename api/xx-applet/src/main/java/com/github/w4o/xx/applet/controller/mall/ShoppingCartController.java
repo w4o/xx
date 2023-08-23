@@ -16,6 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mall/shoppingCart")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "06. 购物车接口")
+@Tag(name = "26. 购物车接口")
 public class ShoppingCartController {
 }

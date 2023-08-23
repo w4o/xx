@@ -51,4 +51,12 @@ public class AppletBannerServiceImpl extends BaseServiceImpl<AppletBannerMapper,
     public void delete(long id) {
         removeById(id);
     }
+
+    @Override
+    public void updateVisible(long id, boolean visible) {
+        AppletBannerEntity entity = baseMapper.selectById(id);
+        AssertUtils.notNull(entity);
+        entity.setVisible(visible);
+        updateById(entity);
+    }
 }

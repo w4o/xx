@@ -12,4 +12,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "文章分类分页查询参数")
 public class CategoryPageParam extends BasePageParam {
+    private String search;
 }

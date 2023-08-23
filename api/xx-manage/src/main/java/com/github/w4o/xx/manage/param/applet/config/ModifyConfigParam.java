@@ -11,4 +11,6 @@ import lombok.Data;
 public class ModifyConfigParam {
     @Schema(description = "配置Value")
     private String configValue;
+    @Schema(description = "配置描述")
+    private String description;
 }

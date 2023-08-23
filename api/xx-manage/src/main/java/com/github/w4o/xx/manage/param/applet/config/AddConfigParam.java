@@ -1,9 +1,8 @@
 package com.github.w4o.xx.manage.param.applet.config;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 /**
  * @author Frank
@@ -16,4 +15,8 @@ public class AddConfigParam {
     private String configKey;
     @Schema(description = "配置Value")
     private String configValue;
+    @Schema(description = "配置描述")
+    private String description;
+    @Schema(description = "配置类别 1:文本 2:图片")
+    private Integer type;
 }

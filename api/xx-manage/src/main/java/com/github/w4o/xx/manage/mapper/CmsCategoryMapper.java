@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.CmsCategoryEntity;
 import com.github.w4o.xx.manage.dto.cms.category.CategoryDTO;
 import com.github.w4o.xx.manage.param.cms.category.CategoryPageParam;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 文章分类表 Mapper 接口
@@ -19,6 +20,6 @@ public interface CmsCategoryMapper extends BaseMapper<CmsCategoryEntity> {
      * @param param 查询参数
      * @return 分页数据
      */
-    Page<CategoryDTO> findPage(Page<?> page, CategoryPageParam param);
+    Page<CategoryDTO> findPage(Page<?> page, @Param("condition") CategoryPageParam param);
 
 }

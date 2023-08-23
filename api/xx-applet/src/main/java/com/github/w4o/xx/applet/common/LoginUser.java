@@ -11,5 +11,4 @@ import lombok.Data;
 public class LoginUser {
     private Long userId;
     private String openId;
-    private String sessionKey;
 }

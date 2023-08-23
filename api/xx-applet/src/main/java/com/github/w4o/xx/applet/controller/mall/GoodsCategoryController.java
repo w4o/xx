@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mall/goodsCategory")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "03. 商品分类接口")
+@Tag(name = "23. 商品分类接口")
 public class GoodsCategoryController {
 
     @Operation(summary = "分类列表")

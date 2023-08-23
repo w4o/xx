@@ -13,6 +13,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.lang.NonNull;
@@ -37,24 +38,22 @@ public class CustomRestControllerAdvice implements ResponseBodyAdvice<Object> {
     @Value("${app.version}")
     private String version;
 
-    private final BusinessUtils businessUtils;
-
     /**
      * 系统出现未捕获的异常时
      */
     @ExceptionHandler(Exception.class)
     public CommonResult<?> exception(Exception e) {
         log.error("an exception occurs", e);
-        if (businessUtils.isDebug()) {
+        if (BusinessUtils.isDebug()) {
             return CommonResult.error(ErrorCode.E500, e.getMessage());
         } else {
             return CommonResult.error(ErrorCode.E500);
         }
     }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, MismatchedInputException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, MismatchedInputException.class, HttpMessageNotReadableException.class})
     public CommonResult<?> badRequestException(Exception e) {
-        if (businessUtils.isDebug()) {
+        if (BusinessUtils.isDebug()) {
             return CommonResult.error(ErrorCode.E400, e.getMessage());
         } else {
             return CommonResult.error(ErrorCode.E400);
@@ -63,7 +62,7 @@ public class CustomRestControllerAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public CommonResult<?> maxUploadSizeExceededException(MaxUploadSizeExceededException e) {
-        if (businessUtils.isDebug()) {
+        if (BusinessUtils.isDebug()) {
             return CommonResult.error(ErrorCode.E9991, e.getMessage());
         } else {
             return CommonResult.error(ErrorCode.E9991);
@@ -76,7 +75,7 @@ public class CustomRestControllerAdvice implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(CustomException.class)
     @ResponseStatus(HttpStatus.OK)
     public CommonResult<?> businessException(CustomException e) {
-        if (businessUtils.isDebug()) {
+        if (BusinessUtils.isDebug()) {
             return CommonResult.error(e.getError(), e.getMessage());
         } else {
             return CommonResult.error(e.getError());

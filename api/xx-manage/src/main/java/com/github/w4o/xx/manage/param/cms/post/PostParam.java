@@ -1,9 +1,8 @@
 package com.github.w4o.xx.manage.param.cms.post;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -28,6 +27,6 @@ public class PostParam {
     private Integer status = STATUS_DRAFT;
     @Schema(description = "文章分类ID")
     private Set<Long> categoryIds;
-    @Schema(description = "文章标签ID")
-    private Set<Long> tagIds;
+    @Schema(description = "文章标签")
+    private Set<String> tags;
 }

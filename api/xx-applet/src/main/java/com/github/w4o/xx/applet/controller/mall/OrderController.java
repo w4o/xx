@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mall/order")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Tag(name = "05. 订单接口")
+@Tag(name = "25. 订单接口")
 public class OrderController {
 
     @Operation(summary = "订单列表")

@@ -3,6 +3,7 @@ package com.github.w4o.xx.core.util;
 import cn.hutool.crypto.Mode;
 import cn.hutool.crypto.Padding;
 import cn.hutool.crypto.symmetric.AES;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +14,31 @@ import java.util.Arrays;
  *
  * @author Frank
  */
+@Slf4j
 @Component
 public class BusinessUtils {
 
-    @Value("${spring.profiles.active}")
-    private String active;
-    @Value("${app.encrypted}")
-    private Boolean encrypted = false;
-    @Value("${app.aes-key}")
-    private String aesKey = "a1b2c3d4e5f6g7h8";
+    private static String active;
+    private static Boolean encrypted = false;
+    private static String aesKey = "a1b2c3d4e5f6g7h8";
 
-    public boolean isDebug() {
+    @Value("${spring.profiles.active}")
+    public void setActive(String active) {
+        BusinessUtils.active = active;
+    }
+
+    @Value("${app.encrypted}")
+    public void setEncrypted(Boolean encrypted) {
+        BusinessUtils.encrypted = encrypted;
+    }
+
+    @Value("${app.aes-key}")
+    public void setAesKey(String aesKey) {
+        BusinessUtils.aesKey = aesKey;
+    }
+
+    public static boolean isDebug() {
+        log.debug("active:{}", active);
         return Arrays.asList(new String[]{"dev", "test", "stage"}).contains(active);
     }
 
@@ -51,7 +66,7 @@ public class BusinessUtils {
      * @param data 密文
      * @return 明文
      */
-    public String aesDecrypt(String data) {
+    public static String aesDecrypt(String data) {
         AES aes = new AES(Mode.CBC, Padding.PKCS5Padding, aesKey.getBytes(), aesKey.getBytes());
         String decrypt = "";
         try {
@@ -67,9 +82,9 @@ public class BusinessUtils {
      * @param data 数据
      * @return 结果
      */
-    public String decrypt(String data) {
+    public static String decrypt(String data) {
         if (encrypted) {
-            return this.aesDecrypt(data);
+            return BusinessUtils.aesDecrypt(data);
         } else {
             return data;
         }

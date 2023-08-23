@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>xx-manage</artifactId>
-    <version>1.0</version>
+    <version>2.1</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>com.github.w4o.xx</groupId>
         <artifactId>xx-parent</artifactId>
-        <version>1.0</version>
+        <version>2.1</version>
         <relativePath/>
     </parent>
 
@@ -18,15 +18,11 @@
         <dependency>
             <groupId>com.github.w4o.xx</groupId>
             <artifactId>xx-core</artifactId>
-            <version>1.0</version>
+            <version>2.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.flowable</groupId>
-            <artifactId>flowable-spring-boot-starter</artifactId>
         </dependency>
         <!-- test -->
         <dependency>

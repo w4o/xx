@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.AppletBannerEntity;
 import com.github.w4o.xx.manage.dto.applet.banner.BannerDTO;
 import com.github.w4o.xx.manage.param.applet.banner.BannerPageParam;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 小程序轮播图表 Mapper 接口
@@ -20,17 +20,5 @@ public interface AppletBannerMapper extends BaseMapper<AppletBannerEntity> {
      * @param param 查询参数
      * @return 分页数据
      */
-    @Select("""
-            select id as bannerId,
-            url,
-            title,
-            description,
-            sort,
-            create_by,
-            create_time,
-            last_update_by,
-            last_update_time
-            from applet_banner where deleted = 0
-            """)
-    Page<BannerDTO> findPage(Page<?> page, BannerPageParam param);
+    Page<BannerDTO> findPage(Page<?> page, @Param("condition") BannerPageParam param);
 }
