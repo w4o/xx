@@ -170,7 +170,7 @@ onMounted(async () => {
   categoryList.value = await categoryApi.findTree()
   state.type = route.query.type as string
   if (state.type === 'edit') {
-    const loadingInstance = ElLoading.service()
+    const loadingInstance = ElLoading.service({background: 'rgba(0, 0, 0, 0.3)'})
     state.ruleForm = await postApi.getPost(route.query.postId as string).then().finally(() => {
       loadingInstance.close()
     })
