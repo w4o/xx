@@ -1,38 +1,50 @@
 import request from '/@/utils/request';
 
-export function useCategoryApi() {
+export function usePostApi() {
     return {
         findPage: (params?: object) => {
             return request({
-                url: '/cms/category',
+                url: '/cms/post',
                 method: 'get',
                 params
             })
         },
         add: (data?: object) => {
             return request({
-                url: '/cms/category',
+                url: '/cms/post',
                 method: 'post',
                 data
             })
         },
-        update: (id: string, data?: object) => {
+        update: (data?: any) => {
             return request({
-                url: `/cms/category/${id}`,
+                url: `/cms/post/${data?.id}`,
                 method: 'put',
                 data
             })
         },
         delete: (id: string) => {
             return request({
-                url: `/cms/category/${id}`,
+                url: `/cms/post/${id}`,
                 method: 'delete'
             })
         },
-        findTree: () => {
+        getPost: (id: string) => {
             return request({
-                url: '/cms/category/tree',
+                url: `/cms/post/${id}`,
                 method: 'get'
+            })
+        },
+        draft: (id: string) => {
+            return request({
+                url: `/cms/post/${id}/draft`,
+                method: 'put'
+            })
+        },
+        publish: (id: string) => {
+            return request({
+                url: `/cms/post/${id}/publish`,
+                method: 'put'
             })
         }
     }

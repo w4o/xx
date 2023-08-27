@@ -143,6 +143,8 @@ declare interface RowDicType {
 	status: boolean;
 	createTime: string;
 	list: ListType[];
+	dictTypeId: string;
+	name: string;
 }
 
 interface SysDicTableType extends TableType {
@@ -161,7 +163,7 @@ declare interface RowCategoryType {
 	categoryId: string;
 	name: string;
 	description: string;
-	postCount: number,
+	postCount: number;
 	createTime: string;
 	sort: number;
 	thumbnail: string;
@@ -174,7 +176,6 @@ interface CmsCategoryTableType extends TableType {
 declare interface CmsCategoryState {
 	tableData: CmsCategoryTableType;
 }
-
 
 /**
  * views pages

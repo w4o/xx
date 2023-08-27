@@ -1,38 +1,44 @@
 import request from '/@/utils/request';
 
-export function useCategoryApi() {
+export function useAppletBannerApi() {
     return {
         findPage: (params?: object) => {
             return request({
-                url: '/cms/category',
+                url: '/applet/banner',
                 method: 'get',
                 params
             })
         },
         add: (data?: object) => {
             return request({
-                url: '/cms/category',
+                url: '/applet/banner',
                 method: 'post',
                 data
             })
         },
-        update: (id: string, data?: object) => {
+        update: (data?: any) => {
             return request({
-                url: `/cms/category/${id}`,
+                url: `/applet/banner/${data.bannerId}`,
                 method: 'put',
                 data
             })
         },
         delete: (id: string) => {
             return request({
-                url: `/cms/category/${id}`,
+                url: `/applet/banner/${id}`,
                 method: 'delete'
             })
         },
-        findTree: () => {
+        invisible: (id: string) => {
             return request({
-                url: '/cms/category/tree',
-                method: 'get'
+                url: `/applet/banner/${id}/invisible`,
+                method: 'put'
+            })
+        },
+        visible: (id: string) => {
+            return request({
+                url: `/applet/banner/${id}/visible`,
+                method: 'put'
             })
         }
     }

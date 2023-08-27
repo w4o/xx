@@ -1,37 +1,37 @@
 import request from '/@/utils/request';
 
-export function useCategoryApi() {
+export function useTagApi() {
     return {
         findPage: (params?: object) => {
             return request({
-                url: '/cms/category',
+                url: '/cms/tag',
                 method: 'get',
                 params
             })
         },
         add: (data?: object) => {
             return request({
-                url: '/cms/category',
+                url: '/cms/tag',
                 method: 'post',
                 data
             })
         },
         update: (id: string, data?: object) => {
             return request({
-                url: `/cms/category/${id}`,
+                url: `/cms/tag/${id}`,
                 method: 'put',
                 data
             })
         },
         delete: (id: string) => {
             return request({
-                url: `/cms/category/${id}`,
+                url: `/cms/tag/${id}`,
                 method: 'delete'
             })
         },
-        findTree: () => {
+        getTag: (name: string) => {
             return request({
-                url: '/cms/category/tree',
+                url: `/cms/tag/name/${name}`,
                 method: 'get'
             })
         }

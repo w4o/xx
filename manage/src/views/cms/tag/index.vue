@@ -1,8 +1,8 @@
 <template>
   <div class="system-dic-container layout-padding">
     <el-card class="layout-padding-auto" shadow="hover">
-      <div class="cms-category-search mb15">
-        <el-input v-model="state.tableData.param.search" clearable placeholder="请输入分类名称或描述"
+      <div class="cms-tag-search mb15">
+        <el-input v-model="state.tableData.param.search" clearable placeholder="请输入标签名称或描述"
                   size="default" style="max-width: 180px"></el-input>
         <el-button class="ml10" size="default" type="primary" @click="onSearch">
           <el-icon>
@@ -10,11 +10,11 @@
           </el-icon>
           查询
         </el-button>
-        <el-button class="ml10" size="default" type="success" @click="onOpenAddCategory('add')">
+        <el-button class="ml10" size="default" type="success" @click="onOpenAddTag('add')">
           <el-icon>
             <ele-FolderAdd/>
           </el-icon>
-          新增分类
+          新增标签
         </el-button>
       </div>
       <el-table v-loading="state.tableData.loading" :data="state.tableData.data" style="width: 100%">
@@ -32,12 +32,12 @@
             </el-image>
           </template>
         </el-table-column>
-        <el-table-column label="分类名称" prop="name" show-overflow-tooltip></el-table-column>
-        <el-table-column label="分类描述" prop="description" show-overflow-tooltip></el-table-column>
+        <el-table-column label="标签名称" prop="name" show-overflow-tooltip></el-table-column>
+        <el-table-column label="标签描述" prop="description" show-overflow-tooltip></el-table-column>
         <el-table-column label="文章数量" prop="postCount" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作" width="100">
           <template #default="scope">
-            <el-button size="small" text type="primary" @click="onOpenEditCategory('edit', scope.row)">修改</el-button>
+            <el-button size="small" text type="primary" @click="onOpenEditTag('edit', scope.row)">修改</el-button>
             <el-button size="small" text type="primary" @click="onRowDel(scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -56,28 +56,29 @@
       >
       </el-pagination>
     </el-card>
-    <CategoryDialog ref="categoryDialogRef" @refresh="getTableData()"/>
+    <TagDialog ref="tagDialogRef" @refresh="getTableData()"/>
   </div>
 </template>
 
-<script lang="ts" name="cmsCategory" setup>
+<script lang="ts" name="cmsTag" setup>
 
 import {defineAsyncComponent, onMounted, reactive, ref} from "vue";
-import {useCategoryApi} from "/@/api/cms/category";
+import {useTagApi} from "/@/api/cms/tag";
 import {ElMessage, ElMessageBox} from "element-plus";
 import {Picture as IconPicture} from '@element-plus/icons-vue'
 
-const categoryApi = useCategoryApi()
+const tagApi = useTagApi()
 // 引入组件
-const CategoryDialog = defineAsyncComponent(() => import('./dialog.vue'))
+const TagDialog = defineAsyncComponent(() => import('./dialog.vue'))
 
 // 定义变量内容
-const categoryDialogRef = ref();
-const state = reactive<CmsCategoryState>({
+const tagDialogRef = ref();
+const state = reactive({
   tableData: {
     param: {
       pageNo: 1,
       pageSize: 10,
+      search: ''
     },
     data: [],
     total: 0,
@@ -88,7 +89,7 @@ const state = reactive<CmsCategoryState>({
 // 初始化表格数据
 const getTableData = async () => {
   state.tableData.loading = true;
-  const {records, total} = await categoryApi.findPage(state.tableData.param).finally(() => {
+  const {records, total} = await tagApi.findPage(state.tableData.param).finally(() => {
     state.tableData.loading = false;
   });
   state.tableData.data = records;
@@ -98,22 +99,22 @@ const onSearch = () => {
   state.tableData.param.pageNo = 1;
   getTableData();
 };
-// 打开新增分类弹窗
-const onOpenAddCategory = (type: string) => {
-  categoryDialogRef.value?.openDialog(type)
+// 打开新增标签弹窗
+const onOpenAddTag = (type: string) => {
+  tagDialogRef.value?.openDialog(type)
 }
-// 打开编辑分类弹窗
-const onOpenEditCategory = (type: string, row: RowCategoryType) => {
-  categoryDialogRef.value?.openDialog(type, row)
+// 打开编辑标签弹窗
+const onOpenEditTag = (type: string, row) => {
+  tagDialogRef.value?.openDialog(type, row)
 }
-// 删除分类
-const onRowDel = (row: RowCategoryType) => {
-  ElMessageBox.confirm(`此操作将永久删除分类：“${row.name}”，是否继续?`, '提示', {
+// 删除标签
+const onRowDel = (row) => {
+  ElMessageBox.confirm(`此操作将永久删除标签：“${row.name}”，是否继续?`, '提示', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning',
   }).then(async () => {
-    await categoryApi.delete(row.categoryId);
+    await tagApi.delete(row.tagId);
     await getTableData();
     ElMessage.success('删除成功');
   }).catch(() => {

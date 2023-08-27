@@ -25,6 +25,7 @@
         <div
             style="width: 100px; height: 100px; margin-bottom: 5px; margin-right: 5px; display: flex; justify-content: center; align-items: center; border: 1px dashed var(--el-border-color); border-radius: 6px;">
           <el-upload
+              ref="uploadRef"
               :http-request="uploadRequest"
               :show-file-list="false"
               limit="1"
@@ -65,8 +66,8 @@
 
 </template>
 
-<script lang="ts" setup>
-import {defineAsyncComponent, onMounted, ref} from "vue";
+<script lang="ts" name="mediaLibraryIndex" setup>
+import {defineAsyncComponent, onMounted, ref, watch} from "vue";
 import {mediaCategoryApi} from "/@/api/system/mediaCategory";
 import {mediaApi} from "/@/api/system/media";
 import {ElLoading} from "element-plus";
@@ -86,6 +87,12 @@ const props = defineProps({
   editModal: {
     type: Boolean,
     default: false
+  },
+  defaultCheckedIds: {
+    type: Array,
+    default: () => {
+      return []
+    }
   }
 })
 
@@ -97,7 +104,8 @@ const MediaApi = mediaApi();
 const UploadApi = uploadApi();
 const emit = defineEmits(['update:value'])
 
-const categoryDialogRef = ref(null)
+const categoryDialogRef = ref()
+const uploadRef = ref()
 
 const categoryTree = ref([] as any)
 const editModalCategoryTree = ref([] as any)
@@ -143,6 +151,7 @@ const getMedia = () => {
   const loading = ElLoading.service({background: 'rgba(0, 0, 0, 0.3)'})
   MediaApi.getMedia(mediaParams.value).then(res => {
     mediaData.value = res
+    defaultChecked()
   }).finally(() => {
     loading.close()
   })
@@ -155,7 +164,9 @@ const uploadRequest = (res: any) => {
     categoryId: currentCategory.value.id
   }
   UploadApi.uploadImage(data).then(() => {
+    uploadRef.value.clearFiles()
     getMedia()
+  }).finally(() => {
     loading.close()
   })
 }
@@ -185,6 +196,19 @@ const handleClickMedia = (data: any) => {
     }
   }
 }
+
+const defaultChecked = () => {
+  if (props.defaultCheckedIds) {
+    props.defaultCheckedIds.forEach(id => {
+      currentMedia.value.push(mediaData.value.records.find((item: any) => item.mediaId === id))
+    })
+  }
+}
+
+watch(() => props.defaultCheckedIds, () => {
+  defaultChecked()
+  emit('update:value', currentMedia.value)
+})
 
 onMounted(async () => {
   getMedia()

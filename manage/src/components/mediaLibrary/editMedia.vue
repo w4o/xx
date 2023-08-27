@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" name="mediaLibraryEditMedia" setup>
 import {onMounted, ref, watch} from "vue";
 import {mediaApi} from "/@/api/system/media";
 import {ElLoading, ElMessage, ElMessageBox} from 'element-plus'

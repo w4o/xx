@@ -2,11 +2,11 @@
   <div class="cms-category-dialog-container">
     <el-dialog v-model="state.dialog.isShowDialog" :title="state.dialog.title">
       <el-form ref="dialogFormRef" :model="state.ruleForm" :rules="state.rules" label-width="90px" size="default">
-        <el-form-item label="分类名称" prop="name">
-          <el-input v-model="state.ruleForm.name" clearable placeholder="请输入分类名称"></el-input>
+        <el-form-item label="标签名称" prop="name">
+          <el-input v-model="state.ruleForm.name" clearable placeholder="请输入标签名称"></el-input>
         </el-form-item>
-        <el-form-item label="分类描述" prop="description">
-          <el-input v-model="state.ruleForm.description" clearable placeholder="请输入分类描述"
+        <el-form-item label="标签描述" prop="description">
+          <el-input v-model="state.ruleForm.description" clearable placeholder="请输入标签描述"
                     type="textarea"></el-input>
         </el-form-item>
         <el-form-item label="特色图片" prop="thumbnail">
@@ -33,14 +33,14 @@
 
   <MediaLibraryDialog ref="mediaRef" v-model:value="mediaData"/>
 </template>
-<script lang="ts" name="cmsCategoryDialog" setup>
+<script lang="ts" name="cmsTagDialog" setup>
 
 import {defineAsyncComponent, nextTick, reactive, ref, watch} from "vue";
-import {useCategoryApi} from "/@/api/cms/category";
+import {useTagApi} from "/@/api/cms/tag";
 
 const MediaLibraryDialog = defineAsyncComponent(() => import('/@/components/mediaLibrary/mediaLibraryDialog.vue'))
 
-const categoryApi = useCategoryApi();
+const tagApi = useTagApi();
 // 定义子组件向父组件传值/事件
 const emit = defineEmits(['refresh']);
 const dialogFormRef = ref()
@@ -52,18 +52,18 @@ const state = reactive({
     type: '',
   },
   ruleForm: {
-    categoryId: '',
+    tagId: '',
     name: '',
     description: '',
     thumbnail: '',
   },
   rules: {
     name: [
-      {required: true, message: '请输入分类名称', trigger: 'blur'},
+      {required: true, message: '请输入标签名称', trigger: 'blur'},
       {min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur'},
     ],
     description: [
-      {required: true, message: '请输入分类描述', trigger: 'blur'},
+      {required: true, message: '请输入标签描述', trigger: 'blur'},
       {min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'blur'},
     ]
   }
@@ -73,16 +73,16 @@ const mediaData = ref({} as any)
 const mediaRef = ref()
 
 // 打开弹窗
-const openDialog = (type: string, row: RowCategoryType) => {
+const openDialog = (type: string, row) => {
   if (type === 'edit') {
-    state.dialog.title = '修改分类';
+    state.dialog.title = '修改标签';
     state.dialog.submitTxt = '修 改';
     nextTick(() => {
       state.ruleForm = {...row};
       dialogFormRef.value.clearValidate();
     });
   } else {
-    state.dialog.title = '新增分类';
+    state.dialog.title = '新增标签';
     state.dialog.submitTxt = '新 增';
     // 清空表单，此项需加表单验证才能使用
     nextTick(() => {
@@ -111,10 +111,10 @@ const onSubmit = () => {
 
     if (state.dialog.type === 'add') {
       // 新增
-      await categoryApi.add(data)
+      await tagApi.add(data)
     } else {
       // 修改
-      await categoryApi.update(data.categoryId, data)
+      await tagApi.update(data.tagId, data)
     }
     closeDialog();
     emit('refresh');
