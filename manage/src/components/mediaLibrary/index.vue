@@ -25,6 +25,7 @@
         <div
             style="width: 100px; height: 100px; margin-bottom: 5px; margin-right: 5px; display: flex; justify-content: center; align-items: center; border: 1px dashed var(--el-border-color); border-radius: 6px;">
           <el-upload
+              ref="uploadRef"
               :http-request="uploadRequest"
               :show-file-list="false"
               limit="1"
@@ -103,7 +104,8 @@ const MediaApi = mediaApi();
 const UploadApi = uploadApi();
 const emit = defineEmits(['update:value'])
 
-const categoryDialogRef = ref(null)
+const categoryDialogRef = ref()
+const uploadRef = ref()
 
 const categoryTree = ref([] as any)
 const editModalCategoryTree = ref([] as any)
@@ -162,6 +164,7 @@ const uploadRequest = (res: any) => {
     categoryId: currentCategory.value.id
   }
   UploadApi.uploadImage(data).then(() => {
+    uploadRef.value.clearFiles()
     getMedia()
   }).finally(() => {
     loading.close()
