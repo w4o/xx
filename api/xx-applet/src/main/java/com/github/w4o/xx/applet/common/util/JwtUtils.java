@@ -30,7 +30,6 @@ public class JwtUtils {
 
     private static final String CLAIM_KEY_OPEN_ID = "open_id";
     private static final String CLAIM_KEY_USER_ID = "user_id";
-    private static final String CLAIM_KEY_USERNAME = "sub";
 
     public String generateToken(LoginUser loginUser) {
         // expire time
@@ -57,7 +56,7 @@ public class JwtUtils {
     public LoginUser getLoginUserFromToken(String token) {
         Map<String, Claim> map = getClaimsFromToken(token);
         return LoginUser.builder()
-                .openId(map.get(CLAIM_KEY_USERNAME).asString())
+                .openId(map.get(CLAIM_KEY_OPEN_ID).asString())
                 .userId(map.get(CLAIM_KEY_USER_ID).asLong())
                 .build();
     }
