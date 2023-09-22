@@ -1,9 +1,8 @@
 package com.github.w4o.xx.manage.param.sys.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -34,4 +33,6 @@ public class AddUserParam {
     private String description;
     @Schema(description = "角色(可多个)", example = "[1,2,3]")
     private Set<Long> roles;
+    @Schema(description = "部门ID", example = "1")
+    private Long deptId;
 }

@@ -16,7 +16,8 @@
         sys_user.create_time,
         sys_user.last_update_by,
         sys_user.last_update_time,
-        sys_dept.dept_name
+        sys_dept.dept_name,
+        sys_user.dept_id
         from sys_user
         left join sys_dept on sys_user.dept_id = sys_dept.id
         where sys_user.deleted = 0
