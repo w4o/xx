@@ -1,5 +1,7 @@
 package com.github.w4o.xx.core.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.github.w4o.xx.core.base.BaseDataEntity;
 import lombok.Getter;
@@ -54,9 +56,11 @@ public class AppletBannerEntity extends BaseDataEntity {
     /**
      * 开始时间
      */
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private LocalDateTime startTime;
     /**
      * 结束时间
      */
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private LocalDateTime endTime;
 }

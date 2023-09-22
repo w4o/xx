@@ -1,8 +1,7 @@
 package com.github.w4o.xx.applet.controller;
 
 import com.github.w4o.xx.applet.param.SendSmsCodeParam;
-import com.github.w4o.xx.applet.service.AppletConfigService;
-import com.github.w4o.xx.applet.service.CommonService;
+import com.github.w4o.xx.applet.service.*;
 import com.github.w4o.xx.core.annotation.CheckToken;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.manage.SysDictManage;
@@ -32,6 +31,7 @@ public class CommonController {
 
     private final CommonService commonService;
     private final AppletConfigService appletConfigService;
+    private final AppletBannerService appletBannerService;
 
 
     @Operation(summary = "小程序配置信息")
@@ -39,6 +39,7 @@ public class CommonController {
     public CommonResult<?> config() {
         Map<String, Object> result = new HashMap<>();
         result.put("basic", appletConfigService.getConfig());
+        result.put("banner", appletBannerService.getList());
         return CommonResult.success(result);
     }
 
