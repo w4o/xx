@@ -1,4 +1,4 @@
-FROM openjdk:17-oracle
+FROM openjdk:21-oracle
 
 VOLUME /tmp
 
@@ -11,4 +11,4 @@ ENV TZ=Asia/Shanghai
 
 ENV VERSION=1.0
 
-ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=dev", "--app.version=${VERSION}"]
+ENTRYPOINT ["java", "-jar", "/app.jar", "--app.name=manage-api", "--spring.profiles.active=dev", "--app.version=${VERSION}"]
