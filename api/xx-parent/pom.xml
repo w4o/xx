@@ -11,14 +11,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
+        <version>3.1.4</version>
         <relativePath/>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <hutool.version>5.8.21</hutool.version>
         <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
         <java-jwt.version>4.4.0</java-jwt.version>
@@ -28,6 +28,7 @@
         <knife4j.version>4.3.0</knife4j.version>
         <aliyun-sdk-oss.version>3.17.1</aliyun-sdk-oss.version>
         <cos_api.version>5.6.75</cos_api.version>
+        <dysmsapi20170525.version>2.0.24</dysmsapi20170525.version>
     </properties>
 
     <dependencyManagement>
@@ -91,8 +92,8 @@
             </dependency>
             <dependency>
                 <groupId>com.aliyun</groupId>
-                <artifactId>dysmsapi20170525</artifactId>
-                <version>2.0.24</version>
+                <artifactId>alibabacloud-dysmsapi20170525</artifactId>
+                <version>${dysmsapi20170525.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.qcloud</groupId>
