@@ -34,15 +34,15 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CosUploadManageImpl implements UploadManage {
 
-    @Value("${app.upload.cos.access-key")
+    @Value("${app.upload.cos.access-key}")
     private String accessKey;
-    @Value("${app.upload.cos.secret-key")
+    @Value("${app.upload.cos.secret-key}")
     private String secretKey;
-    @Value("${app.upload.cos.region")
+    @Value("${app.upload.cos.region}")
     private String region;
-    @Value("${app.upload.cos.bucket")
+    @Value("${app.upload.cos.bucket}")
     private String bucket;
-    @Value("${app.upload.cos.root-path")
+    @Value("${app.upload.cos.root-path}")
     private String rootPath;
     @Value("${app.upload.cos.domain}")
     private String domain;
