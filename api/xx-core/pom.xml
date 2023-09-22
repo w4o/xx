@@ -108,7 +108,7 @@
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>dysmsapi20170525</artifactId>
+            <artifactId>alibabacloud-dysmsapi20170525</artifactId>
         </dependency>
         <!-- test -->
         <dependency>
