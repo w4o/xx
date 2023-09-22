@@ -26,8 +26,7 @@ public class AppletConfigServiceImpl extends ServiceImpl<AppletConfigMapper, App
     @Cacheable(cacheNames = "appletBasicConfig", unless = "#result == null")
     public Map<String, Object> getConfig() {
         List<Map<String, Object>> list = baseMapper.selectMaps(new LambdaQueryWrapper<AppletConfigEntity>()
-                .select(AppletConfigEntity::getConfigKey,
-                        AppletConfigEntity::getConfigValue));
+                .select(AppletConfigEntity::getConfigKey, AppletConfigEntity::getConfigValue));
         if (list != null && !list.isEmpty()) {
             return list.stream().collect(
                     java.util.stream.Collectors.toMap(
