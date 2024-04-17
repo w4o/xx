@@ -1,10 +1,10 @@
 package com.github.w4o.xx.core.filter;
 
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.w4o.xx.core.util.RequestUtils;
-import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -114,7 +114,7 @@ public class HttpTraceLogFilter extends OncePerRequestFilter implements Ordered 
         var responseBody = "";
         val wrapper = WebUtils.getNativeResponse(response, ContentCachingResponseWrapper.class);
         if (wrapper != null) {
-            responseBody = IOUtils.toString(wrapper.getContentInputStream(), StandardCharsets.UTF_8);
+            responseBody = IoUtil.read(wrapper.getContentInputStream(), StandardCharsets.UTF_8);
         }
         try {
             return mapper.readValue(responseBody, new TypeReference<>() {
