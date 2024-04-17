@@ -4,16 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.w4o.xx</groupId>
-    <artifactId>xx-service</artifactId>
+    <artifactId>xx-full</artifactId>
     <version>2.1</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>xx-parent</module>
         <module>xx-core</module>
-        <module>xx-manage</module>
-        <module>xx-front</module>
-        <module>xx-applet</module>
+        <module>xx-service</module>
+        <module>xx-manage-api</module>
+        <module>xx-front-api</module>
+        <module>xx-applet-api</module>
     </modules>
 
 </project>
