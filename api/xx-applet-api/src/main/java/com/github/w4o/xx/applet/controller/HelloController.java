@@ -27,7 +27,7 @@ public class HelloController {
 
     @Operation(summary = "Hello")
     @GetMapping("/hello")
-    public CommonResult<?> hello() {
+    public CommonResult<String> hello() {
         return CommonResult.success(helloService.hello());
     }
 }

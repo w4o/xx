@@ -3,10 +3,9 @@ package com.github.w4o.xx.applet.common.filter;
 import com.github.w4o.xx.applet.common.util.JwtUtils;
 import com.github.w4o.xx.core.annotation.CheckToken;
 import com.github.w4o.xx.core.constant.Constant;
-import com.github.w4o.xx.core.exception.CustomException;
-import com.github.w4o.xx.core.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -23,9 +22,9 @@ import static com.github.w4o.xx.core.constant.Constant.AUTH_USER;
  * @author Frank
  */
 @Slf4j
+@Setter(onMethod = @__(@Autowired))
 public class AuthenticationInterceptor implements AsyncHandlerInterceptor {
 
-    @Autowired
     private JwtUtils jwtUtils;
 
     @Override
@@ -48,7 +47,7 @@ public class AuthenticationInterceptor implements AsyncHandlerInterceptor {
             if (checkToken.required()) {
 
                 if (StringUtils.isEmpty(token)) {
-                    throw new CustomException(ErrorCode.E401);
+                    return false;
                 }
 
                 httpServletRequest.setAttribute(AUTH_USER, jwtUtils.getLoginUserFromToken(token));

@@ -1,6 +1,6 @@
 package com.github.w4o.xx.applet.controller;
 
-import com.github.w4o.xx.applet.param.LoginParam;
+import com.github.w4o.xx.applet.domain.param.LoginParam;
 import com.github.w4o.xx.applet.service.LoginService;
 import com.github.w4o.xx.applet.vo.LoginVO;
 import com.github.w4o.xx.applet.vo.UserInfoVO;

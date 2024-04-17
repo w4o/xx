@@ -40,7 +40,7 @@ public class JwtUtils {
         Date iatDate = new Date();
 
         // header Map
-        Map<String, Object> map = new HashMap<>(2);
+        Map<String, Object> map = new HashMap<>();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
 

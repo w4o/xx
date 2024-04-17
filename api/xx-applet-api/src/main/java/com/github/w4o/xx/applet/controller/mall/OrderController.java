@@ -1,6 +1,8 @@
 package com.github.w4o.xx.applet.controller.mall;
 
+import com.github.w4o.xx.applet.domain.vo.mall.OrderPageVO;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.core.base.PageResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "25. 订单接口")
 public class OrderController {
 
-    @Operation(summary = "订单列表")
+    @Operation(summary = "订单分页列表")
     @GetMapping
-    public CommonResult<?> page() {
+    public CommonResult<PageResult<OrderPageVO>> page() {
         return CommonResult.success();
     }
 
     @Operation(summary = "创建订单")
     @PostMapping
-    public CommonResult<?> create() {
+    public CommonResult<Void> create() {
         return CommonResult.success();
     }
 }

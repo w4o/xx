@@ -1,6 +1,8 @@
 package com.github.w4o.xx.applet.controller.mall;
 
+import com.github.w4o.xx.applet.domain.vo.mall.GoodsPageVO;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.core.base.PageResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "24. 商品接口")
 public class GoodsController {
 
-    @Operation(summary = "商品列表")
+    @Operation(summary = "商品分页列表")
     @GetMapping
-    public CommonResult<?> findPage() {
+    public CommonResult<PageResult<GoodsPageVO>> findPage() {
         return CommonResult.success();
     }
 }

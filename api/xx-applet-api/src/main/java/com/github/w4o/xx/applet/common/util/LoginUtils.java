@@ -14,6 +14,9 @@ import static com.github.w4o.xx.core.constant.Constant.AUTH_USER;
  */
 public class LoginUtils {
 
+    private LoginUtils() {
+    }
+
     /**
      * 获取登录信息
      *

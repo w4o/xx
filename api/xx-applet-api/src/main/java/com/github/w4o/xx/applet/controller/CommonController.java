@@ -1,10 +1,14 @@
 package com.github.w4o.xx.applet.controller;
 
-import com.github.w4o.xx.applet.param.SendSmsCodeParam;
-import com.github.w4o.xx.applet.service.*;
+import com.github.w4o.xx.applet.domain.param.SendSmsCodeParam;
+import com.github.w4o.xx.applet.domain.vo.AppletConfigVO;
+import com.github.w4o.xx.applet.domain.vo.SendSmsCodeVO;
+import com.github.w4o.xx.applet.service.CommonService;
 import com.github.w4o.xx.core.annotation.CheckToken;
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.core.manage.SysDictManage;
+import com.github.w4o.xx.core.vo.UploadVO;
+import com.github.w4o.xx.service.impl.AppletBannerService;
+import com.github.w4o.xx.service.impl.AppletConfigService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -14,9 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Frank
@@ -36,24 +37,24 @@ public class CommonController {
 
     @Operation(summary = "小程序配置信息")
     @GetMapping("/config")
-    public CommonResult<?> config() {
-        Map<String, Object> result = new HashMap<>();
-        result.put("basic", appletConfigService.getConfig());
-        result.put("banner", appletBannerService.getList());
-        return CommonResult.success(result);
+    public CommonResult<AppletConfigVO> config() {
+        return CommonResult.success(AppletConfigVO.builder()
+                .basic(appletConfigService.getConfig())
+                .banner(appletBannerService.getList())
+                .build());
     }
 
     @Operation(summary = "发送短信验证码")
     @PostMapping("/sendSmsCode")
     @CheckToken
-    public CommonResult<?> sendSmsCode(@RequestBody @Valid SendSmsCodeParam param) {
+    public CommonResult<SendSmsCodeVO> sendSmsCode(@RequestBody @Valid SendSmsCodeParam param) {
         return CommonResult.success(commonService.sendSmsCode(param));
     }
 
     @Operation(summary = "上传图片")
     @PostMapping("/upload/image")
     @CheckToken
-    public CommonResult<?> uploadImage(@RequestParam(value = "file") MultipartFile file) {
+    public CommonResult<UploadVO> uploadImage(@RequestParam(value = "file") MultipartFile file) {
         return CommonResult.success(commonService.uploadImage(file));
     }
 

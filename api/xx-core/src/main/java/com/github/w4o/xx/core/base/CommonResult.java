@@ -1,5 +1,6 @@
 package com.github.w4o.xx.core.base;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -17,14 +18,14 @@ import java.time.format.DateTimeFormatter;
 @Schema(name = "API通用数据", description = "通用返回格式")
 public class CommonResult<T> {
 
-    public final static int SUCCESS = 200;
-    public final static String SUCCESS_MSG = "操作成功";
+    public static final int SUCCESS_CODE = 200;
+    public static final String SUCCESS_MSG = "操作成功";
 
     @Schema(description = "响应代码")
     private int code;
 
     @Schema(description = "接口是否成功")
-    private boolean success = true;
+    private boolean success;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @Schema(description = "业务数据")
@@ -64,11 +65,24 @@ public class CommonResult<T> {
     }
 
     public static <T> CommonResult<T> success(T data) {
-        return new CommonResult<>(true, SUCCESS, SUCCESS_MSG, data);
+        return new CommonResult<>(true, SUCCESS_CODE, SUCCESS_MSG, data);
     }
 
     public static <T> CommonResult<T> success() {
-        return new CommonResult<>(true, SUCCESS, SUCCESS_MSG, null);
+        return new CommonResult<>(true, SUCCESS_CODE, SUCCESS_MSG, null);
+    }
+
+    public static <T> CommonResult<PageResult<T>> page(IPage<T> iPage) {
+        PageResult<T> result = new PageResult<>();
+        // 记录明细
+        result.setRecords(iPage.getRecords());
+        // 总条数
+        result.setTotal(iPage.getTotal());
+        // 当前页码
+        result.setCurrent(iPage.getCurrent());
+        // 是否有下一页
+        result.setHasNext(iPage.getPages() > iPage.getCurrent());
+        return success(result);
     }
 
     public static <T> CommonResult<T> error(CommonError error) {

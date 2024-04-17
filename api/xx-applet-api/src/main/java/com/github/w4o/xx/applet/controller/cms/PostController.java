@@ -1,7 +1,11 @@
 package com.github.w4o.xx.applet.controller.cms;
 
-import com.github.w4o.xx.applet.service.CmsPostService;
+import com.github.w4o.xx.applet.domain.vo.cms.PostDetailVO;
 import com.github.w4o.xx.core.base.CommonResult;
+import com.github.w4o.xx.core.entity.CmsPostEntity;
+import com.github.w4o.xx.core.exception.CustomException;
+import com.github.w4o.xx.core.exception.ErrorCode;
+import com.github.w4o.xx.service.impl.CmsPostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 文章 控制器
+ *
  * @author Frank
  */
 @Slf4j
@@ -28,7 +34,19 @@ public class PostController {
 
     @Operation(summary = "文章详情")
     @GetMapping("/{postId}")
-    public CommonResult<?> detail(@PathVariable("postId") Long postId) {
-        return CommonResult.success(cmsPostService.detail(postId));
+    public CommonResult<PostDetailVO> detail(@PathVariable("postId") Long postId) {
+        CmsPostEntity cmsPost = cmsPostService.getOne(CmsPostEntity.gw()
+                .eq(CmsPostEntity::getId, postId)
+                .eq(CmsPostEntity::getStatus, CmsPostEntity.STATUS_PUBLISH));
+        if (cmsPost == null) {
+            throw new CustomException(ErrorCode.E1204);
+        }
+        return CommonResult.success(PostDetailVO.builder()
+                .id(cmsPost.getId())
+                .title(cmsPost.getTitle())
+                .content(cmsPost.getContent())
+                .summary(cmsPost.getSummary())
+                .thumbnail(cmsPost.getThumbnail())
+                .build());
     }
 }

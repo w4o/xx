@@ -1,10 +1,13 @@
 package com.github.w4o.xx.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.w4o.xx.core.base.BaseDataEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.util.Map;
 
 /**
@@ -14,8 +17,18 @@ import java.util.Map;
  */
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "cms_post")
 public class CmsPostEntity extends BaseDataEntity {
+
+    //gw
+    public static LambdaQueryWrapper<CmsPostEntity> gw() {
+        return new LambdaQueryWrapper<>();
+    }
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     /**
      * 文章摘要
      */

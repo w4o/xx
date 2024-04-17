@@ -1,10 +1,9 @@
 package com.github.w4o.xx.applet.service;
 
-import com.github.w4o.xx.applet.param.SendSmsCodeParam;
+import com.github.w4o.xx.applet.domain.param.SendSmsCodeParam;
+import com.github.w4o.xx.applet.domain.vo.SendSmsCodeVO;
 import com.github.w4o.xx.core.vo.UploadVO;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Map;
 
 /**
  * @author Frank
@@ -17,7 +16,7 @@ public interface CommonService {
      * @param param 手机号
      * @return 发送结果
      */
-    Map<String, Object> sendSmsCode(SendSmsCodeParam param);
+    SendSmsCodeVO sendSmsCode(SendSmsCodeParam param);
 
     /**
      * 验证短信验证码
