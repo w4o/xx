@@ -1,11 +1,11 @@
 package com.github.w4o.xx.front.common.util;
 
+import com.github.w4o.xx.core.exception.CustomException;
+import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.front.common.LoginUser;
 import lombok.val;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-import com.github.w4o.xx.core.exception.CustomException;
-import com.github.w4o.xx.core.exception.ErrorCode;
 
 import static com.github.w4o.xx.core.constant.Constant.AUTH_USER;
 
@@ -13,6 +13,9 @@ import static com.github.w4o.xx.core.constant.Constant.AUTH_USER;
  * @author Frank
  */
 public class LoginUtils {
+
+    private LoginUtils() {
+    }
 
     /**
      * 获取登录信息

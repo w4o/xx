@@ -6,13 +6,13 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import com.github.w4o.xx.core.exception.CustomException;
+import com.github.w4o.xx.core.exception.ErrorCode;
 import com.github.w4o.xx.front.common.LoginUser;
 import com.github.w4o.xx.front.common.config.AppConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.github.w4o.xx.core.exception.CustomException;
-import com.github.w4o.xx.core.exception.ErrorCode;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -42,7 +42,7 @@ public class JwtUtils {
         Date iatDate = new Date();
 
         // header Map
-        Map<String, Object> map = new HashMap<>(2);
+        Map<String, Object> map = new HashMap<>();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
 
