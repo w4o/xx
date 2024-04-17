@@ -42,10 +42,8 @@ public class LogAspect {
         Exception currentException = null;
         try {
             returnValue = joinPoint.proceed();
-            if (returnValue instanceof CommonResult<?> result) {
-                if (result.getCode() != CommonResult.SUCCESS) {
-                    succeed = false;
-                }
+            if (returnValue instanceof CommonResult<?> result && (result.getCode() != CommonResult.SUCCESS_CODE)) {
+                succeed = false;
             }
         } catch (Exception e) {
             succeed = false;
