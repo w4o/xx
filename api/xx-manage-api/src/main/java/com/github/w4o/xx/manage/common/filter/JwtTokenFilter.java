@@ -11,6 +11,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -33,10 +34,10 @@ import java.io.PrintWriter;
  */
 @Slf4j
 @Component
+@Setter(onMethod = @__(@Autowired))
 public class JwtTokenFilter extends OncePerRequestFilter {
-    @Autowired
+    
     private JwtUtils jwtUtils;
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override

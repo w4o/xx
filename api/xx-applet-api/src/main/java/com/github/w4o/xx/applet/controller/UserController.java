@@ -8,7 +8,7 @@ import com.github.w4o.xx.applet.service.CommonService;
 import com.github.w4o.xx.core.annotation.CheckToken;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.entity.AppletUserEntity;
-import com.github.w4o.xx.service.impl.AppletUserService;
+import com.github.w4o.xx.service.impl.applet.AppletUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

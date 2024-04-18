@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.service.mapper.SysLoginLogMapper">
+
+    <select id="findPage" resultType="com.github.w4o.xx.service.dto.sys.log.LoginLogPageDTO">
+        select id,
+               username,
+               `status`,
+               ip,
+               ua,
+               create_time
+        from sys_login_log
+        where deleted = 0
+    </select>
+</mapper>

@@ -8,13 +8,14 @@
 .
 ├── LICENSE
 ├── README.md
-├── api             // java 服务端
+├── api                 // java 服务端
 │   ├── pom.xml
-│   ├── xx-applet   // 小程序服务
-│   ├── xx-core     // 核心模块
-│   ├── xx-front    // PC前端服务
-│   ├── xx-manage   // PC后台管理服务
-│   └── xx-parent   // Parent
+│   ├── xx-core         // 核心模块
+|   ├── xx-service      // 业务模块
+│   ├── xx-applet-api   // 小程序服务API
+│   ├── xx-front-api    // PC前端服务API
+│   ├── xx-manage-api   // PC后台管理服务API
+│   └── xx-parent       // Parent
 ├── docker
 ├── docs
 └── manage          // 管理端页面
@@ -24,7 +25,7 @@
 
 ### api
 
-* JDK \>= 17
+* JDK \>= 21
 * [SpringBoot](https://spring.io/projects/spring-boot) 3.1.x
 * SpringSecurity
 * [MyBatis](https://github.com/mybatis)

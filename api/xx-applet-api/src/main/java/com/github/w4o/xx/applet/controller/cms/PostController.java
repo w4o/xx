@@ -5,7 +5,7 @@ import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.entity.CmsPostEntity;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
-import com.github.w4o.xx.service.impl.CmsPostService;
+import com.github.w4o.xx.service.impl.cms.CmsPostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

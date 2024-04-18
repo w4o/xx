@@ -3,22 +3,26 @@ package com.github.w4o.xx.manage.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.tree.Tree;
 import com.github.w4o.xx.core.annotation.SysLog;
 import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.exception.CustomException;
 import com.github.w4o.xx.core.exception.ErrorCode;
+import com.github.w4o.xx.core.util.AssertUtils;
 import com.github.w4o.xx.core.util.BusinessUtils;
 import com.github.w4o.xx.manage.common.UserInfo;
 import com.github.w4o.xx.manage.common.config.AppConfig;
 import com.github.w4o.xx.manage.common.util.JwtUtils;
-import com.github.w4o.xx.manage.param.ChangePasswordParam;
-import com.github.w4o.xx.manage.param.LoginParam;
-import com.github.w4o.xx.manage.service.SysLoginLogService;
-import com.github.w4o.xx.manage.service.SysMenuService;
-import com.github.w4o.xx.manage.service.SysUserService;
-import com.github.w4o.xx.manage.vo.CaptchaVO;
-import com.github.w4o.xx.manage.vo.LoginVO;
-import com.github.w4o.xx.manage.vo.UserInfoVO;
+import com.github.w4o.xx.manage.common.util.LoginUtils;
+import com.github.w4o.xx.manage.domain.param.ChangePasswordParam;
+import com.github.w4o.xx.manage.domain.param.LoginParam;
+import com.github.w4o.xx.manage.domain.vo.CaptchaVO;
+import com.github.w4o.xx.manage.domain.vo.LoginVO;
+import com.github.w4o.xx.manage.domain.vo.UserInfoVO;
+import com.github.w4o.xx.service.impl.sys.SysLoginLogService;
+import com.github.w4o.xx.service.impl.sys.SysMenuService;
+import com.github.w4o.xx.service.impl.sys.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -34,11 +38,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -65,6 +71,11 @@ public class LoginController {
     private final SysLoginLogService sysLoginLogService;
     private final AppConfig appConfig;
     private final RedisTemplate<String, Object> redisTemplate;
+
+    /**
+     * 管理员id
+     */
+    public static final Long ROOT_ROLE_ID = 1L;
 
     @Operation(summary = "登录")
     @PostMapping("/login")
@@ -122,21 +133,34 @@ public class LoginController {
     @SysLog("用户修改密码")
     @Operation(summary = "修改密码")
     @PutMapping("/changePassword")
-    public CommonResult<?> changePassword(@RequestBody @Valid ChangePasswordParam param) {
-        sysUserService.changePassword(param);
+    public CommonResult<Void> changePassword(@RequestBody @Valid ChangePasswordParam param) {
+        var queryEntity = sysUserService.getById(LoginUtils.getLoginId());
+        AssertUtils.notNull(queryEntity);
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+
+        String decryptOldPassword = BusinessUtils.decrypt(param.getOldPassword());
+        String decryptNewPassword = BusinessUtils.decrypt(param.getNewPassword());
+
+        if (!encoder.matches(decryptOldPassword, queryEntity.getPassword())) {
+            throw new CustomException(ErrorCode.E1012);
+        }
+        queryEntity.setPassword(encoder.encode(decryptNewPassword));
+        sysUserService.updateById(queryEntity);
+
         return CommonResult.success();
     }
 
     @Operation(summary = "登出")
     @GetMapping("/logout")
-    public CommonResult<?> logout() {
+    public CommonResult<Void> logout() {
         return CommonResult.success();
     }
 
     @Operation(summary = "前端路由（菜单）")
     @GetMapping("/menus")
-    public CommonResult<?> getRouter() {
-        return CommonResult.success(sysMenuService.findNavTree());
+    public CommonResult<List<Tree<Long>>> getRouter() {
+        return CommonResult.success(sysMenuService.findNavTree(CollUtil.contains(LoginUtils.getLoginInfo().getRoles(), ROOT_ROLE_ID), LoginUtils.getLoginId()));
     }
 
     @Operation(summary = "获取验证码")

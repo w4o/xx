@@ -20,33 +20,6 @@
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-row :gutter="35" v-for="(v, k) in state.ruleForm.list" :key="k">
-							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item :prop="`list[${k}].label`">
-									<template #label>
-										<el-button type="primary" circle size="small" @click="onAddRow" v-if="k === 0">
-											<el-icon>
-												<ele-Plus />
-											</el-icon>
-										</el-button>
-										<el-button type="danger" circle size="small" @click="onDelRow(k)" v-else>
-											<el-icon>
-												<ele-Delete />
-											</el-icon>
-										</el-button>
-										<span class="ml10">字段</span>
-									</template>
-									<el-input v-model="v.label" style="width: 100%" placeholder="请输入字段名"> </el-input>
-								</el-form-item>
-							</el-col>
-							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="属性" :prop="`list[${k}].value`">
-									<el-input v-model="v.value" style="width: 100%" placeholder="请输入属性值"> </el-input>
-								</el-form-item>
-							</el-col>
-						</el-row>
-					</el-col>
-					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
 						<el-form-item label="字典描述">
 							<el-input v-model="state.ruleForm.description" type="textarea" placeholder="请输入字典描述" maxlength="150"></el-input>
 						</el-form-item>

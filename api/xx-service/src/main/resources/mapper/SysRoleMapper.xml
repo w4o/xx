@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.service.mapper.SysRoleMapper">
+
+    <select id="findPage" resultType="com.github.w4o.xx.service.dto.sys.role.RoleDTO">
+        select sys_role.id as role_id,
+        sys_role.role_name,
+        sys_role.role_code,
+        sys_role.enabled,
+        sys_role.description,
+        sys_role.sort,
+        sys_role.create_by,
+        sys_role.create_time,
+        sys_role.last_update_by,
+        sys_role.last_update_time
+        from sys_role
+        where sys_role.deleted = 0
+        <if test="condition.search != null and condition.search != ''">
+            and (sys_role.role_name like concat('%', #{condition.search}, '%')
+            or sys_role.role_code like concat('%', #{condition.search}, '%'))
+        </if>
+    </select>
+</mapper>

@@ -3,10 +3,13 @@ package com.github.w4o.xx.core.entity;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.w4o.xx.core.base.BaseDataEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.time.LocalDateTime;
 
 /**
@@ -16,8 +19,18 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "applet_banner")
 public class AppletBannerEntity extends BaseDataEntity {
+
+    //gw
+    public static LambdaQueryWrapper<AppletBannerEntity> gw() {
+        return new LambdaQueryWrapper<>();
+    }
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     /**
      * 图片地址
      */

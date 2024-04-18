@@ -10,6 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class LoginUtils {
 
+    private LoginUtils() {
+    }
+
     /**
      * 获取登录信息
      *

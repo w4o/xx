@@ -7,7 +7,7 @@ import com.github.w4o.xx.core.base.CommonResult;
 import com.github.w4o.xx.core.entity.SysLogEntity;
 import com.github.w4o.xx.core.util.RequestUtils;
 import com.github.w4o.xx.manage.common.UserInfo;
-import com.github.w4o.xx.manage.mapper.SysLogMapper;
+import com.github.w4o.xx.service.mapper.SysLogMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

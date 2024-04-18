@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.service.mapper.SysMediaMapper">
+
+    <select id="findPage" resultType="com.github.w4o.xx.service.dto.sys.media.MediaDTO">
+        select
+        id as mediaId,
+        media_category_id,
+        title,
+        url,
+        description,
+        type,
+        create_by,
+        create_time,
+        last_update_by,
+        last_update_time
+        from sys_media
+        where deleted = 0
+        <if test="condition.title != null and condition.title != ''">
+            and title like concat('%', #{name}, '%')
+        </if>
+        <if test="condition.categoryId != null">
+            and media_category_id = #{condition.categoryId}
+        </if>
+        <if test="condition.type != null">
+            and type = #{condition.type}
+        </if>
+        order by create_time desc
+    </select>
+</mapper>

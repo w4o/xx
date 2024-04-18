@@ -1,7 +1,10 @@
 package com.github.w4o.xx.service.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.w4o.xx.core.entity.AppletBannerEntity;
+import com.github.w4o.xx.service.dto.applet.banner.BannerDTO;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -26,4 +29,13 @@ public interface AppletBannerMapper extends BaseMapper<AppletBannerEntity> {
             order by sort desc
             """)
     List<Map<String, Object>> getBannerList();
+
+    /**
+     * 分页查询
+     *
+     * @param page   分页参数
+     * @param entity 查询参数
+     * @return 分页数据
+     */
+    Page<BannerDTO> findPage(Page<AppletBannerEntity> page, @Param("condition") AppletBannerEntity entity);
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.service.mapper.SysDictDataMapper">
+
+    <select id="findPage" resultType="com.github.w4o.xx.service.dto.sys.dict.DictDataDTO">
+        select id,
+               `value`,
+               label,
+               `description`,
+               sort,
+               create_by,
+               create_time,
+               last_update_by,
+               last_update_time
+        from sys_dict_data
+        where sys_dict_data.deleted = 0
+          and sys_dict_data.sys_dict_type_id = #{condition.sysDictTypeId}
+        order by sort
+    </select>
+</mapper>

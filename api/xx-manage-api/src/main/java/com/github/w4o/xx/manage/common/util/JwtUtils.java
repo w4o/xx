@@ -40,7 +40,7 @@ public class JwtUtils {
         Date iatDate = new Date();
 
         // header Map
-        Map<String, Object> map = new HashMap<>(2);
+        Map<String, Object> map = new HashMap<>();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
 
@@ -52,7 +52,7 @@ public class JwtUtils {
                 .sign(Algorithm.HMAC256(appConfig.getJwt().getSecret()));
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public boolean validateToken(String token, UserDetails userDetails) {
         User user = (User) userDetails;
         String username = getUsernameFromToken(token);
         return (username.equals(user.getUsername()));

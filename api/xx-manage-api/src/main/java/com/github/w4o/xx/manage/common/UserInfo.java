@@ -1,5 +1,6 @@
 package com.github.w4o.xx.manage.common;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author Frank
  */
 @Getter
+@EqualsAndHashCode(callSuper = true)
 public class UserInfo extends User {
 
     private final Long userId;

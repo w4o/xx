@@ -1,8 +1,12 @@
 package com.github.w4o.xx.manage.controller.applet;
 
 import com.github.w4o.xx.core.base.CommonResult;
-import com.github.w4o.xx.manage.param.applet.user.UserPageParam;
-import com.github.w4o.xx.manage.service.AppletUserService;
+import com.github.w4o.xx.core.base.PageResult;
+import com.github.w4o.xx.core.controller.BaseController;
+import com.github.w4o.xx.core.entity.AppletUserEntity;
+import com.github.w4o.xx.manage.domain.param.applet.user.UserPageParam;
+import com.github.w4o.xx.service.dto.applet.user.UserDTO;
+import com.github.w4o.xx.service.impl.applet.AppletUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -26,13 +30,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/applet/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Tag(name = "41. 小程序用户管理")
-public class AppletUserController {
+public class AppletUserController extends BaseController {
 
     private final AppletUserService appletUserService;
 
     @Operation(summary = "分页查询")
     @GetMapping
-    public CommonResult<?> findPage(@ParameterObject @ModelAttribute UserPageParam param) {
-        return CommonResult.success(appletUserService.getPageList(param));
+    public CommonResult<PageResult<UserDTO>> findPage(@ParameterObject @ModelAttribute UserPageParam param) {
+        AppletUserEntity entity = new AppletUserEntity();
+        return CommonResult.page(appletUserService.getPageList(getIPage(param), entity));
     }
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.w4o.xx.service.mapper.CmsPostMapper">
+
+    <resultMap id="postPageMap" type="com.github.w4o.xx.service.dto.cms.post.PostDTO">
+        <id property="postId" column="postId"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="content" column="content"/>
+        <result property="thumbnail" column="thumbnail"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="lastUpdateBy" column="last_update_by"/>
+        <result property="lastUpdateTime" column="last_update_time"/>
+        <collection property="categories" ofType="com.github.w4o.xx.service.dto.cms.category.CategoryDTO">
+            <result property="categoryId" column="categoryId"/>
+            <result property="name" column="categoryName"/>
+        </collection>
+        <collection property="tags" ofType="com.github.w4o.xx.service.dto.cms.tag.TagDTO">
+            <result property="tagId" column="tagId"/>
+            <result property="name" column="tagName"/>
+        </collection>
+    </resultMap>
+
+    <select id="findPage" resultMap="postPageMap">
+        select cms_post.id as postId,
+        cms_post.title,
+        cms_post.summary,
+        cms_post.thumbnail,
+        cms_post.status,
+        cms_post.create_by,
+        cms_post.create_time,
+        cms_post.last_update_by,
+        cms_post.last_update_time,
+        cms_category.id as categoryId,
+        cms_category.name as categoryName,
+        cms_tag.id as tagId,
+        cms_tag.name as tagName
+        from cms_post
+        left join cms_post_category
+        on cms_post.id = cms_post_category.post_id and cms_post_category.deleted = 0
+        left join cms_category on cms_category.id = cms_post_category.category_id and cms_category.deleted = 0
+        left join cms_post_tag on cms_post_tag.post_id = cms_post.id and cms_post_tag.deleted = 0
+        left join cms_tag on cms_tag.id = cms_post_tag.tag_id and cms_tag.deleted = 0
+        where cms_post.deleted = 0
+        <if test="condition.search != null and condition.search != ''">
+            and cms_post.title like concat('%', #{condition.search}, '%')
+        </if>
+        order by cms_post.create_time desc
+    </select>
+
+    <select id="findDetailById" resultMap="postPageMap">
+        select cms_post.id       as postId,
+               cms_post.title,
+               cms_post.summary,
+               cms_post.thumbnail,
+               cms_post.status,
+               cms_post.create_by,
+               cms_post.create_time,
+               cms_post.last_update_by,
+               cms_post.last_update_time,
+               cms_category.id   as categoryId,
+               cms_category.name as categoryName,
+               cms_tag.id        as tagId,
+               cms_tag.name      as tagName
+        from cms_post
+                 left join cms_post_category
+                           on cms_post.id = cms_post_category.post_id and cms_post_category.deleted = 0
+                 left join cms_category on cms_category.id = cms_post_category.category_id and cms_category.deleted = 0
+                 left join cms_post_tag on cms_post_tag.post_id = cms_post.id and cms_post_tag.deleted = 0
+                 left join cms_tag on cms_tag.id = cms_post_tag.tag_id and cms_tag.deleted = 0
+        where cms_post.deleted = 0
+          and cms_post.id = #{postId}
+        order by cms_post.create_time desc
+    </select>
+
+
+</mapper>

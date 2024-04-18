@@ -2,19 +2,9 @@
 	<div class="system-dic-container layout-padding">
 		<el-card shadow="hover" class="layout-padding-auto">
 			<div class="system-user-search mb15">
-				<el-input size="default" placeholder="请输入字典名称" style="max-width: 180px"> </el-input>
-				<el-button size="default" type="primary" class="ml10" @click="doSearch">
-					<el-icon>
-						<ele-Search />
-					</el-icon>
-					查询
-				</el-button>
-				<el-button size="default" type="success" class="ml10" @click="onOpenAddDic('add')">
-					<el-icon>
-						<ele-FolderAdd />
-					</el-icon>
-					新增字典
-				</el-button>
+				<el-input size="default" placeholder="请输入字典名称" clearable v-model="state.tableData.param.name" style="max-width: 180px" />
+				<el-button size="default" :icon="Search" type="primary" class="ml10" @click="doSearch">查询</el-button>
+				<el-button size="default" type="success" class="ml10" :icon="Plus" @click="onOpenAddDic('add')">新增字典</el-button>
 			</div>
 			<el-table :data="state.tableData.data" v-loading="state.tableData.loading" style="width: 100%">
 				<el-table-column type="index" label="序号" width="60" />
@@ -28,8 +18,9 @@
 				</el-table-column>
 				<el-table-column prop="remark" label="字典描述" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" show-overflow-tooltip></el-table-column>
-				<el-table-column label="操作" width="100">
+				<el-table-column label="操作" width="130">
 					<template #default="scope">
+						<el-button size="small" text type="primary" @click="onOpenView(scope.row)">查看</el-button>
 						<el-button size="small" text type="primary" @click="onOpenEditDic('edit', scope.row)">修改</el-button>
 						<el-button size="small" text type="primary" @click="onRowDel(scope.row)">删除</el-button>
 					</template>
@@ -56,12 +47,14 @@
 <script setup lang="ts" name="systemDic">
 import { defineAsyncComponent, reactive, onMounted, ref } from 'vue';
 import { ElMessageBox, ElMessage } from 'element-plus';
-import {useDictApi} from '/@/api/system/dict';
+import { useDictApi } from '/@/api/system/dict';
+import { Plus, Search } from '@element-plus/icons-vue';
+import router from '/@/router';
 
 // 引入组件
 const DicDialog = defineAsyncComponent(() => import('/@/views/system/dic/dialog.vue'));
 
-const dictApi = useDictApi()
+const dictApi = useDictApi();
 
 // 定义变量内容
 const dicDialogRef = ref();
@@ -73,6 +66,7 @@ const state = reactive<SysDicState>({
 		param: {
 			pageNo: 1,
 			pageSize: 10,
+			name: '',
 		},
 	},
 });
@@ -80,9 +74,9 @@ const state = reactive<SysDicState>({
 // 初始化表格数据
 const getTableData = async () => {
 	state.tableData.loading = true;
-	const {records, total} = await dictApi.findPage(state.tableData.param).finally(() => {
+	const { records, total } = await dictApi.findPage(state.tableData.param).finally(() => {
 		state.tableData.loading = false;
-	})
+	});
 	state.tableData.data = records;
 	state.tableData.total = total;
 };
@@ -99,6 +93,16 @@ const onOpenAddDic = (type: string) => {
 // 打开修改字典弹窗
 const onOpenEditDic = (type: string, row: RowDicType) => {
 	dicDialogRef.value.openDialog(type, row);
+};
+
+const onOpenView = (row: RowDicType) => {
+	router.push({
+		path: '/system/dictData',
+		query: {
+			id: row.dictTypeId,
+			name: row.name,
+		},
+	});
 };
 // 删除字典
 const onRowDel = (row: RowDicType) => {

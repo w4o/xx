@@ -1,7 +1,9 @@
 package com.github.w4o.xx.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.w4o.xx.core.base.BaseDataEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +16,14 @@ import java.io.Serial;
  */
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 @TableName("sys_dict_type")
 public class SysDictTypeEntity extends BaseDataEntity {
+
+    //gw
+    public static LambdaQueryWrapper<SysDictTypeEntity> gw() {
+        return new LambdaQueryWrapper<>();
+    }
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -39,6 +47,5 @@ public class SysDictTypeEntity extends BaseDataEntity {
      * 备注
      */
     private String remark;
-
 
 }

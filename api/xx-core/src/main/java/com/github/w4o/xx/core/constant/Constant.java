@@ -17,4 +17,6 @@ public interface Constant {
      * 短信缓存前缀
      */
     String REDIS_SMS_CODE_PREFIX = "sms:code:";
+
+    String DEFAULT_PASSWORD = "A123456";
 }
